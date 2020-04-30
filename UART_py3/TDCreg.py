@@ -1,0 +1,401 @@
+from TDC_config_low_level_function import *
+
+
+class TDCreg(object):
+    def __init__(self,ser):
+        self.ser = ser
+        self.wordbyte = 3
+        self.reset_all_reg()
+        self.setup_0_align = ['00000']
+        self.setup_1_align = ['00']
+        self.setup_2_align = ['0000']
+        self.control_0_align = ['']
+        self.control_1_align = ['0']
+        trst_0(self.ser)
+        trst_1(self.ser)
+        
+    
+    def reset_setup_0(self):
+        #setup_0
+        #TTC_setup
+        self.enable_new_ttc = ['0']
+        self.enable_master_reset_code =['0']
+        self.enable_direct_bunch_reset = ['0']
+        self.enable_direct_event_reset = ['0']
+        self.enable_direct_trigger = ['0']
+        #bcr_distribute
+        self.auto_roll_over = ['1']
+        self.bypass_bcr_distribution =['0']
+        #tdc_mode
+        self.enable_trigger = ['0']
+        self.channel_data_debug = ['0']
+        self.enable_leading = ['0']
+        self.enable_pair = ['1']
+        self.enbale_fake_hit = ['0']
+        self.rising_is_leading = ['111111111111111111111111']
+        self.channel_enable_r = ['111111111111111111111111']
+        self.channel_enable_f = ['111111111111111111111111']
+        #readout
+        self.TDC_ID = ['1111010101010101010']
+        self.enable_trigger_timeout = ['0']
+        self.enable_high_speed = ['1']
+        self.enable_legacy = ['0']
+        self.full_width_res = ['0']
+        self.width_select = ['000']
+        self.enable_8b10b = ['1']
+        self.enable_insert =['0']
+        self.enable_error_packet = ['0']
+        self.enable_TDC_ID = ['0']
+        self.enable_error_notify = ['0']
+        #setup_0
+        self.TTC_setup = [self.enable_new_ttc , self.enable_master_reset_code , self.enable_direct_bunch_reset , self.enable_direct_event_reset , self.enable_direct_trigger]
+        self.bcr_distribute = [self.auto_roll_over , self.bypass_bcr_distribution]
+        self.tdc_mode = [self.enable_trigger , self.channel_data_debug , self.enable_leading , self.enable_pair , self.enbale_fake_hit ,self.rising_is_leading , self.channel_enable_r , self.channel_enable_f]
+        self.TDC_ID_l = [self.TDC_ID]
+        self.readout = [self.enable_trigger_timeout , self.enable_high_speed , self.enable_legacy , self.full_width_res , self.width_select , self.enable_8b10b , self.enable_insert , self.enable_error_packet , self.enable_TDC_ID , self.enable_error_notify]
+        self.setup_0 = self.TTC_setup + self.bcr_distribute + self.tdc_mode + self.TDC_ID_l + self.readout
+
+
+    def reset_setup_1(self):
+        ##setup_1
+        #timer_out
+        self.combine_time_out_config = ['0000101000']
+        self.fake_hit_time_interval =['000100000000']
+        self.syn_packet_number = ['111111111111']        
+        #coarse_out
+        self.roll_over = ['111111111111']
+        self.coarse_count_offset = ['000000000000']
+        self.bunch_offset = ['111110011100']
+        self.event_offset = ['000000000000']
+        self.match_window = ['000000011111']
+        #setup_1
+        self.timer_out = [self.combine_time_out_config , self.fake_hit_time_interval , self.syn_packet_number]
+        self.coarse_out = [self.roll_over , self.coarse_count_offset , self.bunch_offset , self.event_offset , self.match_window]
+        self.setup_1 = self.timer_out +self.coarse_out 
+
+
+    def reset_setup_2(self):
+        ##setup_2
+        #timer_out
+        self.fine_sel = ['0011']
+        self.lut0 = ['00']
+        self.lut1 = ['01']
+        self.lut2 = ['10']
+        self.lut3 = ['01']
+        self.lut4 = ['11']
+        self.lut5 = ['00']
+        self.lut6 = ['10']
+        self.lut7 = ['10']
+        self.lut8 = ['00']
+        self.lut9 = ['00']
+        self.luta = ['00']
+        self.lutb = ['01']
+        self.lutc = ['11']
+        self.lutd = ['00']
+        self.lute = ['11']
+        self.lutf = ['00']
+        self.chnl_decode = [self.fine_sel , self.lut0 ,self.lut1 ,self.lut2, self.lut3 ,self.lut4 ,self.lut5 ,self.lut6 ,self.lut7 ,self.lut8 ,self.lut9 ,self.luta ,self.lutb ,self.lutc ,self.lutd ,self.lute ,self.lutf]
+        self.setup_2 = self.chnl_decode
+
+
+    def reset_setup(self):
+        self.reset_setup_0()
+        self.reset_setup_1()
+        self.reset_setup_2()
+        self.setup = [self.setup_0, self.setup_1, self.setup_2]
+
+
+    def reset_control_0(self):
+        ##control_0
+        #reset_control
+        self.rst_ePLL = ['0']
+        self.reset_jtag_in = ['0']
+        self.event_reset_jtag_in = ['0']
+        self.chnl_fifo_overflow_clear = ['0']
+        self.debug_port_select =['0000']
+        #control_0
+        self.reset_control = [self.rst_ePLL , self.reset_jtag_in , self.event_reset_jtag_in , self.chnl_fifo_overflow_clear , self.debug_port_select]
+        self.control_0 = self.reset_control
+
+
+    def reset_control_1(self):
+        ##control_1
+        self.phase_clk160 = ['01000']
+        self.phase_clk320_0 = ['0100']
+        self.phase_clk320_1 = ['0000']
+        self.phase_clk320_2 = ['0010']
+        self.ePllRes = ['0010']
+        self.ePllIcp = ['0100']
+        self.ePllCap = ['10']
+        self.ePLL_control = [self.phase_clk160 , self.phase_clk320_0 , self.phase_clk320_1 , self.phase_clk320_2 , self.ePllRes , self.ePllIcp , self.ePllCap,self.ePllRes , self.ePllIcp , self.ePllCap,self.ePllRes , self.ePllIcp , self.ePllCap]
+        self.control_1 = self.ePLL_control
+
+
+    def reset_conttrol(self):
+        self.reset_control_0()
+        self.reset_control_1()
+        self.control = [self.control_0 , self.control_1]
+
+
+    def reset_all_reg(self):
+        trst_0(self.ser)
+        trst_1(self.ser)
+        self.reset_setup()
+        self.reset_conttrol()
+
+
+    def update_setup_0(self):
+        self.setup_0_bin_str = ''.join(self.setup_0_align)
+        for s in self.setup_0:
+            self.setup_0_bin_str = self.setup_0_bin_str + ''.join(s)
+        self.setup_0_str=bin_to_hex(self.setup_0_bin_str)
+        update_reg(0,'\x00'+self.setup_0_str,self.ser)
+        update_reg(1,'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',self.ser)
+        update_reg(2,'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',self.ser)
+        update_reg(3,'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',self.ser)
+        update_config_period(0,self.ser)
+        update_JTAG_inst('\x12',self.ser)
+        update_bit_length(115,self.ser)
+        start_action(self.ser)
+
+
+    def update_setup_1(self):
+        self.setup_1_bin_str = ''.join(self.setup_1_align)
+        for s in self.setup_1:
+            self.setup_1_bin_str = self.setup_1_bin_str + ''.join(s)
+        self.setup_1_str=bin_to_hex(self.setup_1_bin_str)
+        update_reg(0,'\x00\x00\x00\x00'+self.setup_1_str,self.ser)
+        update_reg(1,'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',self.ser)
+        update_reg(2,'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',self.ser)
+        update_reg(3,'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',self.ser)
+        update_config_period(0,self.ser)
+        update_JTAG_inst('\x03',self.ser)
+        update_bit_length(94,self.ser)
+        start_action(self.ser)
+
+
+    def update_setup_2(self):
+        self.setup_2_bin_str = ''.join(self.setup_2_align)
+        for s in self.setup_2:
+            self.setup_2_bin_str = self.setup_2_bin_str + ''.join(s)
+        self.setup_2_str=bin_to_hex(self.setup_2_bin_str)
+        update_reg(0,'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'+self.setup_2_str,self.ser)
+        update_reg(1,'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',self.ser)
+        update_reg(2,'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',self.ser)
+        update_reg(3,'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',self.ser)
+        update_config_period(0,self.ser)
+        update_JTAG_inst('\x14',self.ser)
+        update_bit_length(36,self.ser)
+        start_action(self.ser)
+
+
+    def update_control_0(self):
+        self.control_0_bin_str = ''.join(self.control_0_align)
+        for s in self.control_0:
+            self.control_0_bin_str = self.control_0_bin_str + ''.join(s)
+        self.control_0_str=bin_to_hex(self.control_0_bin_str)
+        update_reg(0,'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'+self.control_0_str,self.ser)
+        update_reg(1,'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',self.ser)
+        update_reg(2,'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',self.ser)
+        update_reg(3,'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',self.ser)
+        update_config_period(0,self.ser)
+        update_JTAG_inst('\x05',self.ser)
+        update_bit_length(8,self.ser)
+        start_action(self.ser)
+
+
+    def update_control_1(self):
+        self.control_1_bin_str = ''.join(self.control_1_align)
+        for s in self.control_1:
+                self.control_1_bin_str = self.control_1_bin_str + ''.join(s)
+        self.control_1_str=bin_to_hex(self.control_1_bin_str)
+        update_reg(0,'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'+self.control_1_str,self.ser)
+        update_reg(1,'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',self.ser)
+        update_reg(2,'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',self.ser)
+        update_reg(3,'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',self.ser)
+        update_config_period(0,self.ser)
+        update_JTAG_inst('\x06',self.ser)
+        update_bit_length(47,self.ser)
+        start_action(self.ser)
+
+
+    def list_to_string(self,var):
+        string_temp = ''
+        for s in self.__dict__[var]:
+            string_temp=string_temp+''.join(s)
+        return string_temp
+
+
+    def set_ePLL_phase(self,clk_160_phase,clk_320_phase):
+        self.phase_clk160[0]=format(clk_160_phase%32,'b').zfill(5)
+        # TDC0.phase_clk160[0]=format(((clk_320_phase+4)*2-4)%32,'b').zfill(5)
+        self.phase_clk320_0[0]=format((clk_320_phase+4)%16,'b').zfill(4)
+        self.phase_clk320_1[0]=format(clk_320_phase%16,'b').zfill(4)
+        self.update_control_1()
+
+
+
+    def reselect_dline(self,correct_counter=1000):
+        self.channel_enable_r[0] ='000000000000000000000000' # disable input to ensure 8b10b comma out
+        self.channel_enable_f[0] ='000000000000000000000000'
+        self.update_setup_0()
+        tdc_master_reset_1(self.ser)
+        tdc_master_reset_0(self.ser)
+        update_input_deserial_para(self.ser,correct_counter_th=correct_counter) # correct_counter_th 10b, max 1022
+        reselect_input_deserial(self.ser)
+        time.sleep(1) # hold to ensure dline locked
+
+
+    def run_320M_data_rate(self):
+        self.enable_high_speed[0] = '1'
+        self.enable_legacy[0] = '0'
+        self.update_setup_0()
+        tdc_high_speed(self.ser) 
+
+
+    def run_160M_data_rate(self):
+        self.enable_high_speed[0] = '0'
+        self.enable_legacy[0] = '0'
+        self.update_setup_0()
+        tdc_low_speed(self.ser) 
+
+
+    def run_80M_data_rate(self):
+        self.enable_legacy[0] = '1'
+        self.update_setup_0()
+
+
+    def run_single_edge_mode(self):  # 24'b dataword = 5'b chnlID + 1'b0 + 1'b is_rising_edge + 17'b leading_edge
+        self.channel_data_debug[0] = '0'
+        self.enable_leading[0] = '1'
+        self.enable_pair[0] = '0'
+        self.update_setup_0()
+        self.wordbyte = 3
+        update_data_length(self.ser, 3)
+
+
+    def run_double_edge_mode(self):  # 40'b dataword = 5'b chnlID + 2'b10 + 17'b leading_edge + 16'b trailing_edge_LSB
+        self.channel_data_debug[0] = '0'
+        self.enable_leading[0] = '0'
+        self.enable_pair[0] = '0'
+        self.update_setup_0()
+        self.wordbyte = 5
+        update_data_length(self.ser, 5)
+
+
+    def run_pair_mode(self,width_select=0):  # 32'b dataword = 5'b chnlID + 2'b11 + 17'b leading_edge + 8'b width
+        self.channel_data_debug[0] = '0'
+        self.enable_leading[0] = '0'
+        self.enable_pair[0] = '1'
+        self.full_width_res[0] = '0'
+        self.width_select[0] = "{:0>3b}".format(width_select%8)
+        self.update_setup_0()
+        self.wordbyte = 4
+        update_data_length(self.ser, 4)
+
+
+    def run_pair_full_width_mode(self):  # 40'b dataword = 5'b chnlID + 2'b11 + 17'b leading_edge + 16'b width
+        self.channel_data_debug[0] = '0'
+        self.enable_leading[0] = '0'
+        self.enable_pair[0] = '1'
+        self.full_width_res[0] = '1'
+        self.update_setup_0()
+        self.wordbyte = 5
+        update_data_length(self.ser, 5)
+
+
+    def run_debug_mode(self):  # 24'b dataword0 = 2'b00 + 5'b chnl_ID + 17'b time
+                               # 24'b dataword1 = 2'b11 + 1'b edge_mode + 2'b hit_counter + 15'b drop_coarse + 4'b fineQ
+        self.channel_data_debug[0] = '1'
+        self.update_setup_0()
+        self.wordbyte = 3
+        update_data_length(self.ser, 3)
+
+
+    def run_idle_insert_mode(self, syn_packet_number):
+        self.enable_insert[0] = '1'
+        self.update_setup_0()
+        self.syn_packet_number[0] = "{:0>12b}".format(syn_packet_number%4096)
+        self.update_setup_1()
+
+
+    def run_error_insert_mode(self):
+        self.enable_error_packet[0] = '1'
+        self.update_setup_0()
+
+
+    def run_TDCID_mode(self):
+        self.enable_TDC_ID[0] = '1'
+        self.update_setup_0()
+        self.wordbyte = 3
+        update_data_length(self.ser, 3)
+
+
+    def config_TDCID(self, TDCID):
+        self.TDC_ID[0] = "{:0>19b}".format(TDCID)
+        self.update_setup_0()
+
+
+    def disable_8b10b(self):
+        self.enable_8b10b[0] = '0'
+        self.update_setup_0()
+
+
+    def config_pairing_timeout(self,time_out=40):
+        self.combine_time_out_config[0] = "{:0>10b}".format(time_out%1024)
+        self.update_setup_1()
+
+
+    def run_triggerless_mode(self):
+        self.enable_trigger[0] = '0'
+        self.update_setup_0()
+        tdc_triggerless_mode(self.ser)
+
+
+    def run_trigger_mode(self,match_window=0x1F):
+        self.enable_trigger[0] = '1'
+        self.enbale_fake_hit[0] = '1'
+        self.enable_direct_trigger[0] = '0'
+        self.enable_direct_bunch_reset[0] = '0'
+        self.enable_direct_event_reset[0] = '0'
+        self.update_setup_0()
+        self.bunch_offset[0] = '000000000000'
+        self.fake_hit_time_interval[0] = "{:0>12b}".format(256)
+        self.match_window[0] = "{:0>12b}".format(match_window%4096)
+        self.update_setup_1()
+        tdc_trigger_mode(self.ser)
+
+
+    def enable_legacy_ttc(self):
+        self.enable_new_ttc[0] = '0'
+        self.update_setup_0()
+        ttc_mode_select(self.ser, 0)
+        update_ttc_delay(self.ser, 1)
+
+
+    def single_trigger(self):
+        enable_ttc_trigger(self.ser)
+        single_TTC(self.ser)
+
+
+    def event_reset(self):
+        enable_ttc_event_reset(self.ser)
+        single_TTC(self.ser)
+
+
+    def single_BCR(self):
+        enable_ttc_BCR(self.ser)
+        single_TTC(self.ser)
+
+
+    def master_reset(self):
+        enable_ttc_master_reset(self.ser)
+        single_TTC(self.ser)
+
+
+
+        
+
+
+    
+

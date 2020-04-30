@@ -1,0 +1,1 @@
+ps -ef|grep 'mac_daq'|grep -v grep|grep -v LD_LIBRARY_PATH| awk '{print $2}'|xargs sudo kill -SIGUSR1
