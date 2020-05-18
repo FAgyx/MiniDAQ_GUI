@@ -1,0 +1,27 @@
+TDC Tab GUI
+
+1. TextBrowser: 
+Show date and time when the GUI started
+Show actions with date and time
+Show print() content
+2. Register chain popup window:
+(1) Setup0
+(2) Setup1
+(3) Setup2
+(4) Control0
+(5) Control1
+
+Actually there would be 2 values for every register: 
+a. value stored in the class TDCreg
+b. value displayed on the GUI (whether it is a text '1' or '0', or a checkbox 'true' or 'false')
+To keep them synchronized at all time, all values must read from the TDCreg at the window starting. A save button or a discard button should be used when closing the pop up window. The save button should connect to a function updating the TDCreg values.
+
+
+3. General functions: (name: functions performed)
+(1) verificate_TDC:verificate_ID_CODE, verificate_setup0 ...
+(2) set_ePLL_phase: set_ePLL_phase
+(3) Data_Rate: run_320M_data_rate/run_160M_data_rate/run_80M_data_rate, reselect_dline
+(4) Run_Mode: run_triggerless_mode/run_trigger_mode
+(5) Word_Mode: run_pair_mode/run_single_edge_mode/run_double_edge_mode/run_pair_full_width_mode/run_TDCID_mode
+(6) Edge_type: rising_edge_mode/falling_edge_mode
+(7) Channel_Enable: channel_enable/channel_disable
