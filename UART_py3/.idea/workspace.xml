@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c3babd03-24e5-4027-a19e-9598779f1190" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/UART.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/UART.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GUI_1/MainWindow_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/../GUI_1/MainWindow_1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GUI_1/MainWindow_1_init.py" beforeDir="false" afterPath="$PROJECT_DIR$/../GUI_1/MainWindow_1_init.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../GUI_1/setup0_popup_new.py" beforeDir="false" afterPath="$PROJECT_DIR$/../GUI_1/setup0_popup_new.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FPGA_verification.py" beforeDir="false" afterPath="$PROJECT_DIR$/FPGA_verification.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TDC_config_low_level_function.py" beforeDir="false" afterPath="$PROJECT_DIR$/TDC_config_low_level_function.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/read_html_eye.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/serial_config_tdc.py" beforeDir="false" afterPath="$PROJECT_DIR$/serial_config_tdc.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

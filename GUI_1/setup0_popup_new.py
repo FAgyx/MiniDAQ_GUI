@@ -13,6 +13,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_Dialog(object):
+    def __init__(self, TDC_inst):
+        self.TDC_inst = TDC_inst
+
+
+
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(554, 698)
@@ -96,6 +101,8 @@ class Ui_Dialog(object):
         #bypass_bcr_distribution
         self.checkBox = QtWidgets.QCheckBox(self.gridLayoutWidget_2)
         self.checkBox.setObjectName("checkBox")
+        # if self.TDC_inst.bypass_bcr_distribution[0] == '1':
+        #     self.checkBox.setChecked(True)
         self.gridLayout_2.addWidget(self.checkBox, 0, 0, 1, 1)
         self.checkBox.clicked.connect(self.checked_box)
 
@@ -156,6 +163,8 @@ class Ui_Dialog(object):
         #auto_roll_over
         self.checkBox_11 = QtWidgets.QCheckBox(self.gridLayoutWidget_2)
         self.checkBox_11.setObjectName("checkBox_11")
+        if self.TDC_inst.auto_roll_over[0] == '1':
+            self.checkBox_11.setChecked(True)
         self.gridLayout_2.addWidget(self.checkBox_11, 5, 0, 1, 1)
         self.checkBox_11.clicked.connect(self.checked_box_11)
 
@@ -344,9 +353,9 @@ class Ui_Dialog(object):
 
     def checked_box_11(self): 
         if self.checkBox_11.isChecked() == True:
-            self.message_11 = "auto_roll_over: set   "
+            self.TDC_inst.auto_roll_over[0] = '1'
         else:
-            self.message_11 = ""
+            self.TDC_inst.auto_roll_over[0] = '0'
 
     def checked_box_12(self): 
         if self.checkBox_12.isChecked() == True:

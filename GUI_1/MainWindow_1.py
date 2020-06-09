@@ -21,7 +21,7 @@ from PyQt5 import QtCore, QtGui
 from PyQt5.QtGui import * 
 from PyQt5.QtCore import *
 
-#Importing the popup windows
+# Importing the popup windows
 from verificate_popup import Ui_Dialog as Form
 from register_popup import Ui_Dialog as Form_1
 from ePLL_popup import Ui_Dialog as Form_2
@@ -36,10 +36,21 @@ from setup2_popup_new import Ui_Dialog as Form_10
 from control0_popup_new import Ui_Dialog as Form_11
 from control1_popup_new import Ui_Dialog as Form_12
 
+# import UART functions
+sys.path.insert(0, "../UART_py3")
+
+from serial_config_tdc import *
+
 
 
 class Ui_MainWindow(object):
     #setting up the main window and tabs
+    def __init__(self, ser, TDC_inst):
+        self.ser = ser
+        self.TDC_inst = TDC_inst
+
+
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(790, 870)
@@ -131,7 +142,8 @@ class Ui_MainWindow(object):
         self.pushButton_8 = QtWidgets.QPushButton(self.gridLayoutWidget)
         self.pushButton_8.setObjectName("pushButton_8")
         self.gridLayout.addWidget(self.pushButton_8, 7, 0, 1, 2)
-        self.pushButton_8.clicked.connect(self.open_dialog_7)
+        # self.pushButton_8.clicked.connect(self.open_dialog_7)
+        self.pushButton_8.clicked.connect(self.printsth)
 
         self.textBrowser_15 = QtWidgets.QTextBrowser(self.gridLayoutWidget)
         self.textBrowser_15.setObjectName("textBrowser_15")
@@ -259,7 +271,7 @@ class Ui_MainWindow(object):
     #Setup0
     def open_dialog_reg_1(self):
         dialog = QtWidgets.QDialog()
-        dialog.ui = Form_8()
+        dialog.ui = Form_8(self.TDC_inst)
         dialog.ui.setupUi(dialog)
         dialog.exec_()
         if dialog.ui.pushButton.clicked: 
@@ -391,11 +403,15 @@ class Ui_MainWindow(object):
         dialog.show()
 
 
+    def printsth(self):
+        verificate_ID_CODE(self.ser)
+
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
+    Dialog = QtWidgets.QDialog()
     ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
+    ui.setupUi(Dialog)
+    Dialog.show()
     sys.exit(app.exec_())
