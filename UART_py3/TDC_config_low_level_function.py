@@ -381,7 +381,7 @@ def update_hit_width(serial_port, width):
 
 
 def update_inv_hit(serial_port, inv):
-    if inv == 'inv':
+    if inv == '0':
         content_str = '\x00' + '\x1f\x2f\x32\x42\x50\x60\x70\x81\x0f'
         serial_port.write(content_str.encode('latin_1'))
         serial_port.flush()

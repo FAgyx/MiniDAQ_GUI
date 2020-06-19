@@ -11,6 +11,11 @@ class TDCreg(object):
         self.setup_2_align = ['0000']
         self.control_0_align = ['']
         self.control_1_align = ['0']
+        self.hit_width = 10
+        self.hit_interval = 10
+        self.hit_inverse = '0'
+        self.hit_enable = '\xFF\xFF\xFF'
+        self.hit_delay = 0
         trst_0(self.ser)
         trst_1(self.ser)
 
@@ -148,7 +153,7 @@ class TDCreg(object):
         update_JTAG_inst('\x12',self.ser)
         update_bit_length(115,self.ser)
         start_action(self.ser)
-        print("setup0 updated to TDC: "+hex(int(setup_0_bin_str,2)))
+        print("setup0 updated to TDC: 0x"+format(int(self.setup_0_bin_str,2),'029X'))
 
     def update_setup_1(self):
         self.setup_1_bin_str = ''.join(self.setup_1_align)
@@ -163,7 +168,7 @@ class TDCreg(object):
         update_JTAG_inst('\x03',self.ser)
         update_bit_length(94,self.ser)
         start_action(self.ser)
-        print("setup1 updated to TDC: "+hex(int(setup_1_bin_str,2)))
+        print("setup1 updated to TDC: 0x"+format(int(self.setup_1_bin_str,2),'024X'))
 
     def update_setup_2(self):
         self.setup_2_bin_str = ''.join(self.setup_2_align)
@@ -178,7 +183,7 @@ class TDCreg(object):
         update_JTAG_inst('\x14',self.ser)
         update_bit_length(36,self.ser)
         start_action(self.ser)
-        print("setup2 updated to TDC: "+hex(int(setup_2_bin_str,2)))
+        print("setup2 updated to TDC: 0x"+format(int(self.setup_2_bin_str,2),'09X'))
 
     def update_control_0(self):
         self.control_0_bin_str = ''.join(self.control_0_align)
@@ -193,7 +198,7 @@ class TDCreg(object):
         update_JTAG_inst('\x05',self.ser)
         update_bit_length(8,self.ser)
         start_action(self.ser)
-        print("control_0 updated to TDC: "+hex(int(control_0_bin_str,2)))
+        print("control_0 updated to TDC: 0x"+format(int(self.control_0_bin_str,2),'02X'))
 
     def update_control_1(self):
         self.control_1_bin_str = ''.join(self.control_1_align)
@@ -208,7 +213,7 @@ class TDCreg(object):
         update_JTAG_inst('\x06',self.ser)
         update_bit_length(47,self.ser)
         start_action(self.ser)
-        print("control_1 updated to TDC: "+hex(int(control_1_bin_str,2)))
+        print("control_1 updated to TDC: 0x"+format(int(self.control_1_bin_str,2),'012X'))
 
     def list_to_string(self,var):
         string_temp = ''
@@ -382,11 +387,11 @@ class TDCreg(object):
         trst_1(self.ser)
 
     def update_JTAG(self):
-        update_setup_0(self.ser)
-        update_setup_1(self.ser)
-        update_setup_2(self.ser)
-        update_control_0(self.ser)
-        update_control_1(self.ser)
+        self.update_setup_0()
+        self.update_setup_1()
+        self.update_setup_2()
+        self.update_control_0()
+        self.update_control_1()
 
     def set_FPGA_sample_rate(self):
         if self.enable_legacy[0] == '1':
@@ -401,7 +406,7 @@ class TDCreg(object):
     def set_word_byte(self):
         if self.enable_TDC_ID[0] == '1':
             self.wordbyte = 3             # TDC_ID mode
-            print("Running in TDC_ID mode, TDC_ID=0X_"+
+            print("Running in TDC_ID mode, TDC_ID=0x"+
             format(int(self.TDC_ID[0],2),'05X'))
         elif self.channel_data_debug[0] == '1':
             self.wordbyte = 3             # debug mode
@@ -422,7 +427,7 @@ class TDCreg(object):
                     self.wordbyte = 5
                     print("Running in full width pair mode")
                 print("Pair time out = "+str(int(self.combine_time_out_config[0],2)*6.25)+
-                ' ns ' + format(int(self.combine_time_out_config[0],2),'03X') +' LSB=6.25ns')
+                'ns, Code=0x' + format(int(self.combine_time_out_config[0],2),'03X') +', LSB=6.25ns')
         update_data_length(self.ser, self.wordbyte)
 
     def set_trigger_type(self):
@@ -434,23 +439,23 @@ class TDCreg(object):
             if self.enbale_fake_hit[0] == '1':
                 print("Fake hit enabled, interval = "+
                 str(int(self.fake_hit_time_interval[0],2))+
-                ' BC, 0X_'+format(int(self.fake_hit_time_interval[0],2),'03X'))
+                ' BC, 0x'+format(int(self.fake_hit_time_interval[0],2),'03X'))
             else:
                 print("Warning: Fake hit not enabled!")
             print("Trigger Matching Information:")
-            print("Bunch Offset = 0X_"+format(int(self.bunch_offset[0],2),'03X'))
-            print("Event Offset = 0X_"+format(int(self.event_offset[0],2),'03X'))
-            print("Match Window = 0X_"+format(int(self.match_window[0],2),'03X'))
+            print("Bunch Offset = 0x"+format(int(self.bunch_offset[0],2),'03X'))
+            print("Event Offset = 0x"+format(int(self.event_offset[0],2),'03X'))
+            print("Match Window = 0x"+format(int(self.match_window[0],2),'03X'))
             if self.enable_trigger_timeout[0] == '1':
                 print("Trigger time out enabled")
 
     def show_channel_info(self):
-        print("Rising is leading: 0X_"+format(int(self.rising_is_leading[0],2),'06X'))
-        print([i for i in range(24) if rising_is_leading[0][i]=='1'])
-        print("Channel enable R : 0X_"+format(int(self.channel_enable_r[0],2),'06X'))
-        print([i for i in range(24) if rising_is_leading[0][i]=='1'])
-        print("Channel enable F : 0X_"+format(int(self.channel_enable_f[0],2),'06X'))
-        print([i for i in range(24) if rising_is_leading[0][i]=='1'])
+        print("Rising is leading: 0x"+format(int(self.rising_is_leading[0],2),'06X'))
+        print([i for i in range(24) if self.rising_is_leading[0][i]=='1'])
+        print("Channel enable R : 0x"+format(int(self.channel_enable_r[0],2),'06X'))
+        print([i for i in range(24) if self.rising_is_leading[0][i]=='1'])
+        print("Channel enable F : 0x"+format(int(self.channel_enable_f[0],2),'06X'))
+        print([i for i in range(24) if self.rising_is_leading[0][i]=='1'])
 
     def show_packet_info(self):
         if self.enable_8b10b[0] == '1':
@@ -474,7 +479,7 @@ class TDCreg(object):
         ttc_str += ' TTC enabled for '
         ttc_str += 'Master_reset ' if self.enable_master_reset_code[0] == '1' else ''
         ttc_str += 'BC_reset ' if self.auto_roll_over[0] == '0' \
-        and enable_direct_bunch_reset[0] == '0' else ''
+        and self.enable_direct_bunch_reset[0] == '0' else ''
         ttc_str += 'Trigger ' if self.enable_direct_trigger[0] == '0' else ''
         ttc_str += 'Event_reset' if self.enable_direct_event_reset[0] == '0' else ''
         print(ttc_str)
@@ -485,26 +490,40 @@ class TDCreg(object):
         if self.auto_roll_over[0] == '1':
             bcr_str += 'internal ' 
         else:
-            if enable_direct_bunch_reset[0] == '0':
+            if self.enable_direct_bunch_reset[0] == '0':
                 bcr_str += 'TTC ' 
-        bcr_str += 'with roll_over = 0X_'+format(int(self.roll_over[0],2),'03X')+' BC '
-        bcr_str += 'and delay = 0X_'+format(int(self.coarse_count_offset[0],2),'03X') \
+        bcr_str += 'with roll_over = 0x'+format(int(self.roll_over[0],2),'03X')+' BC '
+        bcr_str += 'and delay = 0x'+format(int(self.coarse_count_offset[0],2),'03X') \
         +' BC' if self.bypass_bcr_distribution[0] == '0' else 'and no delay'
         print(bcr_str)
 
+    def update_periodic_hit(self):
+        update_hit_width(self.ser,self.hit_width)  # width_time = width*6.25 ns, minimum 6.25ns
+        update_inv_hit(self.ser,self.hit_inverse)
+        update_hit_delay(self.ser,self.hit_delay)
+        update_hit_interval(self.ser,self.hit_interval)   # hit rate = 160MHz/interval
+        update_hit_mask_hit(self.ser,self.hit_enable)
+        print("Periodic hit set!")
+        print("Width="+str(self.hit_width*6.25)+"ns, interval=" +
+        str(self.hit_interval)+", rate="+str(160.0/self.hit_interval)+
+        "MHz, delay="+str(self.hit_delay)+", inverse="+self.hit_inverse)
+        print("Hit enabled for channel:")
+        print([23-i for i in range(24) if (format(ord(self.hit_enable[0]),'08b')+
+        format(ord(self.hit_enable[1]),'08b')+format(ord(self.hit_enable[2]),'08b'))[i]=='1'])
+
     def DAQ_init(self):
-        print("//////DAQ starts!//////")
-        reset_JTAG()
-        update_JTAG()
-        set_data_rate()
-        set_FPGA_sample_rate()
-        reselect_dline()
-        set_word_byte()
-        set_trigger_type()
-        show_channel_info()
-        show_packet_info()
-        show_TTC_info()
-        show_BCR_info()
+        print("//////DAQ initialization starts!//////")
+        self.reset_JTAG()
+        self.update_JTAG()
+        self.set_FPGA_sample_rate()
+        self.reselect_dline()
+        self.set_word_byte()
+        self.set_trigger_type()
+        self.show_channel_info()
+        self.show_packet_info()
+        self.show_TTC_info()
+        self.show_BCR_info()
+        print("//////DAQ initialization done!//////")
         
         
 
