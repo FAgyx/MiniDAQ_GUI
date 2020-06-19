@@ -379,3 +379,17 @@ def get_status1(ser):
     status1_default_bin=str_to_bin(status1_default,'')[0:25]
     print(status1_default_bin)
     
+def verificate_all(ser):
+    print("//////JTAG verification starts!//////")
+    veri_result = [False,False,False,False,False,False]
+    veri_result[0] = verificate_setup0(ser)
+    veri_result[1] = verificate_setup1(ser)
+    veri_result[2] = verificate_setup2(ser)
+    veri_result[3] = verificate_control0(ser)
+    veri_result[4] = verificate_control1(ser)
+    veri_result[5] = verificate_ID_CODE(ser)
+    if veri_result ==[True,True,True,True,True,True]:
+        print("//////All JTAG verification passed!//////")
+    else:
+        print("//////JTAG verification failed!//////")
+
