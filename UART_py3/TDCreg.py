@@ -35,7 +35,7 @@ class TDCreg(object):
         self.channel_data_debug = ['0']
         self.enable_leading = ['0']
         self.enable_pair = ['1']
-        self.enbale_fake_hit = ['0']
+        self.enable_fake_hit = ['0']
         self.rising_is_leading = ['111111111111111111111111']
         self.channel_enable_r = ['111111111111111111111111']
         self.channel_enable_f = ['111111111111111111111111']
@@ -54,7 +54,7 @@ class TDCreg(object):
         #setup_0
         self.TTC_setup = [self.enable_new_ttc , self.enable_master_reset_code , self.enable_direct_bunch_reset , self.enable_direct_event_reset , self.enable_direct_trigger]
         self.bcr_distribute = [self.auto_roll_over , self.bypass_bcr_distribution]
-        self.tdc_mode = [self.enable_trigger , self.channel_data_debug , self.enable_leading , self.enable_pair , self.enbale_fake_hit ,self.rising_is_leading , self.channel_enable_r , self.channel_enable_f]
+        self.tdc_mode = [self.enable_trigger , self.channel_data_debug , self.enable_leading , self.enable_pair , self.enable_fake_hit ,self.rising_is_leading , self.channel_enable_r , self.channel_enable_f]
         self.TDC_ID_l = [self.TDC_ID]
         self.readout = [self.enable_trigger_timeout , self.enable_high_speed , self.enable_legacy , self.full_width_res , self.width_select , self.enable_8b10b , self.enable_insert , self.enable_error_packet , self.enable_TDC_ID , self.enable_error_notify]
         self.setup_0 = self.TTC_setup + self.bcr_distribute + self.tdc_mode + self.TDC_ID_l + self.readout
@@ -346,7 +346,7 @@ class TDCreg(object):
 
     def run_trigger_mode(self,match_window=0x1F):
         self.enable_trigger[0] = '1'
-        self.enbale_fake_hit[0] = '1'
+        self.enable_fake_hit[0] = '1'
         self.enable_direct_trigger[0] = '0'
         self.enable_direct_bunch_reset[0] = '0'
         self.enable_direct_event_reset[0] = '0'
@@ -436,7 +436,7 @@ class TDCreg(object):
             print("Running in triggerless mode")
         elif self.enable_trigger[0] == '1':  # triggered mode
             print("Running in triggered mode")
-            if self.enbale_fake_hit[0] == '1':
+            if self.enable_fake_hit[0] == '1':
                 print("Fake hit enabled, interval = "+
                 str(int(self.fake_hit_time_interval[0],2))+
                 ' BC, 0x'+format(int(self.fake_hit_time_interval[0],2),'03X'))

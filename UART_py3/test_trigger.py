@@ -34,7 +34,7 @@ tdc_master_reset_0(ser)
 TDC0.reset_setup_0()
 TDC0.reset_setup_1()
 TDC0.enable_trigger[0] = '1'
-TDC0.enbale_fake_hit[0] = '1'
+TDC0.enable_fake_hit[0] = '1'
 
 
 
