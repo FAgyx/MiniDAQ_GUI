@@ -58,6 +58,7 @@ class TDCreg(object):
         self.TDC_ID_l = [self.TDC_ID]
         self.readout = [self.enable_trigger_timeout , self.enable_high_speed , self.enable_legacy , self.full_width_res , self.width_select , self.enable_8b10b , self.enable_insert , self.enable_error_packet , self.enable_TDC_ID , self.enable_error_notify]
         self.setup_0 = self.TTC_setup + self.bcr_distribute + self.tdc_mode + self.TDC_ID_l + self.readout
+        self.setup_0_indictor = ['0']
 
     def reset_setup_1(self):
         ##setup_1
@@ -75,6 +76,7 @@ class TDCreg(object):
         self.timer_out = [self.combine_time_out_config , self.fake_hit_time_interval , self.syn_packet_number]
         self.coarse_out = [self.roll_over , self.coarse_count_offset , self.bunch_offset , self.event_offset , self.match_window]
         self.setup_1 = self.timer_out +self.coarse_out 
+        self.setup_1_indictor = ['0']
 
     def reset_setup_2(self):
         ##setup_2
@@ -98,6 +100,7 @@ class TDCreg(object):
         self.lutf = ['00']
         self.chnl_decode = [self.fine_sel , self.lut0 ,self.lut1 ,self.lut2, self.lut3 ,self.lut4 ,self.lut5 ,self.lut6 ,self.lut7 ,self.lut8 ,self.lut9 ,self.luta ,self.lutb ,self.lutc ,self.lutd ,self.lute ,self.lutf]
         self.setup_2 = self.chnl_decode
+        self.setup_2_indictor = ['0']
 
     def reset_setup(self):
         self.reset_setup_0()
@@ -116,6 +119,7 @@ class TDCreg(object):
         #control_0
         self.reset_control = [self.rst_ePLL , self.reset_jtag_in , self.event_reset_jtag_in , self.chnl_fifo_overflow_clear , self.debug_port_select]
         self.control_0 = self.reset_control
+        self.control_0_indictor = ['0']
 
     def reset_control_1(self):
         ##control_1
@@ -128,6 +132,17 @@ class TDCreg(object):
         self.ePllCap = ['10']
         self.ePLL_control = [self.phase_clk160 , self.phase_clk320_0 , self.phase_clk320_1 , self.phase_clk320_2 , self.ePllRes , self.ePllIcp , self.ePllCap,self.ePllRes , self.ePllIcp , self.ePllCap,self.ePllRes , self.ePllIcp , self.ePllCap]
         self.control_1 = self.ePLL_control
+        self.control_1_indictor = ['0']
+
+    def init_status_0(self):
+        self.instruction_error = ['']
+        self.CRC = ['']
+        self.status_0 = [self.instruction_error,self.CRC]
+
+    def init_status_1(self):
+        self.ePll_lock = ['']
+        self.chnl_fifo_overflow = ['']
+        self.status_1 = [self.ePll_lock,self.chnl_fifo_overflow]
 
     def reset_conttrol(self):
         self.reset_control_0()
@@ -154,6 +169,11 @@ class TDCreg(object):
         update_bit_length(115,self.ser)
         start_action(self.ser)
         print("setup0 updated to TDC: 0x"+format(int(self.setup_0_bin_str,2),'029X'))
+        readback = ''
+        for byte in get_update_reg(3,ser)[4:19]:
+            readback+=format(ord(byte),'b').zfill(8)
+        readback = readback[0:115]
+        self.setup_0_indictor[0] = '1' if readback == self.setup_0[0] else '0'
 
     def update_setup_1(self):
         self.setup_1_bin_str = ''.join(self.setup_1_align)
@@ -169,6 +189,11 @@ class TDCreg(object):
         update_bit_length(94,self.ser)
         start_action(self.ser)
         print("setup1 updated to TDC: 0x"+format(int(self.setup_1_bin_str,2),'024X'))
+        readback = ''
+        for byte in get_update_reg(3,ser)[4:16]:
+            readback+=format(ord(byte),'b').zfill(8)
+        readback = readback[0:94]
+        self.setup_1_indictor[0] = '1' if readback == self.setup_1[0] else '0'
 
     def update_setup_2(self):
         self.setup_2_bin_str = ''.join(self.setup_2_align)
@@ -184,6 +209,11 @@ class TDCreg(object):
         update_bit_length(36,self.ser)
         start_action(self.ser)
         print("setup2 updated to TDC: 0x"+format(int(self.setup_2_bin_str,2),'09X'))
+        readback = ''
+        for byte in get_update_reg(3,ser)[4:9]:
+            readback+=format(ord(byte),'b').zfill(8)
+        readback = readback[0:36]
+        self.setup_2_indictor[0] = '1' if readback == self.setup_2[0] else '0'
 
     def update_control_0(self):
         self.control_0_bin_str = ''.join(self.control_0_align)
@@ -199,6 +229,11 @@ class TDCreg(object):
         update_bit_length(8,self.ser)
         start_action(self.ser)
         print("control_0 updated to TDC: 0x"+format(int(self.control_0_bin_str,2),'02X'))
+                readback = ''
+        for byte in get_update_reg(3,ser)[4]:
+            readback+=format(ord(byte),'b').zfill(8)
+        readback = readback[0:8]
+        self.control_0_indictor[0] = '1' if readback == self.control_0[0] else '0'
 
     def update_control_1(self):
         self.control_1_bin_str = ''.join(self.control_1_align)
@@ -214,6 +249,44 @@ class TDCreg(object):
         update_bit_length(47,self.ser)
         start_action(self.ser)
         print("control_1 updated to TDC: 0x"+format(int(self.control_1_bin_str,2),'012X'))
+        for byte in get_update_reg(3,ser)[4:10]:
+            readback+=format(ord(byte),'b').zfill(8)
+        readback = readback[0:47]
+        self.control_1_indictor[0] = '1' if readback == self.control_1[0] else '0'
+
+    def read_status_0(self):
+        update_reg(0,'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',ser)
+        update_reg(1,'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',ser)
+        update_reg(2,'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',ser)
+        update_reg(3,'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',ser)
+        update_config_period(0,self.ser)
+        update_JTAG_inst('\x17',self.ser)
+        update_bit_length(33,self.ser)
+        start_action(self.ser)
+        readback = ''
+        for byte in get_update_reg(3,ser)[4:6]:
+            readback+=format(ord(byte),'b').zfill(8)
+        readback = readback[0:33]
+        self.instruction_error[0] = readback[0]
+        self.CRC[0] = readback[1:33]
+        print("status_0 read back: 0x"+format(int(readback,2),'09X'))
+
+    def read_status_1(self):
+        update_reg(0,'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',ser)
+        update_reg(1,'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',ser)
+        update_reg(2,'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',ser)
+        update_reg(3,'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',ser)
+        update_config_period(0,self.ser)
+        update_JTAG_inst('\x18',self.ser)
+        update_bit_length(25,self.ser)
+        start_action(self.ser)
+        readback = ''
+        for byte in get_update_reg(3,ser)[4]:
+            readback+=format(ord(byte),'b').zfill(8)
+        readback = readback[0:25]
+        self.ePll_lock[0] = readback[0]
+        self.chnl_fifo_overflow[0] = readback[1:25]
+        print("status_1 read back: 0x"+format(int(readback,2),'07X'))
 
     def list_to_string(self,var):
         string_temp = ''
