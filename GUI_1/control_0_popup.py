@@ -20,7 +20,7 @@ class Ui_Dialog(object):
         Dialog.setObjectName("Dialog")
         Dialog.resize(340, 311)
 
-        #Main layout 
+        #Main layout
         self.verticalLayoutWidget = QtWidgets.QWidget(Dialog)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(10, 20, 311, 151))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
@@ -56,7 +56,7 @@ class Ui_Dialog(object):
         if self.TDC_inst.chnl_fifo_overflow_clear[0] == '1':
             self.checkBox_4.setChecked(True)
 
-        #layout for debug_port_select 
+        #layout for debug_port_select
         self.horizontalLayoutWidget = QtWidgets.QWidget(Dialog)
         self.horizontalLayoutWidget.setGeometry(QtCore.QRect(10, 180, 311, 61))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
@@ -125,8 +125,8 @@ class Ui_Dialog(object):
         self.pushButton_3.setText(_translate("Dialog", "Cancel"))
 
 
-    #Function for the line edit 
-    def changed_line1(self): 
+    #Function for the line edit
+    def changed_line1(self):
         self.message_5 = "debug_port_select: " + self.lineEdit.text() + "    "
 
 
@@ -182,12 +182,3 @@ if __name__ == "__main__":
     ui.setupUi(Dialog)
     Dialog.show()
     sys.exit(app.exec_())
-
-
-
-
-
-
-
-
-
