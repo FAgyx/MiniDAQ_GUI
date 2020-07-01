@@ -8,8 +8,11 @@
 
 
 ################ setup2 popup script ###################
-
+import sys
+import serial
 from PyQt5 import QtCore, QtGui, QtWidgets
+sys.path.insert(0, "../UART_py3")
+from TDCreg import *
 
 
 class Ui_Dialog(object):
@@ -201,32 +204,32 @@ class Ui_Dialog(object):
         self.pushButton.setObjectName("pushButton")
         self.horizontalLayout_6.addWidget(self.pushButton)
         self.pushButton.clicked.connect(self.apply_button)
-        self.pushButton.clicked.connect(self.apply_button_mes)
+        # self.pushButton.clicked.connect(self.apply_button_mes)
         #self.pushButton.clicked.connect(Dialog.reject)
 
         #OK button
         self.pushButton_2 = QtWidgets.QPushButton(self.horizontalLayoutWidget_6)
         self.pushButton_2.setObjectName("pushButton_2")
         self.horizontalLayout_6.addWidget(self.pushButton_2)
-        self.pushButton_2.clicked.connect(self.apply_button)
-        self.pushButton_2.clicked.connect(self.OK_button_mes)
+        # self.pushButton_2.clicked.connect(self.apply_button)
+        # self.pushButton_2.clicked.connect(self.OK_button_mes)
         self.pushButton_2.clicked.connect(Dialog.reject)
 
         #Cancel button
         self.pushButton_3 = QtWidgets.QPushButton(self.horizontalLayoutWidget_6)
         self.pushButton_3.setObjectName("pushButton_3")
         self.horizontalLayout_6.addWidget(self.pushButton_3)
-        self.pushButton_3.clicked.connect(self.cancel_button_mes)
+        # self.pushButton_3.clicked.connect(self.cancel_button_mes)
         self.pushButton_3.clicked.connect(Dialog.reject)
 
 
-        #enabling messages to print on the TDC tab
-        self.apply_button_message = ""
-        self.OK_button_message = ""
-        self.cancel_button_message = ""
-
+        # #enabling messages to print on the TDC tab
+        # self.apply_button_message = ""
+        # self.OK_button_message = ""
+        # self.cancel_button_message = ""
+        #
         self.retranslateUi(Dialog)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
+        # QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
@@ -254,6 +257,7 @@ class Ui_Dialog(object):
         self.pushButton_3.setText(_translate("Dialog", "Cancel"))
 
     def apply_button(self):
+        print("applied!")
         self.TDC_inst.fine_sel[0] = self.lineEdit.text()
         self.TDC_inst.lut0[0] = self.lineEdit_2.text()
         self.TDC_inst.lut1[0] = self.lineEdit_3.text()
@@ -274,6 +278,7 @@ class Ui_Dialog(object):
 
         #Call update_setup_2 function
         self.TDC_inst.update_setup_2()
+        print('over!')
 
     # message functions!
     def apply_button_mes(self):
@@ -290,9 +295,16 @@ class Ui_Dialog(object):
 
 if __name__ == "__main__":
     import sys
+    import serial
+    sys.path.insert(0, "../UART_py3")
+    from TDCreg import *
+
+    ser = serial.Serial(port='COM4', baudrate=115200, bytesize=serial.EIGHTBITS,
+                        parity=serial.PARITY_EVEN, stopbits=serial.STOPBITS_ONE, timeout=0.1)
+    TDC_inst = TDCreg(ser)
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
+    ui = Ui_Dialog(TDC_inst)
     ui.setupUi(Dialog)
     Dialog.show()
     sys.exit(app.exec_())

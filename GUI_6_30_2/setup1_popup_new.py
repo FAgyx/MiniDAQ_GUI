@@ -181,9 +181,17 @@ class Ui_Dialog(object):
 
 if __name__ == "__main__":
     import sys
+    import serial
+
+    sys.path.insert(0, "../UART_py3")
+    from TDCreg import *
+
+    ser = serial.Serial(port='COM4', baudrate=115200, bytesize=serial.EIGHTBITS,
+                        parity=serial.PARITY_EVEN, stopbits=serial.STOPBITS_ONE, timeout=0.1)
+    TDC_inst = TDCreg(ser)
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
+    ui = Ui_Dialog(TDC_inst)
     ui.setupUi(Dialog)
     Dialog.show()
     sys.exit(app.exec_())

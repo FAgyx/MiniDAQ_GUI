@@ -45,7 +45,7 @@ from serial_config_tdc import *
 
 class Ui_MainWindow(object):
     #setting up the main window and tabs
-    def __init__(self, ser = None, TDC_inst = ""):
+    def __init__(self, ser, TDC_inst):
     #def __init__(self, ser, TDC_inst):
         self.ser = ser
         self.TDC_inst = TDC_inst
@@ -300,7 +300,7 @@ class Ui_MainWindow(object):
     #Setup2
     def open_dialog_reg_3(self): 
         dialog = QtWidgets.QDialog()
-        dialog.ui = Form_10()
+        dialog.ui = Form_10(self.TDC_inst)
         dialog.ui.setupUi(dialog)
         dialog.exec_()
         if dialog.ui.pushButton.clicked: 
