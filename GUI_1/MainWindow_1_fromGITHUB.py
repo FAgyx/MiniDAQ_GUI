@@ -34,17 +34,14 @@ from setup_1_popup import Ui_Dialog as Form_9
 from setup_2_popup import Ui_Dialog as Form_10
 from control_0_popup import Ui_Dialog as Form_11
 from control_1_popup import Ui_Dialog as Form_12
-<<<<<<< Updated upstream:GUI_1/MainWindow_1_fromGITHUB.py
-=======
 from read_only_popup import Ui_Dialog as Form_13
->>>>>>> Stashed changes:GUI_1/MainWindow_1.py
 
 # import UART functions
 sys.path.insert(0, "../UART_py3")
-#sys.path.insert(0, "../UART_py3_6_30")
 
 from serial_config_tdc import *
 #from TDCreg import *
+
 
 
 class Ui_MainWindow(object):
@@ -284,18 +281,12 @@ class Ui_MainWindow(object):
         dialog.ui = Form_8(self.TDC_inst)
         dialog.ui.setupUi(dialog)
         dialog.exec_()
-<<<<<<< Updated upstream:GUI_1/MainWindow_1_fromGITHUB.py
-        if dialog.ui.pushButton.clicked:
-            self.textBrowser_2.setText(dialog.ui.apply_button_message +
-                                       dialog.ui.OK_button_message + dialog.ui.cancel_button_message)
-=======
         #self.update_messagess = self.TDC_inst.update_setup_0()
         #if dialog.ui.pushButton.clicked:
             # self.textBrowser_2.setText(dialog.ui.apply_button_message +
             #                            dialog.ui.OK_button_message + dialog.ui.cancel_button_message
             #                            #+ self.update_messagess)
             #                            + dialog.ui.update_message)
->>>>>>> Stashed changes:GUI_1/MainWindow_1.py
         dialog.show()
 
     # Setup1
@@ -304,16 +295,10 @@ class Ui_MainWindow(object):
         dialog.ui = Form_9(self.TDC_inst)
         dialog.ui.setupUi(dialog)
         dialog.exec_()
-<<<<<<< Updated upstream:GUI_1/MainWindow_1_fromGITHUB.py
-        if dialog.ui.pushButton.clicked:
-            self.textBrowser_2.setText(dialog.ui.apply_button_message
-                                       + dialog.ui.OK_button_message + dialog.ui.cancel_button_message)
-=======
         # if dialog.ui.pushButton.clicked:
         #     self.textBrowser_2.setText(dialog.ui.apply_button_message
         #                                + dialog.ui.OK_button_message + dialog.ui.cancel_button_message
         #                                + dialog.ui.message + "   " + dialog.ui.message_2)
->>>>>>> Stashed changes:GUI_1/MainWindow_1.py
         dialog.show()
 
     # Setup2
@@ -322,15 +307,9 @@ class Ui_MainWindow(object):
         dialog.ui = Form_10(self.TDC_inst)
         dialog.ui.setupUi(dialog)
         dialog.exec_()
-<<<<<<< Updated upstream:GUI_1/MainWindow_1_fromGITHUB.py
-        if dialog.ui.pushButton.clicked:
-             self.textBrowser_2.setText(dialog.ui.apply_button_message
-                                       + dialog.ui.OK_button_message + dialog.ui.cancel_button_message)
-=======
         # if dialog.ui.pushButton.clicked:
         #      self.textBrowser_2.setText(dialog.ui.apply_button_message
         #                                + dialog.ui.OK_button_message + dialog.ui.cancel_button_message)
->>>>>>> Stashed changes:GUI_1/MainWindow_1.py
         dialog.show()
 
     # Control0
@@ -339,30 +318,15 @@ class Ui_MainWindow(object):
         dialog.ui = Form_11(self.TDC_inst)
         dialog.ui.setupUi(dialog)
         dialog.exec_()
-<<<<<<< Updated upstream:GUI_1/MainWindow_1_fromGITHUB.py
-        if dialog.ui.pushButton.clicked:
-            self.textBrowser_2.setText(dialog.ui.apply_button_message
-                                       + dialog.ui.OK_button_message + dialog.ui.cancel_button_message)
-=======
         # if dialog.ui.pushButton.clicked:
         #     self.textBrowser_2.setText(dialog.ui.apply_button_message
         #                                + dialog.ui.OK_button_message + dialog.ui.cancel_button_message)
->>>>>>> Stashed changes:GUI_1/MainWindow_1.py
         dialog.show()
 
     # Control1
     def open_dialog_reg_5(self):
         dialog = QtWidgets.QDialog()
         dialog.ui = Form_12(self.TDC_inst)
-<<<<<<< Updated upstream:GUI_1/MainWindow_1_fromGITHUB.py
-        dialog.ui.setupUi(dialog)
-        dialog.exec_()
-        if dialog.ui.pushButton.clicked:
-            self.textBrowser_2.setText(dialog.ui.apply_button_message
-                                       + dialog.ui.OK_button_message + dialog.ui.cancel_button_message)
-        dialog.show()
-
-=======
         dialog.ui.setupUi(dialog)
         dialog.exec_()
         # if dialog.ui.pushButton.clicked:
@@ -379,7 +343,6 @@ class Ui_MainWindow(object):
         dialog.show()
 
 
->>>>>>> Stashed changes:GUI_1/MainWindow_1.py
     # For the general functions
     # Verificate TDC
     def open_dialog(self):

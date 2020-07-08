@@ -5,16 +5,11 @@ import sys
 import datetime
 import serial
 sys.path.insert(0, "../UART_py3")
-#sys.path.insert(0, "../UART_py3_6_30")
 from TDCreg import *
 from serial_config_tdc import *
 
 ########################################################
-<<<<<<< Updated upstream:GUI_1/MainWindow_1_init_fromGITHUB.py
-fun()
-=======
 #fun()
->>>>>>> Stashed changes:GUI_1/MainWindow_1_init.py
 ########################################################
 
 #
@@ -67,14 +62,11 @@ if __name__ == "__main__":
     TDC_inst = TDCreg(ser)
 
     #TDC_inst.update_setup_0()
-<<<<<<< Updated upstream:GUI_1/MainWindow_1_init_fromGITHUB.py
-=======
     #TDC_inst.read_status_0()
     #TDC_inst.read_status_1()
     #TDC_inst.update_control_1()
     #TDC_inst.update_control_1()
     #print(TDC_inst.control_1_indictor)
->>>>>>> Stashed changes:GUI_1/MainWindow_1_init.py
 
     myapp = StartQT5(ser, TDC_inst)
     myapp.show()
