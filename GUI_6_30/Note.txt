@@ -1,0 +1,23 @@
+Notes: 
+
+MainWindow_1.py has all of the code relative to the central window of the GUI 
+MainWindow_1_init.py can run and MainWindow_1.py 
+
+All of the other files are for the popup windows that are read into MainWindow_1.py
+They are imported at the top of the MainWindow.py file 
+
+The general function popup windows are in: 
+verificate_popup.py
+ePLL_popup.py 
+datarate_popup_2_new.py 
+runmode_popup_2_new.py 
+wordmode_popup_2_new.py 
+edgetype_popup_2_new.py 
+channel_popup.py 
+
+The register popup windows are in: 
+setup0_popup_new.py
+setup1_popup_new.py 
+setup2_popup_new.py 
+control0_popup_new.py 
+control1_popup_new.py 
