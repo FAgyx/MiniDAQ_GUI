@@ -13,6 +13,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_Dialog(object):
+
+    def __init__(self, TDC_inst):
+        self.TDC_inst = TDC_inst
+
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(318, 260)
@@ -54,6 +58,7 @@ class Ui_Dialog(object):
         self.pushButton = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.pushButton.setObjectName("pushButton")
         self.verticalLayout.addWidget(self.pushButton)
+        self.pushButton.clicked.connect(self.save_button)
         self.pushButton.clicked.connect(Dialog.reject)
 
         #enabling message to print on TDC tab
@@ -64,14 +69,22 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        Dialog.setWindowTitle(_translate("Dialog", "Data Rate"))
         self.checkBox.setText(_translate("Dialog", "Reselect dline"))
         self.label.setText(_translate("Dialog", "Data Rate:"))
         self.pushButton.setText(_translate("Dialog", "Save"))
 
     #Function for the combobox 
     def changed(self):
-        self.message = self.comboBox.currentText()       
+        self.message = self.comboBox.currentText()
+
+    def save_button(self):
+        if self.comboBox.currentIndex() == 0:
+            self.TDC_inst.run_320M_data_rate()
+        if self.comboBox.currentIndex() == 1:
+            self.TDC_inst.run_160M_data_rate()
+        if self.comboBox.currentIndex() == 2:
+            self.TDC_inst.run_80M_data_rate()
 
 
 if __name__ == "__main__":

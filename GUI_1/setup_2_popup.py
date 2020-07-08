@@ -201,7 +201,11 @@ class Ui_Dialog(object):
         self.pushButton.setObjectName("pushButton")
         self.horizontalLayout_6.addWidget(self.pushButton)
         self.pushButton.clicked.connect(self.apply_button)
+<<<<<<< Updated upstream
         self.pushButton.clicked.connect(self.apply_button_mes)
+=======
+        #self.pushButton.clicked.connect(self.apply_button_mes)
+>>>>>>> Stashed changes
         #self.pushButton.clicked.connect(Dialog.reject)
 
         #OK button
@@ -209,21 +213,35 @@ class Ui_Dialog(object):
         self.pushButton_2.setObjectName("pushButton_2")
         self.horizontalLayout_6.addWidget(self.pushButton_2)
         self.pushButton_2.clicked.connect(self.apply_button)
+<<<<<<< Updated upstream
         self.pushButton_2.clicked.connect(self.OK_button_mes)
+=======
+        #self.pushButton_2.clicked.connect(self.OK_button_mes)
+>>>>>>> Stashed changes
         self.pushButton_2.clicked.connect(Dialog.reject)
 
         #Cancel button
         self.pushButton_3 = QtWidgets.QPushButton(self.horizontalLayoutWidget_6)
         self.pushButton_3.setObjectName("pushButton_3")
         self.horizontalLayout_6.addWidget(self.pushButton_3)
+<<<<<<< Updated upstream
         self.pushButton_3.clicked.connect(self.cancel_button_mes)
+=======
+        #self.pushButton_3.clicked.connect(self.cancel_button_mes)
+>>>>>>> Stashed changes
         self.pushButton_3.clicked.connect(Dialog.reject)
 
 
         #enabling messages to print on the TDC tab
+<<<<<<< Updated upstream
         self.apply_button_message = ""
         self.OK_button_message = ""
         self.cancel_button_message = ""
+=======
+        # self.apply_button_message = ""
+        # self.OK_button_message = ""
+        # self.cancel_button_message = ""
+>>>>>>> Stashed changes
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -275,6 +293,7 @@ class Ui_Dialog(object):
         #Call update_setup_2 function
         self.TDC_inst.update_setup_2()
 
+<<<<<<< Updated upstream
     # message functions!
     def apply_button_mes(self):
         self.apply_button_message = "setup2: changes applied"
@@ -286,6 +305,19 @@ class Ui_Dialog(object):
     def cancel_button_mes(self):
         self.cancel_button_message = "setup2: changes canceled"
         self.apply_button_message = ""
+=======
+    # # message functions!
+    # def apply_button_mes(self):
+    #     self.apply_button_message = "setup2: changes applied"
+    #
+    # def OK_button_mes(self):
+    #     self.OK_button_message = "setup2: changes saved"
+    #     self.apply_button_message = ""
+    #
+    # def cancel_button_mes(self):
+    #     self.cancel_button_message = "setup2: changes canceled"
+    #     self.apply_button_message = ""
+>>>>>>> Stashed changes
 
 
 if __name__ == "__main__":

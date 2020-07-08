@@ -86,7 +86,11 @@ class Ui_Dialog(object):
         self.pushButton.setObjectName("pushButton")
         self.horizontalLayout_6.addWidget(self.pushButton)
         self.pushButton.clicked.connect(self.apply_button)
+<<<<<<< Updated upstream
         self.pushButton.clicked.connect(self.apply_button_mes)
+=======
+        #self.pushButton.clicked.connect(self.apply_button_mes)
+>>>>>>> Stashed changes
         #self.pushButton.clicked.connect(Dialog.reject)
 
         #OK button
@@ -94,13 +98,18 @@ class Ui_Dialog(object):
         self.pushButton_2.setObjectName("pushButton_2")
         self.horizontalLayout_6.addWidget(self.pushButton_2)
         self.pushButton_2.clicked.connect(self.apply_button)
+<<<<<<< Updated upstream
         self.pushButton_2.clicked.connect(self.OK_button_mes)
+=======
+        #self.pushButton_2.clicked.connect(self.OK_button_mes)
+>>>>>>> Stashed changes
         self.pushButton_2.clicked.connect(Dialog.reject)
 
         #Cancel button
         self.pushButton_3 = QtWidgets.QPushButton(self.horizontalLayoutWidget_6)
         self.pushButton_3.setObjectName("pushButton_3")
         self.horizontalLayout_6.addWidget(self.pushButton_3)
+<<<<<<< Updated upstream
         self.pushButton_3.clicked.connect(self.cancel_button_mes)
         self.pushButton_3.clicked.connect(Dialog.reject)
 
@@ -108,6 +117,15 @@ class Ui_Dialog(object):
         self.apply_button_message = ""
         self.OK_button_message = ""
         self.cancel_button_message = ""
+=======
+        #self.pushButton_3.clicked.connect(self.cancel_button_mes)
+        self.pushButton_3.clicked.connect(Dialog.reject)
+
+        # # #enabling the messages to print on the TDC tab
+        # self.apply_button_message = ""
+        # self.OK_button_message = ""
+        # self.cancel_button_message = ""
+>>>>>>> Stashed changes
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -125,9 +143,15 @@ class Ui_Dialog(object):
         self.pushButton_3.setText(_translate("Dialog", "Cancel"))
 
 
+<<<<<<< Updated upstream
     #Function for the line edit
     def changed_line1(self):
         self.message_5 = "debug_port_select: " + self.lineEdit.text() + "    "
+=======
+    # #Function for the line edit
+    # def changed_line1(self):
+    #     self.message_5 = "debug_port_select: " + self.lineEdit.text() + "    "
+>>>>>>> Stashed changes
 
 
     #Function for the apply/OK buttons
@@ -162,6 +186,7 @@ class Ui_Dialog(object):
         #call update_control_0 function
         self.TDC_inst.update_control_0()
 
+<<<<<<< Updated upstream
     def apply_button_mes(self):
         self.apply_button_message = "control0: changes applied"
 
@@ -172,6 +197,18 @@ class Ui_Dialog(object):
     def cancel_button_mes(self):
         self.cancel_button_message = "control0: changes canceled"
         self.apply_button_message = ""
+=======
+    # def apply_button_mes(self):
+    #     self.apply_button_message = "control0: changes applied"
+    #
+    # def OK_button_mes(self):
+    #     self.OK_button_message = "control0: changes saved"
+    #     self.apply_button_message = ""
+    #
+    # def cancel_button_mes(self):
+    #     self.cancel_button_message = "control0: changes canceled"
+    #     self.apply_button_message = ""
+>>>>>>> Stashed changes
 
 
 if __name__ == "__main__":

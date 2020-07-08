@@ -34,11 +34,17 @@ from setup_1_popup import Ui_Dialog as Form_9
 from setup_2_popup import Ui_Dialog as Form_10
 from control_0_popup import Ui_Dialog as Form_11
 from control_1_popup import Ui_Dialog as Form_12
+<<<<<<< Updated upstream:GUI_1/MainWindow_1_fromGITHUB.py
+=======
+from read_only_popup import Ui_Dialog as Form_13
+>>>>>>> Stashed changes:GUI_1/MainWindow_1.py
 
 # import UART functions
 sys.path.insert(0, "../UART_py3")
+#sys.path.insert(0, "../UART_py3_6_30")
 
 from serial_config_tdc import *
+#from TDCreg import *
 
 
 class Ui_MainWindow(object):
@@ -50,11 +56,11 @@ class Ui_MainWindow(object):
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(790, 870)
+        MainWindow.resize(930, 960)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
-        self.tabWidget.setGeometry(QtCore.QRect(0, 0, 781, 670))
+        self.tabWidget.setGeometry(QtCore.QRect(0, 0, 910, 760))
         self.tabWidget.setObjectName("tabWidget")
         self.tab = QtWidgets.QWidget()
         self.tab.setObjectName("tab")
@@ -70,7 +76,7 @@ class Ui_MainWindow(object):
         # setting up the grid layout in tab 2
         # main grid layout
         self.gridLayoutWidget = QtWidgets.QWidget(self.tab_2)
-        self.gridLayoutWidget.setGeometry(QtCore.QRect(20, 110, 730, 500))
+        self.gridLayoutWidget.setGeometry(QtCore.QRect(20, 110, 860, 600))
         self.gridLayoutWidget.setObjectName("gridLayoutWidget")
         self.gridLayout = QtWidgets.QGridLayout(self.gridLayoutWidget)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
@@ -78,7 +84,7 @@ class Ui_MainWindow(object):
 
         # upper layout
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.tab_2)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(20, 10, 730, 90))
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(20, 10, 860, 90))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
@@ -139,7 +145,7 @@ class Ui_MainWindow(object):
         self.pushButton_8 = QtWidgets.QPushButton(self.gridLayoutWidget)
         self.pushButton_8.setObjectName("pushButton_8")
         self.gridLayout.addWidget(self.pushButton_8, 7, 0, 1, 2)
-        # self.pushButton_8.clicked.connect(self.open_dialog_7)
+        self.pushButton_8.clicked.connect(self.open_dialog_7)
         self.pushButton_8.clicked.connect(self.printsth)
 
         self.textBrowser_15 = QtWidgets.QTextBrowser(self.gridLayoutWidget)
@@ -203,12 +209,20 @@ class Ui_MainWindow(object):
         self.horizontalLayout.addWidget(self.registerButton_5)
         self.registerButton_5.clicked.connect(self.open_dialog_reg_5)
 
+        #read_only
+        self.registerButton_6 = QtWidgets.QPushButton(self.horizontalLayoutWidget)
+        self.registerButton_6.setObjectName("registerButton_6")
+        self.horizontalLayout.addWidget(self.registerButton_6)
+        self.registerButton_6.clicked.connect(self.open_dialog_reg_6)
+
+
+
         self.tabWidget.addTab(self.tab_2, "")
 
         # Print box on the main page (not on TDC tab)
         # Layout
         self.gridLayoutWidget_2 = QtWidgets.QWidget(self.centralwidget)
-        self.gridLayoutWidget_2.setGeometry(QtCore.QRect(30, 685, 730, 151))
+        self.gridLayoutWidget_2.setGeometry(QtCore.QRect(30, 775, 860, 151))
         self.gridLayoutWidget_2.setObjectName("gridLayoutWidget_2")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.gridLayoutWidget_2)
         self.gridLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -233,6 +247,7 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
+
         self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -256,6 +271,7 @@ class Ui_MainWindow(object):
         self.registerButton_3.setText(_translate("MainWindow", "Setup 2"))
         self.registerButton_4.setText(_translate("MainWindow", "Control 0"))
         self.registerButton_5.setText(_translate("MainWindow", "Control 1"))
+        self.registerButton_6.setText(_translate("MainWindow", "Read Only"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "TDC"))
         self.label_2.setText(_translate("MainWindow", "GUI run information and Print() content: "))
 
@@ -268,9 +284,18 @@ class Ui_MainWindow(object):
         dialog.ui = Form_8(self.TDC_inst)
         dialog.ui.setupUi(dialog)
         dialog.exec_()
+<<<<<<< Updated upstream:GUI_1/MainWindow_1_fromGITHUB.py
         if dialog.ui.pushButton.clicked:
             self.textBrowser_2.setText(dialog.ui.apply_button_message +
                                        dialog.ui.OK_button_message + dialog.ui.cancel_button_message)
+=======
+        #self.update_messagess = self.TDC_inst.update_setup_0()
+        #if dialog.ui.pushButton.clicked:
+            # self.textBrowser_2.setText(dialog.ui.apply_button_message +
+            #                            dialog.ui.OK_button_message + dialog.ui.cancel_button_message
+            #                            #+ self.update_messagess)
+            #                            + dialog.ui.update_message)
+>>>>>>> Stashed changes:GUI_1/MainWindow_1.py
         dialog.show()
 
     # Setup1
@@ -279,9 +304,16 @@ class Ui_MainWindow(object):
         dialog.ui = Form_9(self.TDC_inst)
         dialog.ui.setupUi(dialog)
         dialog.exec_()
+<<<<<<< Updated upstream:GUI_1/MainWindow_1_fromGITHUB.py
         if dialog.ui.pushButton.clicked:
             self.textBrowser_2.setText(dialog.ui.apply_button_message
                                        + dialog.ui.OK_button_message + dialog.ui.cancel_button_message)
+=======
+        # if dialog.ui.pushButton.clicked:
+        #     self.textBrowser_2.setText(dialog.ui.apply_button_message
+        #                                + dialog.ui.OK_button_message + dialog.ui.cancel_button_message
+        #                                + dialog.ui.message + "   " + dialog.ui.message_2)
+>>>>>>> Stashed changes:GUI_1/MainWindow_1.py
         dialog.show()
 
     # Setup2
@@ -290,9 +322,15 @@ class Ui_MainWindow(object):
         dialog.ui = Form_10(self.TDC_inst)
         dialog.ui.setupUi(dialog)
         dialog.exec_()
+<<<<<<< Updated upstream:GUI_1/MainWindow_1_fromGITHUB.py
         if dialog.ui.pushButton.clicked:
              self.textBrowser_2.setText(dialog.ui.apply_button_message
                                        + dialog.ui.OK_button_message + dialog.ui.cancel_button_message)
+=======
+        # if dialog.ui.pushButton.clicked:
+        #      self.textBrowser_2.setText(dialog.ui.apply_button_message
+        #                                + dialog.ui.OK_button_message + dialog.ui.cancel_button_message)
+>>>>>>> Stashed changes:GUI_1/MainWindow_1.py
         dialog.show()
 
     # Control0
@@ -301,15 +339,22 @@ class Ui_MainWindow(object):
         dialog.ui = Form_11(self.TDC_inst)
         dialog.ui.setupUi(dialog)
         dialog.exec_()
+<<<<<<< Updated upstream:GUI_1/MainWindow_1_fromGITHUB.py
         if dialog.ui.pushButton.clicked:
             self.textBrowser_2.setText(dialog.ui.apply_button_message
                                        + dialog.ui.OK_button_message + dialog.ui.cancel_button_message)
+=======
+        # if dialog.ui.pushButton.clicked:
+        #     self.textBrowser_2.setText(dialog.ui.apply_button_message
+        #                                + dialog.ui.OK_button_message + dialog.ui.cancel_button_message)
+>>>>>>> Stashed changes:GUI_1/MainWindow_1.py
         dialog.show()
 
     # Control1
     def open_dialog_reg_5(self):
         dialog = QtWidgets.QDialog()
         dialog.ui = Form_12(self.TDC_inst)
+<<<<<<< Updated upstream:GUI_1/MainWindow_1_fromGITHUB.py
         dialog.ui.setupUi(dialog)
         dialog.exec_()
         if dialog.ui.pushButton.clicked:
@@ -317,6 +362,24 @@ class Ui_MainWindow(object):
                                        + dialog.ui.OK_button_message + dialog.ui.cancel_button_message)
         dialog.show()
 
+=======
+        dialog.ui.setupUi(dialog)
+        dialog.exec_()
+        # if dialog.ui.pushButton.clicked:
+        #     self.textBrowser_2.setText(dialog.ui.apply_button_message
+        #                                + dialog.ui.OK_button_message + dialog.ui.cancel_button_message)
+        dialog.show()
+
+    # Control1
+    def open_dialog_reg_6(self):
+        dialog = QtWidgets.QDialog()
+        dialog.ui = Form_13(self.TDC_inst)
+        dialog.ui.setupUi(dialog)
+        dialog.exec_()
+        dialog.show()
+
+
+>>>>>>> Stashed changes:GUI_1/MainWindow_1.py
     # For the general functions
     # Verificate TDC
     def open_dialog(self):
@@ -341,7 +404,7 @@ class Ui_MainWindow(object):
     # Data rate
     def open_dialog_4(self):
         dialog = QtWidgets.QDialog()
-        dialog.ui = Form_3()
+        dialog.ui = Form_3(self.TDC_inst)
         dialog.ui.setupUi(dialog)
         dialog.exec_()
         self.textBrowser_6.setText(dialog.ui.message)
@@ -390,7 +453,7 @@ class Ui_MainWindow(object):
 
     def printsth(self):
         verificate_ID_CODE(self.ser)
-
+        verificate_setup0(self.ser)
 
 if __name__ == "__main__":
     import sys
