@@ -6,18 +6,10 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 ##########   setup0 popup script ###########
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 class Ui_Dialog(object):
     def __init__(self, TDC_inst):
         self.TDC_inst = TDC_inst
@@ -26,11 +18,7 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
 
         Dialog.setObjectName("Dialog")
-<<<<<<< Updated upstream
-        Dialog.resize(1118, 657)
-=======
         Dialog.resize(1138, 657)
->>>>>>> Stashed changes
 
         #getting the stuff from TDCreg for the larger bit variables
         self.rising_is_leading_list = list(self.TDC_inst.rising_is_leading[0])
@@ -39,11 +27,7 @@ class Ui_Dialog(object):
 
 
         self.horizontalLayoutWidget_6 = QtWidgets.QWidget(Dialog)
-<<<<<<< Updated upstream
-        self.horizontalLayoutWidget_6.setGeometry(QtCore.QRect(20, 540, 1071, 101))
-=======
         self.horizontalLayoutWidget_6.setGeometry(QtCore.QRect(20, 540, 1091, 101))
->>>>>>> Stashed changes
         self.horizontalLayoutWidget_6.setObjectName("horizontalLayoutWidget_6")
         self.horizontalLayout_6 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_6)
         self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
@@ -54,23 +38,14 @@ class Ui_Dialog(object):
         self.pushButton.setObjectName("pushButton")
         self.horizontalLayout_6.addWidget(self.pushButton)
         self.pushButton.clicked.connect(self.apply_button)
-<<<<<<< Updated upstream
-        self.pushButton.clicked.connect(self.apply_button_mes)
-=======
         #self.pushButton.clicked.connect(self.apply_button_mes)
->>>>>>> Stashed changes
 
         #OK button
         self.pushButton_2 = QtWidgets.QPushButton(self.horizontalLayoutWidget_6)
         self.pushButton_2.setObjectName("pushButton_2")
         self.horizontalLayout_6.addWidget(self.pushButton_2)
-<<<<<<< Updated upstream
-        self.pushButton_2.clicked.connect(self.apply_button)
-        self.pushButton_2.clicked.connect(self.OK_button_mes)
-=======
         self.pushButton_2.clicked.connect(self.OK_button)
         #self.pushButton_2.clicked.connect(self.OK_button_mes)
->>>>>>> Stashed changes
         self.pushButton_2.clicked.connect(Dialog.reject)
 
         #Cancel button
@@ -203,11 +178,7 @@ class Ui_Dialog(object):
         #enable_fake_hit
         self.checkBox_10 = QtWidgets.QCheckBox(self.gridLayoutWidget)
         self.checkBox_10.setObjectName("checkBox_10")
-<<<<<<< Updated upstream
-        if self.TDC_inst.enbale_fake_hit[0] == '1':
-=======
         if self.TDC_inst.enable_fake_hit[0] == '1':
->>>>>>> Stashed changes
             self.checkBox_10.setChecked(True)
         self.gridLayout.addWidget(self.checkBox_10, 4, 1, 1, 1)
 
@@ -241,11 +212,7 @@ class Ui_Dialog(object):
 
 
         self.gridLayoutWidget_2 = QtWidgets.QWidget(Dialog)
-<<<<<<< Updated upstream
-        self.gridLayoutWidget_2.setGeometry(QtCore.QRect(20, 310, 891, 121))
-=======
         self.gridLayoutWidget_2.setGeometry(QtCore.QRect(20, 310, 1091, 141))
->>>>>>> Stashed changes
         self.gridLayoutWidget_2.setObjectName("gridLayoutWidget_2")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.gridLayoutWidget_2)
         self.gridLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -730,11 +697,6 @@ class Ui_Dialog(object):
         if self.channel_enable_f_list[22] == '1':
             self.checkBox_85.setChecked(True)
 
-<<<<<<< Updated upstream
-
-        self.horizontalLayoutWidget = QtWidgets.QWidget(Dialog)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(20, 450, 761, 80))
-=======
         self.label_select = QtWidgets.QLabel(self.gridLayoutWidget_2)
         self.label_select.setObjectName("label_select")
         self.label_select.setAlignment(QtCore.Qt.AlignCenter)
@@ -785,7 +747,6 @@ class Ui_Dialog(object):
 
         self.horizontalLayoutWidget = QtWidgets.QWidget(Dialog)
         self.horizontalLayoutWidget.setGeometry(QtCore.QRect(20, 470, 761, 80))
->>>>>>> Stashed changes
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
@@ -796,32 +757,18 @@ class Ui_Dialog(object):
         self.label_31.setObjectName("label_31")
         self.horizontalLayout.addWidget(self.label_31)
         self.lineEdit = QtWidgets.QLineEdit(self.horizontalLayoutWidget)
-<<<<<<< Updated upstream
-        #self.lineEdit.setObjectName("lineEdit")
-        self.lineEdit.setText(self.TDC_inst.TDC_ID[0])
-        self.horizontalLayout.addWidget(self.lineEdit)
-
-
-        self.horizontalLayoutWidget_2 = QtWidgets.QWidget(Dialog)
-        self.horizontalLayoutWidget_2.setGeometry(QtCore.QRect(800, 450, 291, 80))
-=======
         self.lineEdit.setText(format(int(self.TDC_inst.TDC_ID[0], 2), '03X'))
         #self.lineEdit.setText(self.TDC_inst.TDC_ID[0])
         self.horizontalLayout.addWidget(self.lineEdit)
 
         self.horizontalLayoutWidget_2 = QtWidgets.QWidget(Dialog)
         self.horizontalLayoutWidget_2.setGeometry(QtCore.QRect(800, 470, 311, 80))
->>>>>>> Stashed changes
         self.horizontalLayoutWidget_2.setObjectName("horizontalLayoutWidget_2")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_2)
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
 
-<<<<<<< Updated upstream
-        #witdh select label and line edit
-=======
         #width select label and line edit
->>>>>>> Stashed changes
         self.label_32 = QtWidgets.QLabel(self.horizontalLayoutWidget_2)
         self.label_32.setObjectName("label_32")
         self.horizontalLayout_2.addWidget(self.label_32)
@@ -830,115 +777,6 @@ class Ui_Dialog(object):
         self.lineEdit_2.setText(self.TDC_inst.width_select[0])
         self.horizontalLayout_2.addWidget(self.lineEdit_2)
 
-<<<<<<< Updated upstream
-        self.gridLayoutWidget_3 = QtWidgets.QWidget(Dialog)
-        self.gridLayoutWidget_3.setGeometry(QtCore.QRect(930, 310, 161, 121))
-        self.gridLayoutWidget_3.setObjectName("gridLayoutWidget_3")
-        self.gridLayout_3 = QtWidgets.QGridLayout(self.gridLayoutWidget_3)
-        self.gridLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.gridLayout_3.setObjectName("gridLayout_3")
-        self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_5.setObjectName("horizontalLayout_5")
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_5.addItem(spacerItem)
-
-        #select all - channel enable f
-        self.checkBox_61 = QtWidgets.QCheckBox(self.gridLayoutWidget_3)
-        self.checkBox_61.setText("")
-        self.checkBox_61.setObjectName("checkBox_61")
-        self.checkBox_61.clicked.connect(self.channel_enable_f_enable)
-
-        self.horizontalLayout_5.addWidget(self.checkBox_61)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_5.addItem(spacerItem1)
-        self.gridLayout_3.addLayout(self.horizontalLayout_5, 3, 0, 1, 1)
-        self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_4.addItem(spacerItem2)
-
-        #select all - channel enable r
-        self.checkBox_36 = QtWidgets.QCheckBox(self.gridLayoutWidget_3)
-        self.checkBox_36.setText("")
-        self.checkBox_36.setObjectName("checkBox_36")
-        self.horizontalLayout_4.addWidget(self.checkBox_36)
-        self.checkBox_36.clicked.connect(self.channel_enable_r_enable)
-
-        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_4.addItem(spacerItem3)
-        self.gridLayout_3.addLayout(self.horizontalLayout_4, 2, 0, 1, 1)
-        self.horizontalLayout_7 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_7.setObjectName("horizontalLayout_7")
-        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_7.addItem(spacerItem4)
-
-        #deslect all - rising is leading
-        self.checkBox_62 = QtWidgets.QCheckBox(self.gridLayoutWidget_3)
-        self.checkBox_62.setText("")
-        self.checkBox_62.setObjectName("checkBox_62")
-        self.horizontalLayout_7.addWidget(self.checkBox_62)
-        self.checkBox_62.clicked.connect(self.rising_is_leading_disable)
-
-        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_7.addItem(spacerItem5)
-        self.gridLayout_3.addLayout(self.horizontalLayout_7, 1, 1, 1, 1)
-        self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem6)
-
-        #select all - rising is leading
-        self.checkBox_35 = QtWidgets.QCheckBox(self.gridLayoutWidget_3)
-        self.horizontalLayout_3.addWidget(self.checkBox_35)
-        self.checkBox_35.clicked.connect(self.rising_is_leading_enable)
-
-        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem7)
-        self.gridLayout_3.addLayout(self.horizontalLayout_3, 1, 0, 1, 1)
-
-        #select all channels
-        self.label_27 = QtWidgets.QLabel(self.gridLayoutWidget_3)
-        self.label_27.setObjectName("label_27")
-        self.gridLayout_3.addWidget(self.label_27, 0, 0, 1, 1)
-
-        #deselect all channels
-        self.label_28 = QtWidgets.QLabel(self.gridLayoutWidget_3)
-        self.label_28.setObjectName("label_28")
-        self.gridLayout_3.addWidget(self.label_28, 0, 1, 1, 1)
-
-        self.horizontalLayout_8 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_8.setObjectName("horizontalLayout_8")
-        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_8.addItem(spacerItem8)
-
-        #deselect all - channel enable r
-        self.checkBox_98 = QtWidgets.QCheckBox(self.gridLayoutWidget_3)
-        self.checkBox_98.setText("")
-        self.checkBox_98.setObjectName("checkBox_98")
-        self.checkBox_98.clicked.connect(self.channel_enable_r_disable)
-
-        self.horizontalLayout_8.addWidget(self.checkBox_98)
-        spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_8.addItem(spacerItem9)
-        self.gridLayout_3.addLayout(self.horizontalLayout_8, 2, 1, 1, 1)
-        self.horizontalLayout_9 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_9.setObjectName("horizontalLayout_9")
-        spacerItem10 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_9.addItem(spacerItem10)
-
-        #deselect all - channel enable f
-        self.checkBox_99 = QtWidgets.QCheckBox(self.gridLayoutWidget_3)
-        self.checkBox_99.setText("")
-        self.checkBox_99.setObjectName("checkBox_99")
-        self.checkBox_99.clicked.connect(self.channel_enable_f_disable)
-
-        self.horizontalLayout_9.addWidget(self.checkBox_99)
-        spacerItem11 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_9.addItem(spacerItem11)
-        self.gridLayout_3.addLayout(self.horizontalLayout_9, 3, 1, 1, 1)
-
-=======
->>>>>>> Stashed changes
         # #button_messages
         self.enable_pair_message = ""
         self.enable_new_ttc_message = ""
@@ -946,10 +784,7 @@ class Ui_Dialog(object):
         self.apply_button_message = ""
         self.OK_button_message = ""
         self.cancel_button_message = ""
-<<<<<<< Updated upstream
-=======
         self.update_message = ""
->>>>>>> Stashed changes
 
         self.checkBox_list = [self.checkBox_11, self.checkBox_12, self.checkBox_13, self.checkBox_14,
                          self.checkBox_15, self.checkBox_16, self.checkBox_17, self.checkBox_18,
@@ -1032,10 +867,6 @@ class Ui_Dialog(object):
         self.label_12.setText(_translate("Dialog", "9"))
         self.label_31.setText(_translate("Dialog", "TDC_ID:"))
         self.label_32.setText(_translate("Dialog", "Width_select:"))
-<<<<<<< Updated upstream
-        self.label_27.setText(_translate("Dialog", "Select All"))
-        self.label_28.setText(_translate("Dialog", "Deselect All"))
-=======
         #self.label_27.setText(_translate("Dialog", "Select All"))
         #self.label_28.setText(_translate("Dialog", "Deselect All"))
         self.registerButton_6.setText(_translate("Dialog", "enable f"))
@@ -1046,26 +877,12 @@ class Ui_Dialog(object):
         self.registerButton_11.setText(_translate("Dialog", "enable f"))
         self.label_select.setText(_translate("Dialog", "Select All:"))
         self.label_select_2.setText(_translate("Dialog", "Deselect All:"))
->>>>>>> Stashed changes
 
     #General function stuff - for viewing, not setting them officially
 
     #rising is leading
     #enable all
     def rising_is_leading_enable(self):
-<<<<<<< Updated upstream
-        if self.checkBox_35.isChecked() == True:
-            for i in self.checkBox_list:
-                i.setChecked(True)
-                self.checkBox_62.setChecked(False)
-
-    #disable all
-    def rising_is_leading_disable(self):
-        if self.checkBox_62.isChecked() == True:
-            for i in self.checkBox_list:
-                i.setChecked(False)
-                self.checkBox_35.setChecked(False)
-=======
         for i in self.checkBox_list:
             i.setChecked(True)
 
@@ -1073,24 +890,10 @@ class Ui_Dialog(object):
     def rising_is_leading_disable(self):
         for i in self.checkBox_list:
             i.setChecked(False)
->>>>>>> Stashed changes
 
     #channel_enable_r
     #enable all
     def channel_enable_r_enable(self):
-<<<<<<< Updated upstream
-        if self.checkBox_36.isChecked() == True:
-            for i in self.checkBox_list_2:
-                i.setChecked(True)
-                self.checkBox_98.setChecked(False)
-
-    # disable all
-    def channel_enable_r_disable(self):
-        if self.checkBox_98.isChecked() == True:
-            for i in self.checkBox_list_2:
-                i.setChecked(False)
-                self.checkBox_36.setChecked(False)
-=======
         for i in self.checkBox_list_2:
             i.setChecked(True)
 
@@ -1098,26 +901,10 @@ class Ui_Dialog(object):
     def channel_enable_r_disable(self):
         for i in self.checkBox_list_2:
             i.setChecked(False)
->>>>>>> Stashed changes
 
     #channel_enable_f
     #enable all
     def channel_enable_f_enable(self):
-<<<<<<< Updated upstream
-        if self.checkBox_61.isChecked() == True:
-            for i in self.checkBox_list_3:
-                i.setChecked(True)
-                self.checkBox_99.setChecked(False)
-
-    # disable all
-    def channel_enable_f_disable(self):
-        if self.checkBox_99.isChecked() == True:
-            for i in self.checkBox_list_3:
-                i.setChecked(False)
-                self.checkBox_61.setChecked(False)
-
-
-=======
         for i in self.checkBox_list_3:
             i.setChecked(True)
 
@@ -1127,16 +914,12 @@ class Ui_Dialog(object):
             i.setChecked(False)
 
 ##################################################################################
->>>>>>> Stashed changes
 
     #Functions for the apply/OK buttons !!!!!!!!!!!!!!!!!!!!!!
     def apply_button(self):
 
-<<<<<<< Updated upstream
-=======
         self.apply_button_message = "setup0: changes applied! "
 
->>>>>>> Stashed changes
         #enable_new_ttc
         if self.checkBox.isChecked() == True:
             self.TDC_inst.enable_new_ttc[0] = '1'
@@ -1208,15 +991,9 @@ class Ui_Dialog(object):
 
         #enable_fake_hit
         if self.checkBox_10.isChecked() == True:
-<<<<<<< Updated upstream
-            self.TDC_inst.enbale_fake_hit[0] = '1'
-        else:
-            self.TDC_inst.enbale_fake_hit[0] = '0'
-=======
             self.TDC_inst.enable_fake_hit[0] = '1'
         else:
             self.TDC_inst.enable_fake_hit[0] = '0'
->>>>>>> Stashed changes
 
         #rising_is_leading
         #individual channel enable
@@ -1227,28 +1004,12 @@ class Ui_Dialog(object):
             else:
                 self.rising_is_leading_list[index] = '0'
 
-<<<<<<< Updated upstream
-        #enable all channels
-        if self.checkBox_35.isChecked() == True:
-            for i in range (0,24):
-                    self.rising_is_leading_list[i] = '1'
-
-        #disable all channels
-        if self.checkBox_62.isChecked() == True:
-            for i in range(0,24):
-                self.rising_is_leading_list[i] = '0'
-
-=======
->>>>>>> Stashed changes
         #saving the values to TDCreg
         self.TDC_inst.rising_is_leading[0] = ''.join(self.rising_is_leading_list)
 
 
         #channel_enable_r
-<<<<<<< Updated upstream
-=======
         #individual channel enable
->>>>>>> Stashed changes
         for i in self.checkBox_list_2:
             index = self.checkBox_list_2.index(i)
             if i.isChecked() == True:
@@ -1256,19 +1017,6 @@ class Ui_Dialog(object):
             else:
                 self.channel_enable_r_list[index] = '0'
 
-<<<<<<< Updated upstream
-        # enable all channels
-        if self.checkBox_36.isChecked() == True:
-            for i in range(0, 24):
-                self.channel_enable_r_list[i] = '1'
-
-        # disable all channels
-        if self.checkBox_98.isChecked() == True:
-            for i in range(0, 24):
-                self.channel_enable_r_list[i] = '0'
-
-=======
->>>>>>> Stashed changes
         self.TDC_inst.channel_enable_r[0] = ''.join(self.channel_enable_r_list)
 
         #channel_enable_f
@@ -1279,30 +1027,12 @@ class Ui_Dialog(object):
             else:
                 self.channel_enable_f_list[index] = '0'
 
-<<<<<<< Updated upstream
-        # enable all channels
-        if self.checkBox_61.isChecked() == True:
-            for i in range(0, 24):
-                self.channel_enable_f_list[i] = '1'
-
-        # disable all channels
-        if self.checkBox_99.isChecked() == True:
-            for i in range(0, 24):
-                self.channel_enable_f_list[i] = '0'
-
-        self.TDC_inst.channel_enable_f[0] = ''.join(self.channel_enable_f_list)
-
-        #TDC_ID
-        self.TDC_inst.TDC_ID[0] = self.lineEdit.text()
-        self.messages = self.TDC_inst.TDC_ID[0]
-=======
         self.TDC_inst.channel_enable_f[0] = ''.join(self.channel_enable_f_list)
 
         #TDC_ID
         self.lineEdit_binary = format(int(self.lineEdit.text(), 16), '010b')
         self.TDC_inst.TDC_ID[0] = self.lineEdit_binary
         self.messages = self.lineEdit_binary
->>>>>>> Stashed changes
 
         #enable_trigger_timeout
         if self.checkBox_94.isChecked() == True:
@@ -1363,19 +1093,6 @@ class Ui_Dialog(object):
 
         # calling update_setup_0 function
         self.TDC_inst.update_setup_0()
-<<<<<<< Updated upstream
-        self.update_message = self.TDC_inst.setup_0_bin_str[0]
-
-
-    #message functions!
-    def apply_button_mes(self):
-        self.apply_button_message = "setup0: changes applied"
-
-    def OK_button_mes(self):
-        self.OK_button_message = "setup0: changes saved"
-        self.apply_button_message = ""
-
-=======
         #self.update_message = self.TDC_inst.setup_0_bin_str[0]
         #self.update_message = self.TDC_inst.update_setup_0()
 ######################################################################################
@@ -1576,7 +1293,6 @@ class Ui_Dialog(object):
     #     #self.destroy()
 
 
->>>>>>> Stashed changes
     def cancel_button_mes(self):
         self.cancel_button_message = "setup0: changes canceled"
         self.apply_button_message = ""

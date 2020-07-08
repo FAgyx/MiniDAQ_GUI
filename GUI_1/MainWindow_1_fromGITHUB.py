@@ -10,7 +10,6 @@
 ####### This is the script for the main window!          #######
 ####### all other python files get read through this     #######
 
-
 import sys
 from PyQt5 import *
 from PyQt5 import QtWidgets
@@ -22,7 +21,6 @@ from PyQt5.QtCore import *
 
 # Importing the popup windows
 from verificate_popup import Ui_Dialog as Form
-#from register_popup import Ui_Dialog as Form_1
 from ePLL_popup import Ui_Dialog as Form_2
 from datarate_popup_2_new import Ui_Dialog as Form_3
 from runmode_popup_2_new import Ui_Dialog as Form_4
@@ -40,13 +38,9 @@ from read_only_popup import Ui_Dialog as Form_13
 sys.path.insert(0, "../UART_py3")
 
 from serial_config_tdc import *
-#from TDCreg import *
-
-
 
 class Ui_MainWindow(object):
     # setting up the main window and tabs
-    #def __init__(self, ser = None, TDC_inst = None ):
     def __init__(self, ser, TDC_inst):
         self.ser = ser
         self.TDC_inst = TDC_inst
@@ -213,7 +207,6 @@ class Ui_MainWindow(object):
         self.registerButton_6.clicked.connect(self.open_dialog_reg_6)
 
 
-
         self.tabWidget.addTab(self.tab_2, "")
 
         # Print box on the main page (not on TDC tab)
@@ -243,7 +236,6 @@ class Ui_MainWindow(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-
 
         self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(1)
@@ -281,12 +273,6 @@ class Ui_MainWindow(object):
         dialog.ui = Form_8(self.TDC_inst)
         dialog.ui.setupUi(dialog)
         dialog.exec_()
-        #self.update_messagess = self.TDC_inst.update_setup_0()
-        #if dialog.ui.pushButton.clicked:
-            # self.textBrowser_2.setText(dialog.ui.apply_button_message +
-            #                            dialog.ui.OK_button_message + dialog.ui.cancel_button_message
-            #                            #+ self.update_messagess)
-            #                            + dialog.ui.update_message)
         dialog.show()
 
     # Setup1
@@ -295,10 +281,6 @@ class Ui_MainWindow(object):
         dialog.ui = Form_9(self.TDC_inst)
         dialog.ui.setupUi(dialog)
         dialog.exec_()
-        # if dialog.ui.pushButton.clicked:
-        #     self.textBrowser_2.setText(dialog.ui.apply_button_message
-        #                                + dialog.ui.OK_button_message + dialog.ui.cancel_button_message
-        #                                + dialog.ui.message + "   " + dialog.ui.message_2)
         dialog.show()
 
     # Setup2
@@ -318,9 +300,6 @@ class Ui_MainWindow(object):
         dialog.ui = Form_11(self.TDC_inst)
         dialog.ui.setupUi(dialog)
         dialog.exec_()
-        # if dialog.ui.pushButton.clicked:
-        #     self.textBrowser_2.setText(dialog.ui.apply_button_message
-        #                                + dialog.ui.OK_button_message + dialog.ui.cancel_button_message)
         dialog.show()
 
     # Control1
@@ -329,9 +308,6 @@ class Ui_MainWindow(object):
         dialog.ui = Form_12(self.TDC_inst)
         dialog.ui.setupUi(dialog)
         dialog.exec_()
-        # if dialog.ui.pushButton.clicked:
-        #     self.textBrowser_2.setText(dialog.ui.apply_button_message
-        #                                + dialog.ui.OK_button_message + dialog.ui.cancel_button_message)
         dialog.show()
 
     # Control1
@@ -423,7 +399,6 @@ if __name__ == "__main__":
 
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
-    #Dialog = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(Dialog)
     Dialog.show()
