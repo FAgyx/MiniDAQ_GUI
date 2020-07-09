@@ -28,6 +28,8 @@ ePll option	control1 dialog
 TDC status	read only dialog
 Verificate JTAG	verificate_all(self.ser)
 TRST		reset_JTAG
+Load Setup	-
+Save Setup	-
 
 check box	checked				unchecked
 master reset	tdc_master_reset_1(self.ser)		tdc_master_reset_0(self.ser)	
