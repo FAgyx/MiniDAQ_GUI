@@ -286,7 +286,7 @@ class TDCreg(object):
         update_bit_length(33,self.ser)
         start_action(self.ser)
         readback = ''
-        for byte in get_update_reg(3,self.ser)[4:6]:
+        for byte in get_update_reg(3,self.ser)[4:9]:
             readback+=format(ord(byte),'b').zfill(8)
         if len(readback)>0:
             readback = readback[0:33]
@@ -306,7 +306,7 @@ class TDCreg(object):
         update_bit_length(25,self.ser)
         start_action(self.ser)
         readback = ''
-        for byte in get_update_reg(3,self.ser)[4:5]:
+        for byte in get_update_reg(3,self.ser)[4:8]:
             readback+=format(ord(byte),'b').zfill(8)
         if len(readback)>0:
             readback = readback[0:25]
@@ -352,62 +352,40 @@ class TDCreg(object):
     def run_320M_data_rate(self):
         self.enable_high_speed[0] = '1'
         self.enable_legacy[0] = '0'
-        self.update_setup_0()
-        tdc_high_speed(self.ser) 
-        print("Set data rate to 320Mbps!")
 
     def run_160M_data_rate(self):
         self.enable_high_speed[0] = '0'
         self.enable_legacy[0] = '0'
-        self.update_setup_0()
-        tdc_low_speed(self.ser) 
-        print("Set data rate to 160Mbps!")
 
     def run_80M_data_rate(self):
         self.enable_legacy[0] = '1'
-        self.update_setup_0()
 
     def run_single_edge_mode(self):  # 24'b dataword = 5'b chnlID + 1'b0 + 1'b is_rising_edge + 17'b leading_edge
         self.channel_data_debug[0] = '0'
         self.enable_leading[0] = '1'
         self.enable_pair[0] = '0'
-        self.update_setup_0()
-        self.wordbyte = 3
-        update_data_length(self.ser, 3)
 
     def run_double_edge_mode(self):  # 40'b dataword = 5'b chnlID + 2'b10 + 17'b leading_edge + 16'b trailing_edge_LSB
         self.channel_data_debug[0] = '0'
         self.enable_leading[0] = '0'
         self.enable_pair[0] = '0'
-        self.update_setup_0()
-        self.wordbyte = 5
-        update_data_length(self.ser, 5)
 
-    def run_pair_mode(self,width_select=0):  # 32'b dataword = 5'b chnlID + 2'b11 + 17'b leading_edge + 8'b width
+    def run_pair_mode(self):  # 32'b dataword = 5'b chnlID + 2'b11 + 17'b leading_edge + 8'b width
         self.channel_data_debug[0] = '0'
         self.enable_leading[0] = '0'
         self.enable_pair[0] = '1'
         self.full_width_res[0] = '0'
-        self.width_select[0] = "{:0>3b}".format(width_select%8)
-        self.update_setup_0()
-        self.wordbyte = 4
-        update_data_length(self.ser, 4)
 
     def run_pair_full_width_mode(self):  # 40'b dataword = 5'b chnlID + 2'b11 + 17'b leading_edge + 16'b width
         self.channel_data_debug[0] = '0'
         self.enable_leading[0] = '0'
         self.enable_pair[0] = '1'
         self.full_width_res[0] = '1'
-        self.update_setup_0()
-        self.wordbyte = 5
-        update_data_length(self.ser, 5)
 
     def run_debug_mode(self):  # 24'b dataword0 = 2'b00 + 5'b chnl_ID + 17'b time
                                # 24'b dataword1 = 2'b11 + 1'b edge_mode + 2'b hit_counter + 15'b drop_coarse + 4'b fineQ
         self.channel_data_debug[0] = '1'
-        self.update_setup_0()
-        self.wordbyte = 3
-        update_data_length(self.ser, 3)
+
 
     def run_idle_insert_mode(self, syn_packet_number):
         self.enable_insert[0] = '1'
@@ -421,9 +399,6 @@ class TDCreg(object):
 
     def run_TDCID_mode(self):
         self.enable_TDC_ID[0] = '1'
-        self.update_setup_0()
-        self.wordbyte = 3
-        update_data_length(self.ser, 3)
 
     def config_TDCID(self, TDCID):
         self.TDC_ID[0] = "{:0>19b}".format(TDCID)
@@ -444,20 +419,18 @@ class TDCreg(object):
         self.update_setup_0()
         tdc_triggerless_mode(self.ser)
 
-
-    def run_trigger_mode(self,match_window=0x1F):
+    def run_trigger_mode(self):
         self.enable_trigger[0] = '1'
         self.enable_fake_hit[0] = '1'
         self.enable_direct_trigger[0] = '0'
         self.enable_direct_bunch_reset[0] = '0'
         self.enable_direct_event_reset[0] = '0'
-        self.update_setup_0()
-        self.bunch_offset[0] = '000000000000'
-        self.fake_hit_time_interval[0] = "{:0>12b}".format(256)
-        self.match_window[0] = "{:0>12b}".format(match_window%4096)
-        self.update_setup_1()
-        tdc_trigger_mode(self.ser)
 
+    def set_rising_is_leading(self):
+        self.self.rising_is_leading[0] = '111111111111111111111111'
+
+    def set_falling_is_leading(self):
+        self.self.rising_is_leading[0] = '000000000000000000000000'
 
     def enable_legacy_ttc(self):
         self.enable_new_ttc[0] = '0'
@@ -465,11 +438,9 @@ class TDCreg(object):
         ttc_mode_select(self.ser, 0)
         update_ttc_delay(self.ser, 1)
 
-
     def single_trigger(self):
         enable_ttc_trigger(self.ser)
         single_TTC(self.ser)
-
 
     def event_reset(self):
         enable_ttc_event_reset(self.ser)
