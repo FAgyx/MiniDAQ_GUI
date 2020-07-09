@@ -1,0 +1,33 @@
+tool box		list		connect
+Data Rate	320Mb/s		run_320M_data_rate
+Data Rate	160Mb/s		run_160M_data_rate
+Data Rate	80Mb/s		run_80M_data_rate
+Mode		Triggerless	run_triggerless_mode
+Mode		Triggered	run_trigger_mode
+Format		pair		run_pair_mode
+Format		edge		run_single_edge_mode
+Format		double_edge	run_double_edge_mode
+Format		pair_full_width	run_pair_full_width_mode
+Format		debug		run_debug_mode
+Format		TDC_ID		run_TDCID_mode
+EdgeType	leading		set_rising_is_leading
+EdgeType	falling		set_falling_is_leading
+
+spin box		value format	update to		update format
+clk160_phase	decimal		TDCreg.phase_clk160[0]	format(int(text,10),'05b')
+clk320_phase	decimal		TDCreg.phase_clk320_1[0]	format((int(text,10)+4)/16,'04b')
+clk320_phase	decimal		TDCreg.phase_clk320_2[0]	format(int(text,10),'04b')
+
+button		connect
+Init		DAQ_init
+mode set		setup0 dialog
+internal counter	setup1 dialog
+fine time lut	setup2 dialog
+reset option	control0 dialog
+ePll option	control1 dialog
+TDC status	read only dialog
+Verificate JTAG	verificate_all(self.ser)
+TRST		reset_JTAG
+
+check box	checked				unchecked
+master reset	tdc_master_reset_1(self.ser)	tdc_master_reset_0(self.ser)	
