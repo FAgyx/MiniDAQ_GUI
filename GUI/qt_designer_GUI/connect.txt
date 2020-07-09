@@ -15,8 +15,8 @@ EdgeType	falling		set_falling_is_leading
 
 spin box		value format	update to		update format
 clk160_phase	decimal		TDCreg.phase_clk160[0]	format(int(text,10),'05b')
-clk320_phase	decimal		TDCreg.phase_clk320_1[0]	format((int(text,10)+4)/16,'04b')
-clk320_phase	decimal		TDCreg.phase_clk320_2[0]	format(int(text,10),'04b')
+clk320_phase	decimal		TDCreg.phase_clk320_0[0]	format((int(text,10)+4)/16,'04b')
+clk320_phase	decimal		TDCreg.phase_clk320_1[0]	format(int(text,10),'04b')
 
 button		connect
 Init		DAQ_init
@@ -30,4 +30,4 @@ Verificate JTAG	verificate_all(self.ser)
 TRST		reset_JTAG
 
 check box	checked				unchecked
-master reset	tdc_master_reset_1(self.ser)	tdc_master_reset_0(self.ser)	
+master reset	tdc_master_reset_1(self.ser)		tdc_master_reset_0(self.ser)	
