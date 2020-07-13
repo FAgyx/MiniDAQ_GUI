@@ -431,7 +431,7 @@ class TDCreg(object):
         self.rising_is_leading[0] = '111111111111111111111111'
 
     def set_falling_is_leading(self):
-        self.self.rising_is_leading[0] = '000000000000000000000000'
+        self.rising_is_leading[0] = '000000000000000000000000'
 
     def enable_legacy_ttc(self):
         self.enable_new_ttc[0] = '0'
