@@ -11,6 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_Dialog(object):
+
     def __init__(self, TDC_inst):
         self.TDC_inst = TDC_inst
 
@@ -120,7 +121,6 @@ class Ui_Dialog(object):
     def OK_button(self):
         self.TDC_inst.read_status_0()
         self.TDC_inst.read_status_1()
-
 
 
 if __name__ == "__main__":
