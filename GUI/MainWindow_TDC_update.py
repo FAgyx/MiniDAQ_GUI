@@ -264,7 +264,7 @@ class Ui_MainWindow(object):
         self.label_3.setText(_translate("MainWindow", "Format:"))
         self.label_5.setText(_translate("MainWindow", "Clk160_phase: "))
         self.label_4.setText(_translate("MainWindow", "EdgeType:"))
-        self.label_6.setText(_translate("MainWindow", "Clk320_phase:"))
+        self.label_6.setText(_translate("MainWindow", "Clk320_1_phase:"))
         self.label_7.setText(_translate("MainWindow", "JTAG IN"))
         self.pushButton.setText(_translate("MainWindow", "mode set"))
         self.pushButton_2.setText(_translate("MainWindow", "internal counter"))
@@ -382,17 +382,14 @@ class Ui_MainWindow(object):
 
     def spinbox_160(self):
         # phase_clk160
-        self.phase_clk160_binary = format(int(str(self.spinBox.value()), 10), '05b')
-        # self.phase_clk160_binary = format(self.spinBox.value(), '05b')
+        self.phase_clk160_binary = format(self.spinBox.value(), '05b')
         self.TDC_inst.phase_clk160[0] = self.phase_clk160_binary
 
     def spinbox_320(self):
-        self.phase_clk320_0_binary = format((int(str(self.spinBox_2.value()), 10) + 4), '04b')
-        #self.phase_clk320_0_binary = format((int(str(self.spinBox_2.value()), 10) + 4)/16, '04b')
-        # self.phase_clk320_0_binary = format(self.spinBox_2.value() +4, '04b')
+        self.phase_clk320_0_binary = format(self.spinBox_2.value()+4, '04b')[-4:]
         self.TDC_inst.phase_clk320_0[0] = self.phase_clk320_0_binary
 
-        self.phase_clk320_1_binary = format(int(str(self.spinBox_2.value()), 10), '04b')
+        self.phase_clk320_1_binary = format(self.spinBox_2.value(), '04b')
         self.TDC_inst.phase_clk320_1[0] = self.phase_clk320_1_binary
 
 
@@ -402,7 +399,7 @@ class Ui_MainWindow(object):
 
     #TRST button connect
     def TRST(self):
-        self.TDC_inst.reset_JTAG()
+        self.TDC_inst.reset_all_reg()
 
     def master_reset(self):
         if self.checkBox.isChecked() == True:

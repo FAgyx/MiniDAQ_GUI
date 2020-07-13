@@ -160,6 +160,7 @@ class TDCreg(object):
         self.reset_setup()
         self.reset_conttrol()
         self.reset_status()
+        print("JTAG and All regs reset!")
 
     def update_setup_0(self):
         self.setup_0_bin_str = ''.join(self.setup_0_align)
@@ -332,9 +333,9 @@ class TDCreg(object):
     def reselect_dline(self,correct_counter=1000):
         tmp_r = self.channel_enable_r[0]
         tmp_f = self.channel_enable_f[0]
-        print('Phase clock160   = '+str(int(self.phase_clk160[0],2)))
-        print('Phase clock320_0 = '+str(int(self.phase_clk320_0[0],2)))
-        print('Phase clk320_1   = '+str(int(self.phase_clk320_1[0],2)))
+        print('Phase clk160   = '+str(int(self.phase_clk160[0],2)))
+        print('Phase clk320_0 = '+str(int(self.phase_clk320_0[0],2)))
+        print('Phase clk320_1 = '+str(int(self.phase_clk320_1[0],2)))
 
         self.channel_enable_r[0] ='000000000000000000000000' # disable input to ensure 8b10b comma out
         self.channel_enable_f[0] ='000000000000000000000000'
@@ -427,7 +428,7 @@ class TDCreg(object):
         self.enable_direct_event_reset[0] = '0'
 
     def set_rising_is_leading(self):
-        self.self.rising_is_leading[0] = '111111111111111111111111'
+        self.rising_is_leading[0] = '111111111111111111111111'
 
     def set_falling_is_leading(self):
         self.self.rising_is_leading[0] = '000000000000000000000000'
