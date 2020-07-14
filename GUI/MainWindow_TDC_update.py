@@ -128,6 +128,8 @@ class Ui_MainWindow(object):
         self.spinBox.setObjectName("spinBox")
         self.gridLayout.addWidget(self.spinBox, 4, 1, 1, 1)
         self.spinBox.setValue(int(format(int(self.TDC_inst.phase_clk160[0], 2), 'd')))
+        #self.spinBox.setValue(int(self.TDC_inst.updated_phase_clk160[0]))
+        #self.spinBox.setValue(int(self.TDC_inst.enable_high_speed[0]))
         self.spinBox.valueChanged.connect(self.spinbox_160)
 
 
@@ -324,6 +326,8 @@ class Ui_MainWindow(object):
         dialog.ui = Form_12(self.TDC_inst)
         dialog.ui.setupUi(dialog)
         dialog.exec_()
+        self.spinBox.setValue(dialog.ui.clk160_value)
+        self.spinBox_2.setValue(dialog.ui.clk320_1_value)
         dialog.show()
 
     #TDC status
@@ -391,7 +395,6 @@ class Ui_MainWindow(object):
 
         self.phase_clk320_1_binary = format(self.spinBox_2.value(), '04b')
         self.TDC_inst.phase_clk320_1[0] = self.phase_clk320_1_binary
-
 
     #Init button!
     def init_settings(self):

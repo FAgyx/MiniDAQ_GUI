@@ -6,11 +6,9 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-
 ############## control1 popup script #################
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_Dialog(object):
 
@@ -119,36 +117,22 @@ class Ui_Dialog(object):
         self.pushButton.setObjectName("pushButton")
         self.horizontalLayout_6.addWidget(self.pushButton)
         self.pushButton.clicked.connect(self.apply_button)
-        #self.pushButton.clicked.connect(self.apply_button_mes)
-        # self.pushButton.clicked.connect(Dialog.reject)
 
         # OK button
         self.pushButton_2 = QtWidgets.QPushButton(self.horizontalLayoutWidget_6)
         self.pushButton_2.setObjectName("pushButton_2")
         self.horizontalLayout_6.addWidget(self.pushButton_2)
         self.pushButton_2.clicked.connect(self.apply_button)
-        #self.pushButton_2.clicked.connect(self.OK_button_mes)
         self.pushButton_2.clicked.connect(Dialog.reject)
 
         # Cancel button
         self.pushButton_3 = QtWidgets.QPushButton(self.horizontalLayoutWidget_6)
         self.pushButton_3.setObjectName("pushButton_3")
         self.horizontalLayout_6.addWidget(self.pushButton_3)
-        #self.pushButton_3.clicked.connect(self.cancel_button_mes)
         self.pushButton_3.clicked.connect(Dialog.reject)
 
-        # #enabling the messages to print on the TDC tab
-        # self.message_1 = ""
-        # self.message_2 = ""
-        # self.message_3 = ""
-        # self.message_4 = ""
-        # self.message_5 = ""
-        # self.message_6 = ""
-        # self.message_7 = ""
-
-        self.apply_button_message = ""
-        self.OK_button_message = ""
-        self.cancel_button_message = ""
+        self.clk160_value = int(self.TDC_inst.phase_clk160[0], 2)
+        self.clk320_1_value = int(self.TDC_inst.phase_clk320_1[0], 2)
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -167,28 +151,6 @@ class Ui_Dialog(object):
         self.pushButton_2.setText(_translate("Dialog", "OK"))
         self.pushButton_3.setText(_translate("Dialog", "Cancel"))
 
-    # #Functions for the line edits
-    # def changed_line1(self):
-    #     self.message_1 = "phase_clk160: " + self.lineEdit.text() + "    "
-    #
-    # def changed_line2(self):
-    #    self.message_2 = "phase_clk320_0: " + self.lineEdit_2.text() + "    "
-    #
-    # def changed_line3(self):
-    #     self.message_3 = "phase_clk320_1: " + self.lineEdit_3.text() + "    "
-    #
-    # def changed_line4(self):
-    #    self.message_4 = "phase_clk320_2: " + self.lineEdit_4.text() + "    "
-    #
-    # def changed_line5(self):
-    #     self.message_5 = "ePllRes: " + self.lineEdit_5.text() + "    "
-    #
-    # def changed_line6(self):
-    #    self.message_6 = "ePllIcp: " + self.lineEdit_6.text() + "    "
-    #
-    # def changed_line7(self):
-    #     self.message_7 = "ePllCap: " + self.lineEdit_7.text() + "    "
-
     def apply_button(self):
         self.TDC_inst.phase_clk160[0] = self.lineEdit.text()
         self.TDC_inst.phase_clk320_0[0] = self.lineEdit_2.text()
@@ -198,24 +160,15 @@ class Ui_Dialog(object):
         self.TDC_inst.ePllIcp[0] = self.lineEdit_6.text()
         self.TDC_inst.ePllCap[0] = self.lineEdit_7.text()
 
+        self.clk160_value = int(self.lineEdit.text(), 2)
+        self.clk320_1_value = int(self.lineEdit_3.text(), 2)
+
         # call update_control_1 function
         self.TDC_inst.update_control_1()
-
-    # def apply_button_mes(self):
-    #     self.apply_button_message = "control1: changes applied"
-    #
-    # def OK_button_mes(self):
-    #     self.OK_button_message = "control1: changes saved"
-    #     self.apply_button_message = ""
-    #
-    # def cancel_button_mes(self):
-    #     self.cancel_button_message = "control1: changes canceled"
-    #     self.apply_button_message = ""
 
 
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
     ui = Ui_Dialog()
