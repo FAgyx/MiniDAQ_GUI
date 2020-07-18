@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+	<mode_set>
+		<enable_new_ttc>0</enable_new_ttc>
+		<enable_master_reset_code>0</enable_master_reset_code>
+		<enable_direct_bunch_reset>0</enable_direct_bunch_reset>
+		<enable_direct_trigger>0</enable_direct_trigger> 
+		<auto_roll_over>1</auto_roll_over>
+		<bypass_bcr_distribution>0</bypass_bcr_distribution> 
+		<enable_trigger>0</enable_trigger>
+		<channel_data_debug>0</channel_data_debug>
+		<enable_leading>0</enable_leading>
+		<enable_pair>1</enable_pair> 
+		<enable_fake_hit>0</enable_fake_hit>
+		<enable_trigger_timeout>0</enable_trigger_timeout>
+		<enable_high_speed>1</enable_high_speed> 
+		<enable_legacy>0</enable_legacy> 
+		<full_width_res>0</full_width_res>
+		<enable_8b10b>1</enable_8b10b>
+		<enable_insert>0</enable_insert>
+		<enable_error_packet>0</enable_error_packet>
+		<enable_TDC_ID>0</enable_TDC_ID>
+		<enable_error_notify>0</enable_error_notify>
+	</mode_set>
+</configuration>

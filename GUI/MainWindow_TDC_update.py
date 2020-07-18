@@ -9,6 +9,12 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
+####
+import xml.etree.ElementTree as ET
+tree = ET.parse('TDC_config_default.xml')
+root = tree.getroot()
+#print(root[0][0].text)
+###
 from PyQt5 import *
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import *
@@ -214,6 +220,8 @@ class Ui_MainWindow(object):
         self.pushButton_10 = QtWidgets.QPushButton(self.horizontalLayoutWidget)
         self.pushButton_10.setObjectName("pushButton_10")
         self.horizontalLayout.addWidget(self.pushButton_10)
+        self.pushButton_10.clicked.connect(self.load_setup_func)
+
         self.pushButton_11 = QtWidgets.QPushButton(self.horizontalLayoutWidget)
         self.pushButton_11.setObjectName("pushButton_11")
         self.horizontalLayout.addWidget(self.pushButton_11)
@@ -407,11 +415,36 @@ class Ui_MainWindow(object):
     def master_reset(self):
         if self.checkBox.isChecked() == True:
             tdc_master_reset_1(self.ser)
-            #print("what")
             print("master reset 1")
         if self.checkBox.isChecked() == False:
             tdc_master_reset_0(self.ser)
             print("master reset 0")
+
+
+    ### connecting to the TDC xml file
+    def load_setup_func(self):
+        print("TDC_config_default loaded")
+        #print("enable_new_ttc: " + root[0][0].text)
+        self.TDC_inst.enable_new_ttc[0] = root[0][0].text
+        self.TDC_inst.enable_master_reset_code[0] = root[0][1].text
+        self.TDC_inst.enable_direct_bunch_reset[0] = root[0][2].text
+        self.TDC_inst.enable_direct_trigger[0] = root[0][3].text
+        self.TDC_inst.auto_roll_over[0] = root[0][4].text
+        self.TDC_inst.bypass_bcr_distribution[0] = root[0][5].text
+        self.TDC_inst.enable_trigger[0] = root[0][6].text
+        self.TDC_inst.channel_data_debug[0] = root[0][7].text
+        self.TDC_inst.enable_leading[0] = root[0][8].text
+        self.TDC_inst.enable_pair[0] = root[0][9].text
+        self.TDC_inst.enable_fake_hit[0] = root[0][10].text
+        self.TDC_inst.enable_trigger_timeout[0] = root[0][11].text
+        self.TDC_inst.enable_high_speed[0] = root[0][12].text
+        self.TDC_inst.enable_legacy[0] = root[0][13].text
+        self.TDC_inst.full_width_res[0] = root[0][14].text
+        self.TDC_inst.enable_8b10b[0] = root[0][15].text
+        self.TDC_inst.enable_insert[0] = root[0][16].text
+        self.TDC_inst.enable_error_packet[0] = root[0][17].text
+        self.TDC_inst.enable_TDC_ID[0] = root[0][18].text
+        self.TDC_inst.enable_error_notify[0] = root[0][19].text
 
 
 if __name__ == "__main__":
