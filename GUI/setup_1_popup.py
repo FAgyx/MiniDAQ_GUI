@@ -101,7 +101,6 @@ class Ui_Dialog(object):
         self.lineEdit_8.setObjectName("lineEdit_8")
         self.gridLayout.addWidget(self.lineEdit_8, 7, 0, 1, 1)
         self.lineEdit_8.setText(format(int(self.TDC_inst.match_window[0], 2), '03X'))
-        #self.lineEdit_8.setText(self.TDC_inst.match_window[0])
         self.label_8 = QtWidgets.QLabel(self.gridLayoutWidget)
         self.label_8.setObjectName("label_8")
         self.gridLayout.addWidget(self.label_8, 7, 1, 1, 1)
@@ -119,22 +118,18 @@ class Ui_Dialog(object):
         self.pushButton.setObjectName("pushButton")
         self.horizontalLayout_6.addWidget(self.pushButton)
         self.pushButton.clicked.connect(self.apply_button)
-        #self.pushButton.clicked.connect(self.apply_button_mes)
-        #self.pushButton.clicked.connect(Dialog.reject)
 
         #OK button
         self.pushButton_2 = QtWidgets.QPushButton(self.horizontalLayoutWidget_6)
         self.pushButton_2.setObjectName("pushButton_2")
         self.horizontalLayout_6.addWidget(self.pushButton_2)
         self.pushButton_2.clicked.connect(self.apply_button)
-        #self.pushButton_2.clicked.connect(self.OK_button_mes)
         self.pushButton_2.clicked.connect(Dialog.reject)
 
         #Cancel button
         self.pushButton_3 = QtWidgets.QPushButton(self.horizontalLayoutWidget_6)
         self.pushButton_3.setObjectName("pushButton_3")
         self.horizontalLayout_6.addWidget(self.pushButton_3)
-        #self.pushButton_3.clicked.connect(self.cancel_button_mes)
         self.pushButton_3.clicked.connect(Dialog.reject)
 
         self.apply_button_message = ""
@@ -180,24 +175,10 @@ class Ui_Dialog(object):
         self.TDC_inst.coarse_count_offset[0] = self.lineEdit_5_binary
         self.TDC_inst.bunch_offset[0] = self.lineEdit_6_binary
         self.TDC_inst.event_offset[0] = self.lineEdit_7_binary
-        #self.TDC_inst.match_window[0] = self.lineEdit_8.text()
         self.TDC_inst.match_window[0] = self.lineEdit_8_binary
 
         #call update_setup_1 function
         self.TDC_inst.update_setup_1()
-
-    # # message functions!
-    # def apply_button_mes(self):
-    #     self.apply_button_message = "setup1: changes applied  "
-    #
-    # def OK_button_mes(self):
-    #     self.OK_button_message = "setup1: changes saved "
-    #     self.apply_button_message = ""
-    #
-    # def cancel_button_mes(self):
-    #     self.cancel_button_message = "setup1: changes canceled "
-    #     #self.apply_button_message = ""
-
 
 if __name__ == "__main__":
     import sys

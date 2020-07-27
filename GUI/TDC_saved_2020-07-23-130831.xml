@@ -1,4 +1,3 @@
-<?xml version="1.0" ?>
 <configuration>
 	<mode_set>
 		<enable_new_ttc>0</enable_new_ttc>
@@ -20,33 +19,7 @@
 		<enable_insert>0</enable_insert>
 		<enable_error_packet>0</enable_error_packet>
 		<enable_TDC_ID>0</enable_TDC_ID>
-		<enable_error_notify>1</enable_error_notify>
-		<rising_is_leading>
-			<channel_0>1</channel_0>
-			<channel_1>1</channel_1>
-			<channel_2>1</channel_2>
-			<channel_3>1</channel_3>
-			<channel_4>1</channel_4>
-			<channel_5>1</channel_5>
-			<channel_6>1</channel_6>
-			<channel_7>1</channel_7>
-			<channel_8>1</channel_8>
-			<channel_9>1</channel_9>
-			<channel_10>1</channel_10>
-			<channel_11>1</channel_11>
-			<channel_12>1</channel_12>
-			<channel_13>1</channel_13>
-			<channel_14>1</channel_14>
-			<channel_15>1</channel_15>
-			<channel_16>1</channel_16>
-			<channel_17>1</channel_17>
-			<channel_18>1</channel_18>
-			<channel_19>1</channel_19>
-			<channel_20>1</channel_20>
-			<channel_21>1</channel_21>
-			<channel_22>1</channel_22>
-			<channel_23>1</channel_23>
-		</rising_is_leading>
+		<enable_error_notify>0</enable_error_notify>
 	</mode_set>
 	<internal_counter>
 		<combine_time_out_config>0000101000</combine_time_out_config>
@@ -93,7 +66,7 @@
 		<ePllIcp>0100</ePllIcp>
 		<ePllCap>10</ePllCap>
 	</ePll_option>
-	<TDC_status/>
+	<TDC_status />
 	<data_rate>
 		<run_320_rate>0</run_320_rate>
 		<run_160_rate>1</run_160_rate>
@@ -117,6 +90,6 @@
 		<phase_clk160_value>7</phase_clk160_value>
 	</phase_clk160>
 	<phase_clk320_1>
-		<phase_clk320_1_value>6</phase_clk320_1_value>
+		<phase_clk320_1_value>4</phase_clk320_1_value>
 	</phase_clk320_1>
 </configuration>

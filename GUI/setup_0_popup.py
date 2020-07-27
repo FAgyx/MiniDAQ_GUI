@@ -22,6 +22,7 @@ class Ui_Dialog(object):
 
         #getting the stuff from TDCreg for the larger bit variables
         self.rising_is_leading_list = list(self.TDC_inst.rising_is_leading[0])
+        print(self.TDC_inst.rising_is_leading[0])
         self.channel_enable_r_list = list(self.TDC_inst.channel_enable_r[0])
         self.channel_enable_f_list = list(self.TDC_inst.channel_enable_f[0])
 
@@ -1278,23 +1279,9 @@ class Ui_Dialog(object):
         self.TDC_inst.update_setup_0()
         #self.update_message = self.TDC_inst.setup_0_bin_str[0]
 
-####################################################################################
-
-    #message functions!
-    # def apply_button_mes(self):
-    #     self.apply_button_message = "setup0: changes applied"
-
-    # def OK_button_mes(self):
-    #     self.OK_button_message = "setup0: changes saved"
-    #     self.apply_button_message = ""
-    #     #Dialog.reject
-    #     #self.pushButton_2.clicked.connect(Dialog.reject)
-    #     #self.reject()
-    #     #self.destroy()
-
 
     def cancel_button_mes(self):
-        self.cancel_button_message = "setup0: changes canceled"
+        # self.cancel_button_message = "setup0: changes canceled"
         self.apply_button_message = ""
 
 if __name__ == "__main__":

@@ -1,5 +1,5 @@
 #from test_5 import Ui_MainWindow
-from MainWindow_TDC_update import Ui_MainWindow
+from MainWindow_TDC_update_menubar import Ui_MainWindow
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 import datetime

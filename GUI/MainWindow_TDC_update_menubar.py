@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import sys
+import sy
 ####
 import xml.etree.ElementTree as ET
 #tree = ET.parse('TDC_default_original.xml')
@@ -21,7 +21,9 @@ import xml.etree.ElementTree as ET
 ###
 from PyQt5 import *
 from PyQt5 import QtWidgets
+
 from PyQt5.QtWidgets import *
+from PyQt5 import QtGui
 
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtGui import *
@@ -59,6 +61,7 @@ class Ui_MainWindow(object):
         MainWindow.resize(850, 773)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
         self.tabWidget.setGeometry(QtCore.QRect(19, 19, 820, 501))
         self.tabWidget.setObjectName("tabWidget")
@@ -74,6 +77,39 @@ class Ui_MainWindow(object):
         self.tab_4 = QtWidgets.QWidget()
         self.tab_4.setObjectName("tab_4")
         self.tabWidget.addTab(self.tab_4, "")
+
+
+        MainWindow.setCentralWidget(self.centralwidget)
+        #self.menubar = QtWidgets.QMenuBar(MainWindow)
+        self.menubar = QtWidgets.QMenuBar(self.tab_2)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 650, 26))
+        self.menubar.setObjectName("menubar")
+        self.menuFile = QtWidgets.QMenu(self.menubar)
+        self.menuFile.setObjectName("menuFile")
+        self.menuEdit = QtWidgets.QMenu(self.menubar)
+        self.menuEdit.setObjectName("menuEdit")
+        MainWindow.setMenuBar(self.menubar)
+        #self.tab_2.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
+        #self.tab_2.setStatusBar(self.statusbar)
+        self.actionCopy = QtWidgets.QAction(MainWindow)
+        self.actionCopy.setObjectName("actionCopy")
+        self.actionPaste = QtWidgets.QAction(MainWindow)
+        self.actionPaste.setObjectName("actionPaste")
+        self.actionSave = QtWidgets.QAction(MainWindow)
+        self.actionSave.setObjectName("actionSave")
+        self.actionNew = QtWidgets.QAction(MainWindow)
+        self.actionNew.setObjectName("actionNew")
+        self.menuFile.addAction(self.actionNew)
+        self.menuFile.addAction(self.actionSave)
+        self.menuEdit.addAction(self.actionCopy)
+        self.menuEdit.addAction(self.actionPaste)
+        self.menubar.addAction(self.menuFile.menuAction())
+        self.menubar.addAction(self.menuEdit.menuAction())
+
+
         self.gridLayoutWidget = QtWidgets.QWidget(self.tab_2)
         self.gridLayoutWidget.setGeometry(QtCore.QRect(20, 50, 261, 261))
         self.gridLayoutWidget.setObjectName("gridLayoutWidget")
@@ -255,13 +291,27 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.addWidget(self.textBrowser)
         MainWindow.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(1)
+        self.retranslateUi(MainWindow)
+        #self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
+
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+
+        self.menuFile.setTitle(_translate("MainWindow", "File"))
+        self.menuEdit.setTitle(_translate("MainWindow", "edit"))
+        self.actionCopy.setText(_translate("MainWindow", "Copy"))
+        self.actionCopy.setShortcut(_translate("MainWindow", "Ctrl+C"))
+        self.actionPaste.setText(_translate("MainWindow", "Paste"))
+        self.actionPaste.setShortcut(_translate("MainWindow", "Ctrl+V"))
+        self.actionSave.setText(_translate("MainWindow", "Save"))
+        self.actionSave.setShortcut(_translate("MainWindow", "Ctrl+S"))
+        self.actionNew.setText(_translate("MainWindow", "New"))
+        self.actionNew.setShortcut(_translate("MainWindow", "Ctrl+N"))
+
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "Hit gen"))
         self.label.setText(_translate("MainWindow", "Mode:"))
         self.label_2.setText(_translate("MainWindow", "Data Rate: "))
@@ -299,6 +349,7 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("MainWindow", "ASD"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("MainWindow", "CSM"))
         self.label_8.setText(_translate("MainWindow", "GUI run information"))
+
 
     #### functions calling to the popup windows  ####
     # For the Registers
@@ -717,10 +768,18 @@ class Ui_MainWindow(object):
         tree.write('TDC_saved.xml')
 
 if __name__ == "__main__":
+    # import sys
+    # app = QtWidgets.QApplication(sys.argv)
+    # Dialog = QtWidgets.QDialog()
+    # ui = Ui_MainWindow()
+    # ui.setupUi(Dialog)
+    # Dialog.show()
+    # sys.exit(app.exec_())
+
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    Dialog = QtWidgets.QDialog()
+    MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
-    ui.setupUi(Dialog)
-    Dialog.show()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
     sys.exit(app.exec_())

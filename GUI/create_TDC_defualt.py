@@ -47,6 +47,58 @@ def generateXML(fileName):
 	enable_error_notify = ET.SubElement(mode_set, 'enable_error_notify')
 	enable_error_notify.text = '0'
 
+	rising_is_leading = ET.SubElement(mode_set, 'rising_is_leading')
+	channel_0 = ET.SubElement(rising_is_leading, 'channel_0')
+	channel_0.text = '1'
+	channel_1 = ET.SubElement(rising_is_leading, 'channel_1')
+	channel_1.text = '1'
+	channel_2 = ET.SubElement(rising_is_leading, 'channel_2')
+	channel_2.text = '1'
+	channel_3 = ET.SubElement(rising_is_leading, 'channel_3')
+	channel_3.text = '1'
+	channel_4 = ET.SubElement(rising_is_leading, 'channel_4')
+	channel_4.text = '1'
+	channel_5 = ET.SubElement(rising_is_leading, 'channel_5')
+	channel_5.text = '1'
+	channel_6 = ET.SubElement(rising_is_leading, 'channel_6')
+	channel_6.text = '1'
+	channel_7 = ET.SubElement(rising_is_leading, 'channel_7')
+	channel_7.text = '1'
+	channel_8 = ET.SubElement(rising_is_leading, 'channel_8')
+	channel_8.text = '1'
+	channel_9 = ET.SubElement(rising_is_leading, 'channel_9')
+	channel_9.text = '1'
+	channel_10 = ET.SubElement(rising_is_leading, 'channel_10')
+	channel_10.text = '1'
+	channel_11 = ET.SubElement(rising_is_leading, 'channel_11')
+	channel_11.text = '1'
+	channel_12 = ET.SubElement(rising_is_leading, 'channel_12')
+	channel_12.text = '1'
+	channel_13 = ET.SubElement(rising_is_leading, 'channel_13')
+	channel_13.text = '1'
+	channel_14 = ET.SubElement(rising_is_leading, 'channel_14')
+	channel_14.text = '1'
+	channel_15 = ET.SubElement(rising_is_leading, 'channel_15')
+	channel_15.text = '1'
+	channel_16 = ET.SubElement(rising_is_leading, 'channel_16')
+	channel_16.text = '1'
+	channel_17 = ET.SubElement(rising_is_leading, 'channel_17')
+	channel_17.text = '1'
+	channel_18 = ET.SubElement(rising_is_leading, 'channel_18')
+	channel_18.text = '1'
+	channel_19 = ET.SubElement(rising_is_leading, 'channel_19')
+	channel_19.text = '1'
+	channel_20 = ET.SubElement(rising_is_leading, 'channel_20')
+	channel_20.text = '1'
+	channel_21 = ET.SubElement(rising_is_leading, 'channel_21')
+	channel_21.text = '1'
+	channel_22 = ET.SubElement(rising_is_leading, 'channel_22')
+	channel_22.text = '1'
+	channel_23 = ET.SubElement(rising_is_leading, 'channel_23')
+	channel_23.text = '1'
+
+
+
 	#internal_counter variables 
 	internal_counter = ET.SubElement(configuration, 'internal_counter')
 	combine_time_out_config = ET.SubElement(internal_counter, 'combine_time_out_config')
@@ -145,7 +197,6 @@ def generateXML(fileName):
 	run_80_rate = ET.SubElement(data_rate, 'run_80_rate')
 	run_80_rate.text = '0'
 
-
 	#trigger_mode variables (0: triggerless mode , 1: triggered mode)
 	trigger_mode = ET.SubElement(configuration, 'trigger_mode')
 	enable_trigger = ET.SubElement(trigger_mode, 'enable_trigger')
@@ -179,7 +230,7 @@ def generateXML(fileName):
 	#phase_clk320_1
 	phase_clk320_1 = ET.SubElement(configuration, 'phase_clk320_1')
 	phase_clk320_1_value = ET.SubElement(phase_clk320_1, 'phase_clk320_1_value')
-	phase_clk320_1_value.text = '4'
+	phase_clk320_1_value.text = '5'
 
 
 	#create a new XML file with correct indentations
@@ -188,4 +239,4 @@ def generateXML(fileName):
 		f.write(xmlstr)
 
 if __name__ == "__main__":
-	generateXML("TDC_default.xml")
+	generateXML("TDC_default_channels.xml")
