@@ -1,5 +1,13 @@
 Notes: 
 
+7/29/20 Note:
+
+The files now save in a specific directory under a given specified name when
+"save file as:" is selected. 
+
+Also now when the file dialogs are cenceled, the program doesn't crash! 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 7/28/20 Note: 
 
 MainWindow_TDC_update_filedialog.py has the current progress with the filedialog 
@@ -8,10 +16,6 @@ MainWindow_TDC_update_filedialog_init.py runs MainWindow_TDC_update_filedialog.p
 The menu bar here has all the load and the save operations 
 - I'm still working on getting the file to save in a specific file rather 
   than in the current file! 
-
-- currently the 'load setup' and 'save setup' buttons aren't connected to 
-  the functions, rather the file dialogs are! 
-
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

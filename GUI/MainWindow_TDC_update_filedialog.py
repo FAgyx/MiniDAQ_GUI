@@ -91,10 +91,8 @@ class Ui_MainWindow(object):
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 650, 26))
         self.menubar.setObjectName("menubar")
-        self.load = QtWidgets.QMenu(self.menubar)
-        self.load.setObjectName("load")
-        self.save = QtWidgets.QMenu(self.menubar)
-        self.save.setObjectName("save")
+        self.TDC = QtWidgets.QMenu(self.menubar)
+        self.TDC.setObjectName("TDC")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -104,19 +102,18 @@ class Ui_MainWindow(object):
         self.actionSaveDefault.triggered.connect(self.save_setup_func)
         self.actionSaveAs = QtWidgets.QAction(MainWindow)
         self.actionSaveAs.setObjectName("actionSaveAs")
-        #self.actionSaveAs.triggered.connect(self.saveFileAs)
+        self.actionSaveAs.triggered.connect(self.saveFileAs)
         self.actionLoadFrom = QtWidgets.QAction(MainWindow)
         self.actionLoadFrom.setObjectName("actionLoadFrom")
         self.actionLoadFrom.triggered.connect(self.loadFileFrom)
         self.actionLoadDefault = QtWidgets.QAction(MainWindow)
         self.actionLoadDefault.setObjectName("actionLoadDefault")
         self.actionLoadDefault.triggered.connect(self.loadFileDefault)
-        self.load.addAction(self.actionLoadDefault)
-        self.load.addAction(self.actionLoadFrom)
-        self.save.addAction(self.actionSaveDefault)
-        self.save.addAction(self.actionSaveAs)
-        self.menubar.addAction(self.load.menuAction())
-        self.menubar.addAction(self.save.menuAction())
+        self.TDC.addAction(self.actionLoadDefault)
+        self.TDC.addAction(self.actionLoadFrom)
+        self.TDC.addAction(self.actionSaveDefault)
+        self.TDC.addAction(self.actionSaveAs)
+        self.menubar.addAction(self.TDC.menuAction())
         ####################################################################
 
         self.gridLayoutWidget = QtWidgets.QWidget(self.tab_2)
@@ -309,8 +306,9 @@ class Ui_MainWindow(object):
 
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.load.setTitle(_translate("MainWindow", "load"))
-        self.save.setTitle(_translate("MainWindow", "save"))
+        # self.load.setTitle(_translate("MainWindow", "load"))
+        # self.save.setTitle(_translate("MainWindow", "save"))
+        self.TDC.setTitle(_translate("MainWindow", "file"))
         self.actionSaveDefault.setText(_translate("MainWindow", "save TDC default settings"))
         self.actionSaveAs.setText(_translate("MainWindow", "save TDC settings as:"))
         self.actionLoadFrom.setText(_translate("MainWindow", "load TDC settings from:"))
@@ -482,30 +480,37 @@ class Ui_MainWindow(object):
             tdc_master_reset_0(self.ser)
             print("master reset 0")
 
-    # def saveFileAs(self):
-    #     home_dir = str(Path.home())
-    #     self.file_name = QFileDialog.getSaveFileName(caption='save file', directory=home_dir)
-    #     file = open(self.file_name, 'w')
-    #     text = self.textBrowser.text()
-    #     file.write(text)
-    #     file.close()
+    def saveFileAs(self):
+
+        current_dir = str(Path.cwd())
+        self.file_name = QtWidgets.QFileDialog.getSaveFileName(None, "Save File", current_dir, '.xml')[0]
+
+        if self.file_name:
+            self.save_setup_func()
+            file_2 = open('TDC_auto_saved.xml', 'r')
+            data_2 = file_2.read()
+            with open(self.file_name, 'w') as f:
+            #text = self.textBrowser.toPlainText()
+                f.write(data_2)
+                print("current TDC setup saved to selected directory")
+                f.close()
 
 
     def loadFileFrom(self):
         self.val = 1
-        home_dir = str(Path.home())
+        #home_dir = str(Path.home())
         current_dir = str(Path.cwd())
-        self.fname = QFileDialog.getOpenFileName(caption='open file', directory=home_dir)
+        self.fname = QFileDialog.getOpenFileName(caption='open file', directory=current_dir)
 
         if self.fname[0]:
             f = open(self.fname[0], 'r')
 
             with f:
                 data = f.read()
-                print(data)
-                print(self.fname[0])
+                #print(data)
+                #print(self.fname[0])
 
-        self.load_setup_func()
+            self.load_setup_func()
 
     def loadFileDefault(self):
         self.val = 0
@@ -801,7 +806,7 @@ class Ui_MainWindow(object):
         root[11][0].text = str(self.spinBox_2.value())
 
         #tree.write(file_saved_name)
-        tree.write('TDC_saved.xml')
+        tree.write('TDC_auto_saved.xml')
 
 if __name__ == "__main__":
     import sys
