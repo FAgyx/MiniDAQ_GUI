@@ -1,13 +1,8 @@
 Notes: 
 
-7/29/20 Note:
+------- what to do about rising_is_leading individual channels and edge type things? 
 
-The files now save in a specific directory under a given specified name when
-"save file as:" is selected. 
 
-Also now when the file dialogs are cenceled, the program doesn't crash! 
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 7/28/20 Note: 
 
 MainWindow_TDC_update_filedialog.py has the current progress with the filedialog 

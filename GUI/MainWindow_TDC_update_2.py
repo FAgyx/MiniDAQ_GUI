@@ -6,26 +6,14 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import (QMainWindow, QTextEdit,
+                             QAction, QFileDialog, QApplication)
 import sys
-####
+from pathlib import Path
 import xml.etree.ElementTree as ET
-#tree = ET.parse('TDC_default_original.xml')
-# tree = ET.parse('TDC_default_channels.xml')
-# #tree = ET.parse('TDC_default.xml')
-# root = tree.getroot()
-#
-# print(root[0][19].text)
-# print(root[0][20][0].text)
-
-###
-from PyQt5 import *
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import *
-
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
+from PyQt5 import QtCore
 
 # Importing the popup windows
 from setup_0_popup import Ui_Dialog as Form_8
@@ -42,8 +30,6 @@ from serial_config_tdc import *
 from TDCreg import *
 from TDC_config_low_level_function import *
 
-from load_TDC import *
-
 import time
 timestr = time.strftime("%Y-%m-%d-%H%M%S")
 
@@ -52,15 +38,17 @@ class Ui_MainWindow(object):
     def __init__(self, ser, TDC_inst):
         self.ser = ser
         self.TDC_inst = TDC_inst
+        self.val = 0
 
     def setupUi(self, MainWindow):
 
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(850, 773)
+        MainWindow.resize(850, 743)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
-        self.tabWidget.setGeometry(QtCore.QRect(19, 19, 820, 501))
+        self.tabWidget.setGeometry(QtCore.QRect(19, 19, 820, 441))
         self.tabWidget.setObjectName("tabWidget")
         self.tab = QtWidgets.QWidget()
         self.tab.setObjectName("tab")
@@ -74,6 +62,36 @@ class Ui_MainWindow(object):
         self.tab_4 = QtWidgets.QWidget()
         self.tab_4.setObjectName("tab_4")
         self.tabWidget.addTab(self.tab_4, "")
+
+        # menubar stuff
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 650, 26))
+        self.menubar.setObjectName("menubar")
+        self.TDC = QtWidgets.QMenu(self.menubar)
+        self.TDC.setObjectName("TDC")
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
+        self.actionSaveDefault = QtWidgets.QAction(MainWindow)
+        self.actionSaveDefault.setObjectName("actionSaveDefualt")
+        self.actionSaveDefault.triggered.connect(self.save_setup_func)
+        self.actionSaveAs = QtWidgets.QAction(MainWindow)
+        self.actionSaveAs.setObjectName("actionSaveAs")
+        self.actionSaveAs.triggered.connect(self.saveFileAs)
+        self.actionLoadFrom = QtWidgets.QAction(MainWindow)
+        self.actionLoadFrom.setObjectName("actionLoadFrom")
+        self.actionLoadFrom.triggered.connect(self.loadFileFrom)
+        self.actionLoadDefault = QtWidgets.QAction(MainWindow)
+        self.actionLoadDefault.setObjectName("actionLoadDefault")
+        self.actionLoadDefault.triggered.connect(self.loadFileDefault)
+        self.TDC.addAction(self.actionLoadDefault)
+        self.TDC.addAction(self.actionLoadFrom)
+        self.TDC.addAction(self.actionSaveDefault)
+        self.TDC.addAction(self.actionSaveAs)
+        self.menubar.addAction(self.TDC.menuAction())
+
         self.gridLayoutWidget = QtWidgets.QWidget(self.tab_2)
         self.gridLayoutWidget.setGeometry(QtCore.QRect(20, 50, 261, 261))
         self.gridLayoutWidget.setObjectName("gridLayoutWidget")
@@ -229,18 +247,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.pushButton_10 = QtWidgets.QPushButton(self.horizontalLayoutWidget)
-        self.pushButton_10.setObjectName("pushButton_10")
-        self.horizontalLayout.addWidget(self.pushButton_10)
-        self.pushButton_10.clicked.connect(self.load_setup_func)
-
-        self.pushButton_11 = QtWidgets.QPushButton(self.horizontalLayoutWidget)
-        self.pushButton_11.setObjectName("pushButton_11")
-        self.horizontalLayout.addWidget(self.pushButton_11)
-        self.pushButton_11.clicked.connect(self.save_setup_func)
 
         self.verticalLayoutWidget_2 = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(30, 530, 800, 201))
+        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(30, 480, 800, 201))
         self.verticalLayoutWidget_2.setObjectName("verticalLayoutWidget_2")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_2)
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -255,13 +264,19 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.addWidget(self.textBrowser)
         MainWindow.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(1)
+        self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
+
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "MiniDAQ GUI"))
+        self.TDC.setTitle(_translate("MainWindow", "file"))
+        self.actionSaveDefault.setText(_translate("MainWindow", "save TDC default settings"))
+        self.actionSaveAs.setText(_translate("MainWindow", "save TDC settings as"))
+        self.actionLoadFrom.setText(_translate("MainWindow", "load TDC settings from"))
+        self.actionLoadDefault.setText(_translate("MainWindow", "load TDC default settings"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "Hit gen"))
         self.label.setText(_translate("MainWindow", "Mode:"))
         self.label_2.setText(_translate("MainWindow", "Data Rate: "))
@@ -293,12 +308,11 @@ class Ui_MainWindow(object):
         self.pushButton_8.setText(_translate("MainWindow", "TRST"))
         self.checkBox.setText(_translate("MainWindow", "master reset"))
         self.pushButton_9.setText(_translate("MainWindow", "Init"))
-        self.pushButton_10.setText(_translate("MainWindow", "Load Setup"))
-        self.pushButton_11.setText(_translate("MainWindow", "Save Setup"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "TDC"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("MainWindow", "ASD"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("MainWindow", "CSM"))
         self.label_8.setText(_translate("MainWindow", "GUI run information"))
+
 
     #### functions calling to the popup windows  ####
     # For the Registers
@@ -365,7 +379,6 @@ class Ui_MainWindow(object):
             self.TDC_inst.run_160M_data_rate()
         if self.comboBox.currentIndex() == 2:
             self.TDC_inst.run_80M_data_rate()
-        # self.TDC_inst.set_FPGA_sample_rate()
 
     def trigger_mode(self):
         # mode
@@ -373,7 +386,6 @@ class Ui_MainWindow(object):
             self.TDC_inst.run_triggerless_mode()
         if self.comboBox_2.currentIndex() == 1:
             self.TDC_inst.run_trigger_mode()
-        # self.TDC_inst.set_trigger_type()
 
     def format(self):
         # format
@@ -389,7 +401,6 @@ class Ui_MainWindow(object):
             self.TDC_inst.run_debug_mode()
         if self.comboBox_3.currentIndex() == 5:
             self.TDC_inst.run_TDCID_mode()
-        # self.TDC_inst.set_word_byte()
 
     def edge_type(self):
         # Edge type
@@ -410,7 +421,7 @@ class Ui_MainWindow(object):
         self.phase_clk320_1_binary = format(self.spinBox_2.value(), '04b')
         self.TDC_inst.phase_clk320_1[0] = self.phase_clk320_1_binary
 
-    #Init button!
+    #Init button
     def init_settings(self):
         self.TDC_inst.DAQ_init()
 
@@ -426,12 +437,47 @@ class Ui_MainWindow(object):
             tdc_master_reset_0(self.ser)
             print("master reset 0")
 
+    def saveFileAs(self):
 
-    ### connecting to the TDC xml default file
+        current_dir = str(Path.cwd())
+        self.file_name = QtWidgets.QFileDialog.getSaveFileName(None, "Save File", current_dir, '.xml')[0]
+
+        if self.file_name:
+            self.save_setup_func()
+            file_2 = open('TDC_auto_saved.xml', 'r')
+            data_2 = file_2.read()
+            with open(self.file_name, 'w') as f:
+                f.write(data_2)
+                print("current TDC setup saved to selected directory")
+                f.close()
+
+    def loadFileFrom(self):
+        self.val = 1
+        current_dir = str(Path.cwd())
+        self.fname = QFileDialog.getOpenFileName(caption='open file', directory=current_dir)
+
+        if self.fname[0]:
+            f = open(self.fname[0], 'r')
+
+            with f:
+                data = f.read()
+
+            self.load_setup_func()
+
+    def loadFileDefault(self):
+        self.val = 0
+        self.load_setup_func()
+
+    ### connecting to the correct TDC xml file
     def load_setup_func(self):
-        print("TDC_config_default loaded")
-        tree = ET.parse('TDC_default_channels.xml')
-        root = tree.getroot()
+        if self.val == 1:
+            tree = ET.parse(self.fname[0])
+            root = tree.getroot()
+            print(self.fname[0] + " loaded")
+        if self.val == 0:
+            tree = ET.parse('TDC_default_original.xml')
+            root = tree.getroot()
+            print('TDC_default_original.xml loaded')
         #mode set
         self.TDC_inst.enable_new_ttc[0] = root[0][0].text
         self.TDC_inst.enable_master_reset_code[0] = root[0][1].text
@@ -454,22 +500,32 @@ class Ui_MainWindow(object):
         self.TDC_inst.enable_TDC_ID[0] = root[0][18].text
         self.TDC_inst.enable_error_notify[0] = root[0][19].text
 
-        ###################################################################################
-        ### This would be used for individual rising_is_leading stuff, not
-        ### sure if it is something we want to do
+        # edge_type
+        if root[9][0].text == '0':
+            self.comboBox_4.setCurrentIndex(1)
+            self.TDC_inst.set_falling_is_leading()
+        if root[9][0].text == '1':
+            self.comboBox_4.setCurrentIndex(0)
+            self.TDC_inst.set_rising_is_leading()
 
-        # self.rising_is_leading_listing = list(self.TDC_inst.rising_is_leading[0])
-        # self.channel_enable_r_list = list(self.TDC_inst.channel_enable_r[0])
-        # self.channel_enable_f_list = list(self.TDC_inst.channel_enable_f[0])
-        #
-        # self.rising_is_leading_listing[0] = root[0][20][0].text
-        # self.rising_is_leading_listing[1] = root[0][20][1].text
-        # # print(root[0][19].text)
-        # # print(root[0][20][0].text)
-        #
-        # self.TDC_inst.rising_is_leading[0] = ''.join(self.rising_is_leading_listing)
-        # print(self.TDC_inst.rising_is_leading[0])
-        ####################################################################################
+        self.rising_is_leading_listing = list(self.TDC_inst.rising_is_leading[0])
+        for i in range (24):
+            self.rising_is_leading_listing[i] = root[0][22][i].text
+        self.TDC_inst.rising_is_leading[0] = ''.join(self.rising_is_leading_listing)
+
+        self.channel_enable_r_list = list(self.TDC_inst.channel_enable_r[0])
+        for i in range (24):
+            self.channel_enable_r_list[i] = root[0][23][i].text
+        self.TDC_inst.channel_enable_r[0] = ''.join(self.channel_enable_r_list)
+
+        self.channel_enable_f_list = list(self.TDC_inst.channel_enable_f[0])
+        for i in range (24):
+            self.channel_enable_f_list[i] = root[0][24][i].text
+        self.TDC_inst.channel_enable_f[0] = ''.join(self.channel_enable_f_list)
+
+        #TDC_ID
+        self.TDC_inst.TDC_ID[0] = root[0][20].text
+        self.TDC_inst.width_select[0] = root[0][21].text
 
         #internal_counter
         self.TDC_inst.combine_time_out_config[0] = root[1][0].text
@@ -555,14 +611,6 @@ class Ui_MainWindow(object):
             self.comboBox_3.setCurrentIndex(5)
             self.TDC_inst.run_TDCID_mode()
 
-        #edge_type
-        if root[9][0].text == '0':
-            self.comboBox_4.setCurrentIndex(0)
-            self.TDC_inst.set_rising_is_leading()
-        if root[9][0].text == '1':
-            self.comboBox_4.setCurrentIndex(1)
-            self.TDC_inst.set_falling_is_leading()
-
         #clk_160_phase
         self.spinBox.setValue(int(root[10][0].text))
         self.phase_clk160_binary = format(self.spinBox.value(), '05b')
@@ -576,6 +624,8 @@ class Ui_MainWindow(object):
         self.TDC_inst.phase_clk320_1[0] = self.phase_clk320_1_binary
 
     def save_setup_func(self):
+        tree = ET.parse('TDC_default_original.xml')
+        root = tree.getroot()
         file_saved_name_list = ["TDC_saved_", timestr, ".xml"]
         file_saved_name = ''.join(file_saved_name_list)
         #print("current TDC setup saved as: %s" %file_saved_name)
@@ -600,6 +650,21 @@ class Ui_MainWindow(object):
         root[0][17].text = self.TDC_inst.enable_error_packet[0]
         root[0][18].text = self.TDC_inst.enable_TDC_ID[0]
         root[0][19].text = self.TDC_inst.enable_error_notify[0]
+        root[0][20].text = self.TDC_inst.TDC_ID[0]
+        root[0][21].text = self.TDC_inst.width_select[0]
+
+        self.rising_is_leading_listing = list(self.TDC_inst.rising_is_leading[0])
+        self.channel_enable_r_list = list(self.TDC_inst.channel_enable_r[0])
+        self.channel_enable_f_list = list(self.TDC_inst.channel_enable_f[0])
+        #
+        for i in range (24):
+            root[0][22][i].text = self.rising_is_leading_listing[i]
+
+        for i in range (24):
+            root[0][23][i].text = self.channel_enable_r_list[i]
+
+        for i in range (24):
+            root[0][24][i].text = self.channel_enable_f_list[i]
 
         root[1][0].text = self.TDC_inst.combine_time_out_config[0]
         root[1][1].text = self.TDC_inst.fake_hit_time_interval[0]
@@ -711,10 +776,7 @@ class Ui_MainWindow(object):
         root[10][0].text = str(self.spinBox.value())
         root[11][0].text = str(self.spinBox_2.value())
 
-        ##############################   self.load_setup_func()
-
-        #tree.write(file_saved_name)
-        tree.write('TDC_saved.xml')
+        tree.write('TDC_auto_saved.xml')
 
 if __name__ == "__main__":
     import sys

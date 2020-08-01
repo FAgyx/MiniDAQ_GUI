@@ -1,5 +1,5 @@
 #from test_5 import Ui_MainWindow
-from MainWindow_TDC_update import Ui_MainWindow
+from MainWindow_TDC_update_2 import Ui_MainWindow
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 import datetime
@@ -55,15 +55,6 @@ if __name__ == "__main__":
 
 
     TDC_inst = TDCreg(ser)
-
-    #verificate_all(ser)
-    #TDC_inst.update_setup_0()
-    #TDC_inst.read_status_0()
-    #TDC_inst.read_status_1()
-    #TDC_inst.update_control_1()
-    #TDC_inst.update_control_1()
-    #print(TDC_inst.control_1_indictor)
-    #TDC_inst.DAQ_init()
 
     myapp = StartQT5(ser, TDC_inst)
     myapp.show()
