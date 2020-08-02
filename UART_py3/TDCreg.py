@@ -1,4 +1,5 @@
 from TDC_config_low_level_function import *
+from ASD_reg import *
 
 # test 1
 class TDCreg(object):
@@ -16,6 +17,7 @@ class TDCreg(object):
         self.hit_inverse = '0'
         self.hit_enable = '\xFF\xFF\xFF'
         self.hit_delay = 0
+        self.asd_mezz = ASD_mezz()
         trst_0(self.ser)
         trst_1(self.ser)
 

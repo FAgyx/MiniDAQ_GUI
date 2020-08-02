@@ -1,0 +1,13 @@
+default value 		   	corresponding value
+channel_0_mode = ['00']    	checked = ['00'] unchecked = ['11']
+chip_mode =['0']		ADC_mode = ['0'] TOT_mode = ['1']
+deadtime =['111'] 		[format(QCombo_box_index,'b').zfill(3)]
+int_gate =['0100']		[format(QCombo_box_index,'b').zfill(4)]	
+rundown_curr =['010']   	[format(QCombo_box_index,'b').zfill(3)]	      
+hyst =['1110']			[''.join(reversed(format(QCombo_box_index,'b').zfill(4)))]
+wilk_thr =['010']		[format(QCombo_box_index,'b').zfill(3)]
+main_thr =['01101010']		[format(((255-spinbox_value)/2),'b').zfill(8)]
+
+save single asd: Apply changes to current ASD instance, close dialog
+save all ASDs: Apply changes to ASD0, ASD1 and ASD2, close dialog
+discard: close dialog
