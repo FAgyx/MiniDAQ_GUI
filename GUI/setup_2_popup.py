@@ -219,12 +219,6 @@ class Ui_Dialog(object):
         #self.pushButton_3.clicked.connect(self.cancel_button_mes)
         self.pushButton_3.clicked.connect(Dialog.reject)
 
-
-        #enabling messages to print on the TDC tab
-        # self.apply_button_message = ""
-        # self.OK_button_message = ""
-        # self.cancel_button_message = ""
-
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
@@ -274,19 +268,6 @@ class Ui_Dialog(object):
 
         #Call update_setup_2 function
         self.TDC_inst.update_setup_2()
-
-    # # message functions!
-    # def apply_button_mes(self):
-    #     self.apply_button_message = "setup2: changes applied"
-    #
-    # def OK_button_mes(self):
-    #     self.OK_button_message = "setup2: changes saved"
-    #     self.apply_button_message = ""
-    #
-    # def cancel_button_mes(self):
-    #     self.cancel_button_message = "setup2: changes canceled"
-    #     self.apply_button_message = ""
-
 
 if __name__ == "__main__":
     import sys

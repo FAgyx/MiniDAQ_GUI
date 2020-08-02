@@ -6,9 +6,7 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_Dialog(object):
 
@@ -90,7 +88,6 @@ class Ui_Dialog(object):
         self.horizontalLayout_6.addWidget(self.pushButton_2)
         self.pushButton_2.clicked.connect(self.OK_button)
         self.pushButton_2.clicked.connect(Dialog.reject)
-
 
         # Cancel button
         self.pushButton_3 = QtWidgets.QPushButton(self.horizontalLayoutWidget_6)

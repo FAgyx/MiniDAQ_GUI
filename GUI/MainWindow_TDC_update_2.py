@@ -6,31 +6,16 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import (QMainWindow, QTextEdit,
+                             QAction, QFileDialog, QApplication)
 import sys
-####
+from pathlib import Path
 import xml.etree.ElementTree as ET
-tree = ET.parse('TDC_config_default.xml')
-root = tree.getroot()
-#print(root[0][0].text)
-###
-from PyQt5 import *
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import *
-
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
+from PyQt5 import QtCore
 
 # Importing the popup windows
-# from verificate_popup import Ui_Dialog as Form
-# from ePLL_popup import Ui_Dialog as Form_2
-# from datarate_popup import Ui_Dialog as Form_3
-# from runmode_popup import Ui_Dialog as Form_4
-# from wordmode_popup import Ui_Dialog as Form_5
-# from edgetype_popup import Ui_Dialog as Form_6
-# from channel_popup import Ui_Dialog as Form_7
 from setup_0_popup import Ui_Dialog as Form_8
 from setup_1_popup import Ui_Dialog as Form_9
 from setup_2_popup import Ui_Dialog as Form_10
@@ -45,20 +30,25 @@ from serial_config_tdc import *
 from TDCreg import *
 from TDC_config_low_level_function import *
 
+import time
+timestr = time.strftime("%Y-%m-%d-%H%M%S")
 
 class Ui_MainWindow(object):
 
     def __init__(self, ser, TDC_inst):
         self.ser = ser
         self.TDC_inst = TDC_inst
+        self.val = 0
 
     def setupUi(self, MainWindow):
+
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(850, 773)
+        MainWindow.resize(850, 743)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
-        self.tabWidget.setGeometry(QtCore.QRect(19, 19, 820, 501))
+        self.tabWidget.setGeometry(QtCore.QRect(19, 19, 820, 441))
         self.tabWidget.setObjectName("tabWidget")
         self.tab = QtWidgets.QWidget()
         self.tab.setObjectName("tab")
@@ -72,6 +62,36 @@ class Ui_MainWindow(object):
         self.tab_4 = QtWidgets.QWidget()
         self.tab_4.setObjectName("tab_4")
         self.tabWidget.addTab(self.tab_4, "")
+
+        # menubar stuff
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 650, 26))
+        self.menubar.setObjectName("menubar")
+        self.TDC = QtWidgets.QMenu(self.menubar)
+        self.TDC.setObjectName("TDC")
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
+        self.actionSaveDefault = QtWidgets.QAction(MainWindow)
+        self.actionSaveDefault.setObjectName("actionSaveDefualt")
+        self.actionSaveDefault.triggered.connect(self.save_setup_func)
+        self.actionSaveAs = QtWidgets.QAction(MainWindow)
+        self.actionSaveAs.setObjectName("actionSaveAs")
+        self.actionSaveAs.triggered.connect(self.saveFileAs)
+        self.actionLoadFrom = QtWidgets.QAction(MainWindow)
+        self.actionLoadFrom.setObjectName("actionLoadFrom")
+        self.actionLoadFrom.triggered.connect(self.loadFileFrom)
+        self.actionLoadDefault = QtWidgets.QAction(MainWindow)
+        self.actionLoadDefault.setObjectName("actionLoadDefault")
+        self.actionLoadDefault.triggered.connect(self.loadFileDefault)
+        self.TDC.addAction(self.actionLoadDefault)
+        self.TDC.addAction(self.actionLoadFrom)
+        self.TDC.addAction(self.actionSaveDefault)
+        self.TDC.addAction(self.actionSaveAs)
+        self.menubar.addAction(self.TDC.menuAction())
+
         self.gridLayoutWidget = QtWidgets.QWidget(self.tab_2)
         self.gridLayoutWidget.setGeometry(QtCore.QRect(20, 50, 261, 261))
         self.gridLayoutWidget.setObjectName("gridLayoutWidget")
@@ -102,6 +122,15 @@ class Ui_MainWindow(object):
         self.comboBox.addItem("")
         self.comboBox.addItem("")
         self.comboBox.addItem("")
+        if self.TDC_inst.enable_high_speed[0] == '1':
+            self.comboBox.setCurrentIndex(0)
+            self.TDC_inst.run_320M_data_rate()
+        if self.TDC_inst.enable_high_speed[0] == '0':
+            self.comboBox.setCurrentIndex(1)
+            self.TDC_inst.run_160M_data_rate()
+        if self.TDC_inst.enable_legacy[0] == '1':
+            self.comboBox.setCurrentIndex(2)
+            self.TDC_inst.run_80M_data_rate()
         self.comboBox.activated.connect(self.data_rate)
 
         self.gridLayout.addWidget(self.comboBox, 0, 1, 1, 1)
@@ -109,6 +138,10 @@ class Ui_MainWindow(object):
         self.comboBox_2.setObjectName("comboBox_2")
         self.comboBox_2.addItem("")
         self.comboBox_2.addItem("")
+        if self.TDC_inst.enable_trigger[0] == '0':
+            self.comboBox_2.setCurrentIndex(0)
+        if self.TDC_inst.enable_trigger[0] == '1':
+            self.comboBox_2.setCurrentIndex(1)
         self.comboBox_2.activated.connect(self.trigger_mode)
 
         self.gridLayout.addWidget(self.comboBox_2, 1, 1, 1, 1)
@@ -134,15 +167,12 @@ class Ui_MainWindow(object):
         self.spinBox.setObjectName("spinBox")
         self.gridLayout.addWidget(self.spinBox, 4, 1, 1, 1)
         self.spinBox.setValue(int(format(int(self.TDC_inst.phase_clk160[0], 2), 'd')))
-        #self.spinBox.setValue(int(self.TDC_inst.updated_phase_clk160[0]))
-        #self.spinBox.setValue(int(self.TDC_inst.enable_high_speed[0]))
         self.spinBox.valueChanged.connect(self.spinbox_160)
 
 
         self.spinBox_2 = QtWidgets.QSpinBox(self.gridLayoutWidget)
         self.spinBox_2.setObjectName("spinBox_2")
         self.gridLayout.addWidget(self.spinBox_2, 5, 1, 1, 1)
-        ######### What do we want to have here??
         self.spinBox_2.setValue(int(format(int(self.TDC_inst.phase_clk320_1[0], 2), 'd')))
         self.spinBox_2.valueChanged.connect(self.spinbox_320)
 
@@ -217,16 +247,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.pushButton_10 = QtWidgets.QPushButton(self.horizontalLayoutWidget)
-        self.pushButton_10.setObjectName("pushButton_10")
-        self.horizontalLayout.addWidget(self.pushButton_10)
-        self.pushButton_10.clicked.connect(self.load_setup_func)
 
-        self.pushButton_11 = QtWidgets.QPushButton(self.horizontalLayoutWidget)
-        self.pushButton_11.setObjectName("pushButton_11")
-        self.horizontalLayout.addWidget(self.pushButton_11)
         self.verticalLayoutWidget_2 = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(30, 530, 800, 201))
+        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(30, 480, 800, 201))
         self.verticalLayoutWidget_2.setObjectName("verticalLayoutWidget_2")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_2)
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -240,21 +263,20 @@ class Ui_MainWindow(object):
         self.textBrowser.setObjectName("textBrowser")
         self.verticalLayout_2.addWidget(self.textBrowser)
         MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 769, 18))
-        self.menubar.setObjectName("menubar")
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
-        self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
 
-        self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(1)
+        self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
+
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "MiniDAQ GUI"))
+        self.TDC.setTitle(_translate("MainWindow", "file"))
+        self.actionSaveDefault.setText(_translate("MainWindow", "save TDC default settings"))
+        self.actionSaveAs.setText(_translate("MainWindow", "save TDC settings as"))
+        self.actionLoadFrom.setText(_translate("MainWindow", "load TDC settings from"))
+        self.actionLoadDefault.setText(_translate("MainWindow", "load TDC default settings"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "Hit gen"))
         self.label.setText(_translate("MainWindow", "Mode:"))
         self.label_2.setText(_translate("MainWindow", "Data Rate: "))
@@ -269,7 +291,7 @@ class Ui_MainWindow(object):
         self.comboBox_3.setItemText(3, _translate("MainWindow", "pair_full_width"))
         self.comboBox_3.setItemText(4, _translate("MainWindow", "debug"))
         self.comboBox_3.setItemText(5, _translate("MainWindow", "TDC_ID"))
-        self.comboBox_4.setItemText(0, _translate("MainWindow", "leading"))
+        self.comboBox_4.setItemText(0, _translate("MainWindow", "rising"))
         self.comboBox_4.setItemText(1, _translate("MainWindow", "falling"))
         self.label_3.setText(_translate("MainWindow", "Format:"))
         self.label_5.setText(_translate("MainWindow", "Clk160_phase: "))
@@ -286,15 +308,13 @@ class Ui_MainWindow(object):
         self.pushButton_8.setText(_translate("MainWindow", "TRST"))
         self.checkBox.setText(_translate("MainWindow", "master reset"))
         self.pushButton_9.setText(_translate("MainWindow", "Init"))
-        self.pushButton_10.setText(_translate("MainWindow", "Load Setup"))
-        self.pushButton_11.setText(_translate("MainWindow", "Save Setup"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "TDC"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("MainWindow", "ASD"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("MainWindow", "CSM"))
         self.label_8.setText(_translate("MainWindow", "GUI run information"))
 
-    #### functions calling to the popup windows  ####
 
+    #### functions calling to the popup windows  ####
     # For the Registers
     # mode set
     def open_mode_set(self):
@@ -359,7 +379,6 @@ class Ui_MainWindow(object):
             self.TDC_inst.run_160M_data_rate()
         if self.comboBox.currentIndex() == 2:
             self.TDC_inst.run_80M_data_rate()
-        # self.TDC_inst.set_FPGA_sample_rate()
 
     def trigger_mode(self):
         # mode
@@ -367,7 +386,6 @@ class Ui_MainWindow(object):
             self.TDC_inst.run_triggerless_mode()
         if self.comboBox_2.currentIndex() == 1:
             self.TDC_inst.run_trigger_mode()
-        # self.TDC_inst.set_trigger_type()
 
     def format(self):
         # format
@@ -383,7 +401,6 @@ class Ui_MainWindow(object):
             self.TDC_inst.run_debug_mode()
         if self.comboBox_3.currentIndex() == 5:
             self.TDC_inst.run_TDCID_mode()
-        # self.TDC_inst.set_word_byte()
 
     def edge_type(self):
         # Edge type
@@ -404,7 +421,7 @@ class Ui_MainWindow(object):
         self.phase_clk320_1_binary = format(self.spinBox_2.value(), '04b')
         self.TDC_inst.phase_clk320_1[0] = self.phase_clk320_1_binary
 
-    #Init button!
+    #Init button
     def init_settings(self):
         self.TDC_inst.DAQ_init()
 
@@ -420,11 +437,48 @@ class Ui_MainWindow(object):
             tdc_master_reset_0(self.ser)
             print("master reset 0")
 
+    def saveFileAs(self):
 
-    ### connecting to the TDC xml file
+        current_dir = str(Path.cwd())
+        self.file_name = QtWidgets.QFileDialog.getSaveFileName(None, "Save File", current_dir, '.xml')[0]
+
+        if self.file_name:
+            self.save_setup_func()
+            file_2 = open('TDC_auto_saved.xml', 'r')
+            data_2 = file_2.read()
+            with open(self.file_name, 'w') as f:
+                f.write(data_2)
+                print("current TDC setup saved to selected directory")
+                f.close()
+
+    def loadFileFrom(self):
+        self.val = 1
+        current_dir = str(Path.cwd())
+        self.fname = QFileDialog.getOpenFileName(caption='open file', directory=current_dir)
+
+        if self.fname[0]:
+            f = open(self.fname[0], 'r')
+
+            with f:
+                data = f.read()
+
+            self.load_setup_func()
+
+    def loadFileDefault(self):
+        self.val = 0
+        self.load_setup_func()
+
+    ### connecting to the correct TDC xml file
     def load_setup_func(self):
-        print("TDC_config_default loaded")
-        #print("enable_new_ttc: " + root[0][0].text)
+        if self.val == 1:
+            tree = ET.parse(self.fname[0])
+            root = tree.getroot()
+            print(self.fname[0] + " loaded")
+        if self.val == 0:
+            tree = ET.parse('TDC_default_original.xml')
+            root = tree.getroot()
+            print('TDC_default_original.xml loaded')
+        #mode set
         self.TDC_inst.enable_new_ttc[0] = root[0][0].text
         self.TDC_inst.enable_master_reset_code[0] = root[0][1].text
         self.TDC_inst.enable_direct_bunch_reset[0] = root[0][2].text
@@ -446,6 +500,283 @@ class Ui_MainWindow(object):
         self.TDC_inst.enable_TDC_ID[0] = root[0][18].text
         self.TDC_inst.enable_error_notify[0] = root[0][19].text
 
+        # edge_type
+        if root[9][0].text == '0':
+            self.comboBox_4.setCurrentIndex(1)
+            self.TDC_inst.set_falling_is_leading()
+        if root[9][0].text == '1':
+            self.comboBox_4.setCurrentIndex(0)
+            self.TDC_inst.set_rising_is_leading()
+
+        self.rising_is_leading_listing = list(self.TDC_inst.rising_is_leading[0])
+        for i in range (24):
+            self.rising_is_leading_listing[i] = root[0][22][i].text
+        self.TDC_inst.rising_is_leading[0] = ''.join(self.rising_is_leading_listing)
+
+        self.channel_enable_r_list = list(self.TDC_inst.channel_enable_r[0])
+        for i in range (24):
+            self.channel_enable_r_list[i] = root[0][23][i].text
+        self.TDC_inst.channel_enable_r[0] = ''.join(self.channel_enable_r_list)
+
+        self.channel_enable_f_list = list(self.TDC_inst.channel_enable_f[0])
+        for i in range (24):
+            self.channel_enable_f_list[i] = root[0][24][i].text
+        self.TDC_inst.channel_enable_f[0] = ''.join(self.channel_enable_f_list)
+
+        #TDC_ID
+        self.TDC_inst.TDC_ID[0] = root[0][20].text
+        self.TDC_inst.width_select[0] = root[0][21].text
+
+        #internal_counter
+        self.TDC_inst.combine_time_out_config[0] = root[1][0].text
+        self.TDC_inst.fake_hit_time_interval[0] = root[1][1].text
+        self.TDC_inst.syn_packet_number[0] = root[1][2].text
+        self.TDC_inst.roll_over[0] = root[1][3].text
+        self.TDC_inst.coarse_count_offset[0] = root[1][4].text
+        self.TDC_inst.bunch_offset[0] = root[1][5].text
+        self.TDC_inst.event_offset[0] = root[1][6].text
+        self.TDC_inst.match_window[0] = root[1][7].text
+
+        #fine_time_lut
+        self.TDC_inst.fine_sel[0] = root[2][0].text
+        self.TDC_inst.lut0[0] = root[2][1].text
+        self.TDC_inst.lut1[0] = root[2][2].text
+        self.TDC_inst.lut2[0] = root[2][3].text
+        self.TDC_inst.lut3[0] = root[2][4].text
+        self.TDC_inst.lut4[0] = root[2][5].text
+        self.TDC_inst.lut5[0] = root[2][6].text
+        self.TDC_inst.lut6[0] = root[2][7].text
+        self.TDC_inst.lut7[0] = root[2][8].text
+        self.TDC_inst.lut8[0] = root[2][9].text
+        self.TDC_inst.lut9[0] = root[2][10].text
+        self.TDC_inst.luta[0] = root[2][11].text
+        self.TDC_inst.lutb[0] = root[2][12].text
+        self.TDC_inst.lutc[0] = root[2][13].text
+        self.TDC_inst.lutd[0] = root[2][14].text
+        self.TDC_inst.lute[0] = root[2][15].text
+        self.TDC_inst.lutf[0] = root[2][16].text
+
+        #reset_option
+        self.TDC_inst.rst_ePLL[0] = root[3][0].text
+        self.TDC_inst.reset_jtag_in[0] = root[3][1].text
+        self.TDC_inst.event_reset_jtag_in[0] = root[3][2].text
+        self.TDC_inst.chnl_fifo_overflow_clear[0] = root[3][3].text
+        self.TDC_inst.debug_port_select[0] = root[3][4].text
+
+        #ePll_option
+        self.TDC_inst.phase_clk160[0] = root[4][0].text
+        self.TDC_inst.phase_clk320_0[0] = root[4][1].text
+        self.TDC_inst.phase_clk320_1[0] = root[4][2].text
+        self.TDC_inst.phase_clk320_2[0] = root[4][3].text
+        self.TDC_inst.ePllRes[0] = root[4][4].text
+        self.TDC_inst.ePllIcp[0] = root[4][5].text
+        self.TDC_inst.ePllCap[0] = root[4][6].text
+
+        #data_rate
+        if root[6][0].text == '1':
+            self.comboBox.setCurrentIndex(0)
+            self.TDC_inst.run_320M_data_rate()
+        if root[6][1].text == '1':
+            self.comboBox.setCurrentIndex(1)
+            self.TDC_inst.run_160M_data_rate()
+        if root[6][2].text == '1':
+            self.comboBox.setCurrentIndex(2)
+            self.TDC_inst.run_80M_data_rate()
+
+        #trigger_mode
+        if root[7][0].text == '0':
+            self.comboBox_2.setCurrentIndex(0)
+            self.TDC_inst.run_triggerless_mode()
+        if root[7][0].text == '1':
+            self.comboBox_2.setCurrentIndex(1)
+            self.TDC_inst.run_trigger_mode()
+
+        #format
+        if root[8][0].text == '1':
+            self.comboBox_3.setCurrentIndex(0)
+            self.TDC_inst.run_pair_mode()
+        if root[8][1].text == '1':
+            self.comboBox_3.setCurrentIndex(1)
+            self.TDC_inst.run_single_edge_mode()
+        if root[8][2].text == '1':
+            self.comboBox_3.setCurrentIndex(2)
+            self.TDC_inst.run_double_edge_mode()
+        if root[8][3].text == '1':
+            self.comboBox_3.setCurrentIndex(3)
+            self.TDC_inst.run_pair_full_width_mode()
+        if root[8][4].text == '1':
+            self.comboBox_3.setCurrentIndex(4)
+            self.TDC_inst.run_debug_mode()
+        if root[8][5].text == '1':
+            self.comboBox_3.setCurrentIndex(5)
+            self.TDC_inst.run_TDCID_mode()
+
+        #clk_160_phase
+        self.spinBox.setValue(int(root[10][0].text))
+        self.phase_clk160_binary = format(self.spinBox.value(), '05b')
+        self.TDC_inst.phase_clk160[0] = self.phase_clk160_binary
+
+        #clk_320_phase
+        self.spinBox_2.setValue(int(root[11][0].text))
+        self.phase_clk320_0_binary = format(self.spinBox_2.value() + 4, '04b')[-4:]
+        self.TDC_inst.phase_clk320_0[0] = self.phase_clk320_0_binary
+        self.phase_clk320_1_binary = format(self.spinBox_2.value(), '04b')
+        self.TDC_inst.phase_clk320_1[0] = self.phase_clk320_1_binary
+
+    def save_setup_func(self):
+        tree = ET.parse('TDC_default_original.xml')
+        root = tree.getroot()
+        file_saved_name_list = ["TDC_saved_", timestr, ".xml"]
+        file_saved_name = ''.join(file_saved_name_list)
+        #print("current TDC setup saved as: %s" %file_saved_name)
+        print('current TDC setup save as: TDC_saved.xml')
+        root[0][0].text = self.TDC_inst.enable_new_ttc[0]
+        root[0][1].text = self.TDC_inst.enable_master_reset_code[0]
+        root[0][2].text = self.TDC_inst.enable_direct_bunch_reset[0]
+        root[0][3].text = self.TDC_inst.enable_direct_trigger[0]
+        root[0][4].text = self.TDC_inst.auto_roll_over[0]
+        root[0][5].text = self.TDC_inst.bypass_bcr_distribution[0]
+        root[0][6].text = self.TDC_inst.enable_trigger[0]
+        root[0][7].text = self.TDC_inst.channel_data_debug[0]
+        root[0][8].text = self.TDC_inst.enable_leading[0]
+        root[0][9].text = self.TDC_inst.enable_pair[0]
+        root[0][10].text = self.TDC_inst.enable_fake_hit[0]
+        root[0][11].text = self.TDC_inst.enable_trigger_timeout[0]
+        root[0][12].text = self.TDC_inst.enable_high_speed[0]
+        root[0][13].text = self.TDC_inst.enable_legacy[0]
+        root[0][14].text = self.TDC_inst.full_width_res[0]
+        root[0][15].text = self.TDC_inst.enable_8b10b[0]
+        root[0][16].text = self.TDC_inst.enable_insert[0]
+        root[0][17].text = self.TDC_inst.enable_error_packet[0]
+        root[0][18].text = self.TDC_inst.enable_TDC_ID[0]
+        root[0][19].text = self.TDC_inst.enable_error_notify[0]
+        root[0][20].text = self.TDC_inst.TDC_ID[0]
+        root[0][21].text = self.TDC_inst.width_select[0]
+
+        self.rising_is_leading_listing = list(self.TDC_inst.rising_is_leading[0])
+        self.channel_enable_r_list = list(self.TDC_inst.channel_enable_r[0])
+        self.channel_enable_f_list = list(self.TDC_inst.channel_enable_f[0])
+        #
+        for i in range (24):
+            root[0][22][i].text = self.rising_is_leading_listing[i]
+
+        for i in range (24):
+            root[0][23][i].text = self.channel_enable_r_list[i]
+
+        for i in range (24):
+            root[0][24][i].text = self.channel_enable_f_list[i]
+
+        root[1][0].text = self.TDC_inst.combine_time_out_config[0]
+        root[1][1].text = self.TDC_inst.fake_hit_time_interval[0]
+        root[1][2].text = self.TDC_inst.syn_packet_number[0]
+        root[1][3].text = self.TDC_inst.roll_over[0]
+        root[1][4].text = self.TDC_inst.coarse_count_offset[0]
+        root[1][5].text = self.TDC_inst.bunch_offset[0]
+        root[1][6].text = self.TDC_inst.event_offset[0]
+        root[1][7].text = self.TDC_inst.match_window[0]
+
+        root[2][0].text = self.TDC_inst.fine_sel[0]
+        root[2][1].text = self.TDC_inst.lut0[0]
+        root[2][2].text = self.TDC_inst.lut1[0]
+        root[2][3].text = self.TDC_inst.lut2[0]
+        root[2][4].text = self.TDC_inst.lut3[0]
+        root[2][5].text = self.TDC_inst.lut4[0]
+        root[2][6].text = self.TDC_inst.lut5[0]
+        root[2][7].text = self.TDC_inst.lut6[0]
+        root[2][8].text = self.TDC_inst.lut7[0]
+        root[2][9].text = self.TDC_inst.lut8[0]
+        root[2][10].text = self.TDC_inst.lut9[0]
+        root[2][11].text = self.TDC_inst.luta[0]
+        root[2][12].text = self.TDC_inst.lutb[0]
+        root[2][13].text = self.TDC_inst.lutc[0]
+        root[2][14].text = self.TDC_inst.lutd[0]
+        root[2][15].text = self.TDC_inst.lute[0]
+        root[2][16].text = self.TDC_inst.lutf[0]
+
+        root[3][0].text = self.TDC_inst.rst_ePLL[0]
+        root[3][1].text = self.TDC_inst.reset_jtag_in[0]
+        root[3][2].text = self.TDC_inst.event_reset_jtag_in[0]
+        root[3][3].text = self.TDC_inst.chnl_fifo_overflow_clear[0]
+        root[3][4].text = self.TDC_inst.debug_port_select[0]
+
+        root[4][0].text = self.TDC_inst.phase_clk160[0]
+        root[4][1].text = self.TDC_inst.phase_clk320_0[0]
+        root[4][2].text = self.TDC_inst.phase_clk320_1[0]
+        root[4][3].text = self.TDC_inst.phase_clk320_2[0]
+        root[4][4].text = self.TDC_inst.ePllRes[0]
+        root[4][5].text = self.TDC_inst.ePllIcp[0]
+        root[4][6].text = self.TDC_inst.ePllCap[0]
+
+        if self.comboBox.currentIndex() == 0:
+            root[6][0].text = '1'
+            root[6][1].text = '0'
+            root[6][2].text = '0'
+        if self.comboBox.currentIndex() == 1:
+            root[6][0].text = '0'
+            root[6][1].text = '1'
+            root[6][2].text = '0'
+        if self.comboBox.currentIndex() == 2:
+            root[6][0].text = '0'
+            root[6][1].text = '0'
+            root[6][2].text = '1'
+
+        if self.comboBox_2.currentIndex() == 0:
+            root[7][0].text = '0'
+        if self.comboBox_2.currentIndex() == 1:
+            root[7][0].text = '1'
+
+        if self.comboBox_3.currentIndex() == 0:
+            root[8][0].text = '1'
+            root[8][1].text = '0'
+            root[8][2].text = '0'
+            root[8][3].text = '0'
+            root[8][4].text = '0'
+            root[8][5].text = '0'
+        if self.comboBox_3.currentIndex() == 1:
+            root[8][0].text = '0'
+            root[8][1].text = '1'
+            root[8][2].text = '0'
+            root[8][3].text = '0'
+            root[8][4].text = '0'
+            root[8][5].text = '0'
+        if self.comboBox_3.currentIndex() == 2:
+            root[8][0].text = '0'
+            root[8][1].text = '0'
+            root[8][2].text = '1'
+            root[8][3].text = '0'
+            root[8][4].text = '0'
+            root[8][5].text = '0'
+        if self.comboBox_3.currentIndex() == 3:
+            root[8][0].text = '0'
+            root[8][1].text = '0'
+            root[8][2].text = '0'
+            root[8][3].text = '1'
+            root[8][4].text = '0'
+            root[8][5].text = '0'
+        if self.comboBox_3.currentIndex() == 4:
+            root[8][0].text = '0'
+            root[8][1].text = '0'
+            root[8][2].text = '0'
+            root[8][3].text = '0'
+            root[8][4].text = '1'
+            root[8][5].text = '0'
+        if self.comboBox_3.currentIndex() == 5:
+            root[8][0].text = '0'
+            root[8][1].text = '0'
+            root[8][2].text = '0'
+            root[8][3].text = '0'
+            root[8][4].text = '0'
+            root[8][5].text = '1'
+
+        if self.comboBox_4.currentIndex() == 0:
+            root[9][0].text = '0'
+        if self.comboBox_4.currentIndex() == 1:
+            root[9][0].text = '1'
+
+        root[10][0].text = str(self.spinBox.value())
+        root[11][0].text = str(self.spinBox_2.value())
+
+        tree.write('TDC_auto_saved.xml')
 
 if __name__ == "__main__":
     import sys

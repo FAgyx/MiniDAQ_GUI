@@ -1,5 +1,19 @@
 Notes: 
 
+------- what to do about rising_is_leading individual channels and edge type things? 
+
+
+7/28/20 Note: 
+
+MainWindow_TDC_update_filedialog.py has the current progress with the filedialog 
+MainWindow_TDC_update_filedialog_init.py runs MainWindow_TDC_update_filedialog.py
+
+The menu bar here has all the load and the save operations 
+- I'm still working on getting the file to save in a specific file rather 
+  than in the current file! 
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 MainWindow_1.py has all of the code relative to the central window of the GUI 
 MainWindow_1_init.py can run and MainWindow_1.py 
 

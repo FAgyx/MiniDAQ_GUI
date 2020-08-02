@@ -32,7 +32,6 @@ class Ui_Dialog(object):
         self.lineEdit.setObjectName("lineEdit")
         self.gridLayout.addWidget(self.lineEdit, 0, 0, 1, 1)
         self.lineEdit.setText(self.TDC_inst.phase_clk160[0])
-        # self.lineEdit.textChanged.connect(self.changed_line1)
 
         self.label_2 = QtWidgets.QLabel(self.gridLayoutWidget)
         self.label_2.setObjectName("label_2")
@@ -43,7 +42,6 @@ class Ui_Dialog(object):
         self.lineEdit_2.setObjectName("lineEdit_2")
         self.gridLayout.addWidget(self.lineEdit_2, 1, 0, 1, 1)
         self.lineEdit_2.setText(self.TDC_inst.phase_clk320_0[0])
-        # self.lineEdit_2.textChanged.connect(self.changed_line2)
 
         self.label = QtWidgets.QLabel(self.gridLayoutWidget)
         self.label.setObjectName("label")
@@ -54,7 +52,6 @@ class Ui_Dialog(object):
         self.lineEdit_3.setObjectName("lineEdit_3")
         self.gridLayout.addWidget(self.lineEdit_3, 2, 0, 1, 1)
         self.lineEdit_3.setText(self.TDC_inst.phase_clk320_1[0])
-        # self.lineEdit_3.textChanged.connect(self.changed_line3)
 
         self.label_3 = QtWidgets.QLabel(self.gridLayoutWidget)
         self.label_3.setObjectName("label_3")
@@ -65,7 +62,6 @@ class Ui_Dialog(object):
         self.lineEdit_4.setObjectName("lineEdit_4")
         self.gridLayout.addWidget(self.lineEdit_4, 3, 0, 1, 1)
         self.lineEdit_4.setText(self.TDC_inst.phase_clk320_2[0])
-        # self.lineEdit_4.textChanged.connect(self.changed_line4)
 
         self.label_4 = QtWidgets.QLabel(self.gridLayoutWidget)
         self.label_4.setObjectName("label_4")
@@ -76,7 +72,6 @@ class Ui_Dialog(object):
         self.lineEdit_5.setObjectName("lineEdit_5")
         self.gridLayout.addWidget(self.lineEdit_5, 4, 0, 1, 1)
         self.lineEdit_5.setText(self.TDC_inst.ePllRes[0])
-        # self.lineEdit_5.textChanged.connect(self.changed_line5)
 
         self.label_5 = QtWidgets.QLabel(self.gridLayoutWidget)
         self.label_5.setObjectName("label_5")
@@ -87,7 +82,6 @@ class Ui_Dialog(object):
         self.lineEdit_6.setObjectName("lineEdit_6")
         self.gridLayout.addWidget(self.lineEdit_6, 5, 0, 1, 1)
         self.lineEdit_6.setText(self.TDC_inst.ePllIcp[0])
-        # self.lineEdit_6.textChanged.connect(self.changed_line6)
 
         self.label_6 = QtWidgets.QLabel(self.gridLayoutWidget)
         self.label_6.setObjectName("label_6")
@@ -98,7 +92,6 @@ class Ui_Dialog(object):
         self.lineEdit_7.setObjectName("lineEdit_7")
         self.gridLayout.addWidget(self.lineEdit_7, 6, 0, 1, 1)
         self.lineEdit_7.setText(self.TDC_inst.ePllCap[0])
-        # self.lineEdit_7.textChanged.connect(self.changed_line7)
 
         self.label_7 = QtWidgets.QLabel(self.gridLayoutWidget)
         self.label_7.setObjectName("label_7")
