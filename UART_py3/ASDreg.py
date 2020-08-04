@@ -17,7 +17,7 @@ class ASD_chip(object):
         self.rundown_curr =['010']
         self.hyst =['1110']
         self.wilk_thr =['010']
-        self.main_thr =['01101010']
+        self.main_thr =['01100110']
         self.unused =['0000000000000']
         self.setup =   [self.channel_0_mode,self.channel_1_mode,self.channel_2_mode,self.channel_3_mode,
                         self.channel_4_mode,self.channel_5_mode,self.channel_6_mode,self.channel_7_mode,
