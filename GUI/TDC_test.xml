@@ -1,3 +1,4 @@
+<?xml version="1.0" ?>
 <configuration>
 	<mode_set>
 		<enable_new_ttc>0</enable_new_ttc>
@@ -139,37 +140,37 @@
 	</reset_option>
 	<ePll_option>
 		<phase_clk160>01000</phase_clk160>
-		<phase_clk320_0>0111</phase_clk320_0>
-		<phase_clk320_1>0011</phase_clk320_1>
+		<phase_clk320_0>0100</phase_clk320_0>
+		<phase_clk320_1>0000</phase_clk320_1>
 		<phase_clk320_2>0010</phase_clk320_2>
 		<ePllRes>0010</ePllRes>
 		<ePllIcp>0100</ePllIcp>
 		<ePllCap>10</ePllCap>
 	</ePll_option>
-	<TDC_status />
+	<TDC_status/>
 	<data_rate>
-		<run_320_rate>1</run_320_rate>
-		<run_160_rate>0</run_160_rate>
+		<run_320_rate>0</run_320_rate>
+		<run_160_rate>1</run_160_rate>
 		<run_80_rate>0</run_80_rate>
 	</data_rate>
 	<trigger_mode>
-		<enable_trigger>0</enable_trigger>
+		<enable_trigger>1</enable_trigger>
 	</trigger_mode>
 	<formatting>
-		<pair_mode>1</pair_mode>
-		<edge_mode>0</edge_mode>
+		<pair_mode>0</pair_mode>
+		<edge_mode>1</edge_mode>
 		<double_edge_mode>0</double_edge_mode>
 		<pair_full_width_mode>0</pair_full_width_mode>
 		<debug_mode>0</debug_mode>
 		<TDC_ID_mode>0</TDC_ID_mode>
 	</formatting>
 	<edge_type>
-		<leading_type>0</leading_type>
+		<leading_type>1</leading_type>
 	</edge_type>
 	<phase_clk160>
-		<phase_clk160_value>8</phase_clk160_value>
+		<phase_clk160_value>7</phase_clk160_value>
 	</phase_clk160>
 	<phase_clk320_1>
-		<phase_clk320_1_value>3</phase_clk320_1_value>
+		<phase_clk320_1_value>5</phase_clk320_1_value>
 	</phase_clk320_1>
 </configuration>

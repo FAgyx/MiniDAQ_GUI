@@ -342,4 +342,4 @@ def generateXML(fileName):
 		f.write(xmlstr)
 
 if __name__ == "__main__":
-	generateXML("TDC_default_channels.xml")
+	generateXML("TDC_auto_save.xml")
