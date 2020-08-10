@@ -1,4 +1,12 @@
-Notes: 
+Notes:
+
+8/10/20 Note: 
+
+- The file ASD_popup.py now runs all the ASD popups. 
+
+- So there is just one file for the ASD popups and one for the xml files 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 8/7/20 Note: 
 

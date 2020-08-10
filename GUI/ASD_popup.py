@@ -5,13 +5,14 @@
 # Created by: PyQt5 UI code generator 5.14.2
 #
 # WARNING! All changes made in this file will be lost!
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_Dialog(object):
 
-    def __init__(self, TDC_inst):
-        self.TDC_inst = TDC_inst
+    def __init__(self, ASD_chip_inst, ASD_mezz_inst, ASD_name):
+        self.ASD_chip_inst = ASD_chip_inst
+        self.ASD_name = ASD_name
+        self.ASD_mezz_inst = ASD_mezz_inst
 
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -47,56 +48,57 @@ class Ui_Dialog(object):
         self.checkBox.setText("")
         self.checkBox.setObjectName("checkBox")
         self.gridLayout.addWidget(self.checkBox, 2, 1, 1, 1)
-        if self.TDC_inst.asd_mezz.ASD1.channel_0_mode[0] == '00':
+        if self.ASD_chip_inst.channel_0_mode[0] == '00':
             self.checkBox.setChecked(True)
+
 
         self.checkBox_2 = QtWidgets.QCheckBox(self.gridLayoutWidget)
         self.checkBox_2.setText("")
         self.checkBox_2.setObjectName("checkBox_2")
         self.gridLayout.addWidget(self.checkBox_2, 2, 2, 1, 1)
-        if self.TDC_inst.asd_mezz.ASD1.channel_1_mode[0] == '00':
+        if self.ASD_chip_inst.channel_1_mode[0] == '00':
             self.checkBox_2.setChecked(True)
 
         self.checkBox_3 = QtWidgets.QCheckBox(self.gridLayoutWidget)
         self.checkBox_3.setText("")
         self.checkBox_3.setObjectName("checkBox_3")
         self.gridLayout.addWidget(self.checkBox_3, 2, 3, 1, 1)
-        if self.TDC_inst.asd_mezz.ASD1.channel_2_mode[0] == '00':
+        if self.ASD_chip_inst.channel_2_mode[0] == '00':
             self.checkBox_3.setChecked(True)
 
         self.checkBox_4 = QtWidgets.QCheckBox(self.gridLayoutWidget)
         self.checkBox_4.setText("")
         self.checkBox_4.setObjectName("checkBox_4")
         self.gridLayout.addWidget(self.checkBox_4, 2, 4, 1, 1)
-        if self.TDC_inst.asd_mezz.ASD1.channel_3_mode[0] == '00':
+        if self.ASD_chip_inst.channel_3_mode[0] == '00':
             self.checkBox_4.setChecked(True)
 
         self.checkBox_5 = QtWidgets.QCheckBox(self.gridLayoutWidget)
         self.checkBox_5.setText("")
         self.checkBox_5.setObjectName("checkBox_5")
         self.gridLayout.addWidget(self.checkBox_5, 2, 5, 1, 1)
-        if self.TDC_inst.asd_mezz.ASD1.channel_4_mode[0] == '00':
+        if self.ASD_chip_inst.channel_4_mode[0] == '00':
             self.checkBox_5.setChecked(True)
 
         self.checkBox_6 = QtWidgets.QCheckBox(self.gridLayoutWidget)
         self.checkBox_6.setText("")
         self.checkBox_6.setObjectName("checkBox_6")
         self.gridLayout.addWidget(self.checkBox_6, 2, 6, 1, 1)
-        if self.TDC_inst.asd_mezz.ASD1.channel_5_mode[0] == '00':
+        if self.ASD_chip_inst.channel_5_mode[0] == '00':
             self.checkBox_6.setChecked(True)
 
         self.checkBox_7 = QtWidgets.QCheckBox(self.gridLayoutWidget)
         self.checkBox_7.setText("")
         self.checkBox_7.setObjectName("checkBox_7")
         self.gridLayout.addWidget(self.checkBox_7, 2, 7, 1, 1)
-        if self.TDC_inst.asd_mezz.ASD1.channel_6_mode[0] == '00':
+        if self.ASD_chip_inst.channel_6_mode[0] == '00':
             self.checkBox_7.setChecked(True)
 
         self.checkBox_8 = QtWidgets.QCheckBox(self.gridLayoutWidget)
         self.checkBox_8.setText("")
         self.checkBox_8.setObjectName("checkBox_8")
         self.gridLayout.addWidget(self.checkBox_8, 2, 8, 1, 1)
-        if self.TDC_inst.asd_mezz.ASD1.channel_7_mode[0] == '00':
+        if self.ASD_chip_inst.channel_7_mode[0] == '00':
             self.checkBox_8.setChecked(True)
 
         self.label_4 = QtWidgets.QLabel(self.gridLayoutWidget)
@@ -131,9 +133,9 @@ class Ui_Dialog(object):
         self.comboBox.setObjectName("comboBox")
         self.comboBox.addItem("")
         self.comboBox.addItem("")
-        if self.TDC_inst.asd_mezz.ASD1.chip_mode[0] == '0':
+        if self.ASD_chip_inst.chip_mode[0] == '0':
             self.comboBox.setCurrentIndex(0)
-        if self.TDC_inst.asd_mezz.ASD1.chip_mode[0] == '1':
+        if self.ASD_chip_inst.chip_mode[0] == '1':
             self.comboBox.setCurrentIndex(1)
 
         self.horizontalLayout.addWidget(self.comboBox)
@@ -150,7 +152,7 @@ class Ui_Dialog(object):
         self.spinBox = QtWidgets.QSpinBox(self.gridLayoutWidget_2)
         self.spinBox.setObjectName("spinBox")
         self.gridLayout_2.addWidget(self.spinBox, 2, 0, 1, 1)
-        self.spinbox_value = int(format(int(self.TDC_inst.asd_mezz.ASD1.main_thr[0], 2), '02d'))
+        self.spinbox_value = int(format(int(self.ASD_chip_inst.main_thr[0], 2), '02d'))
         self.spinbox_value_true = int(255 - self.spinbox_value*2)
         self.spinBox.setValue(self.spinbox_value_true)
 
@@ -175,7 +177,7 @@ class Ui_Dialog(object):
         self.comboBox_2.addItem("")
         self.gridLayout_2.addWidget(self.comboBox_2, 2, 1, 1, 1)
         #### tad confused about this here!!
-        self.hyst_bin_rev = ''.join(reversed(str(self.TDC_inst.asd_mezz.ASD1.hyst[0])))
+        self.hyst_bin_rev = ''.join(reversed(str(self.ASD_chip_inst.hyst[0])))
         self.hyst_index = int(format(int(self.hyst_bin_rev, 2), 'd'))
         self.comboBox_2.setCurrentIndex(self.hyst_index)
 
@@ -201,7 +203,7 @@ class Ui_Dialog(object):
         self.comboBox_4.addItem("")
         self.comboBox_4.addItem("")
         self.gridLayout_3.addWidget(self.comboBox_4, 1, 2, 1, 1)
-        self.wilkthr_index = format(int(self.TDC_inst.asd_mezz.ASD1.wilk_thr[0], 2), '02d')
+        self.wilkthr_index = format(int(self.ASD_chip_inst.wilk_thr[0], 2), '02d')
         self.comboBox_4.setCurrentIndex(int(self.wilkthr_index))
 
         self.comboBox_6 = QtWidgets.QComboBox(self.gridLayoutWidget_3)
@@ -215,7 +217,7 @@ class Ui_Dialog(object):
         self.comboBox_6.addItem("")
         self.comboBox_6.addItem("")
         self.gridLayout_3.addWidget(self.comboBox_6, 1, 4, 1, 1)
-        self.deadtime_index = format(int(self.TDC_inst.asd_mezz.ASD1.deadtime[0], 2), '02d')
+        self.deadtime_index = format(int(self.ASD_chip_inst.deadtime[0], 2), '02d')
         self.comboBox_6.setCurrentIndex(int(self.deadtime_index))
 
         self.comboBox_5 = QtWidgets.QComboBox(self.gridLayoutWidget_3)
@@ -229,7 +231,7 @@ class Ui_Dialog(object):
         self.comboBox_5.addItem("")
         self.comboBox_5.addItem("")
         self.gridLayout_3.addWidget(self.comboBox_5, 1, 3, 1, 1)
-        self.rundowncurr_index = format(int(self.TDC_inst.asd_mezz.ASD1.rundown_curr[0], 2), '02d')
+        self.rundowncurr_index = format(int(self.ASD_chip_inst.rundown_curr[0], 2), '02d')
         self.comboBox_5.setCurrentIndex(int(self.rundowncurr_index))
 
         self.comboBox_3 = QtWidgets.QComboBox(self.gridLayoutWidget_3)
@@ -251,7 +253,7 @@ class Ui_Dialog(object):
         self.comboBox_3.addItem("")
         self.comboBox_3.addItem("")
         self.gridLayout_3.addWidget(self.comboBox_3, 1, 1, 1, 1)
-        self.intgate_index = format(int(self.TDC_inst.asd_mezz.ASD1.int_gate[0], 2), '02d')
+        self.intgate_index = format(int(self.ASD_chip_inst.int_gate[0], 2), '02d')
         self.comboBox_3.setCurrentIndex(int(self.intgate_index))
 
         self.label_13 = QtWidgets.QLabel(self.gridLayoutWidget_3)
@@ -303,7 +305,7 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "ASD1"))
+        Dialog.setWindowTitle(_translate("Dialog", self.ASD_name))
         self.pushButton.setText(_translate("Dialog", "All Channels On"))
         self.label_2.setText(_translate("Dialog", "0"))
         self.pushButton_2.setText(_translate("Dialog", "All Channels Off"))
@@ -395,97 +397,90 @@ class Ui_Dialog(object):
 
     def save_single(self):
 
-        # self.channel_list = [self.TDC_inst.asd_mezz.ASD0.channel_0_mode[0], self.TDC_inst.asd_mezz.ASD0.channel_1_mode[0],
-        #                      self.TDC_inst.asd_mezz.ASD0.channel_2_mode[0], self.TDC_inst.asd_mezz.ASD0.channel_3_mode[0],
-        #                      self.TDC_inst.asd_mezz.ASD0.channel_4_mode[0], self.TDC_inst.asd_mezz.ASD0.channel_5_mode[0],
-        #                      self.TDC_inst.asd_mezz.ASD0.channel_6_mode[0], self.TDC_inst.asd_mezz.ASD0.channel_7_mode[0]]
-
-
         #channels
         if self.checkBox.isChecked() == True:
-            self.TDC_inst.asd_mezz.ASD1.channel_0_mode[0] = '00'
+            self.ASD_chip_inst.channel_0_mode[0] = '00'
         else:
-            self.TDC_inst.asd_mezz.ASD1.channel_0_mode[0] = '11'
+            self.ASD_chip_inst.channel_0_mode[0] = '11'
 
         if self.checkBox_2.isChecked() == True:
-            self.TDC_inst.asd_mezz.ASD1.channel_1_mode[0] = '00'
+            self.ASD_chip_inst.channel_1_mode[0] = '00'
         else:
-            self.TDC_inst.asd_mezz.ASD1.channel_1_mode[0] = '11'
+            self.ASD_chip_inst.channel_1_mode[0] = '11'
 
         if self.checkBox_3.isChecked() == True:
-            self.TDC_inst.asd_mezz.ASD1.channel_2_mode[0] = '00'
+            self.ASD_chip_inst.channel_2_mode[0] = '00'
         else:
-            self.TDC_inst.asd_mezz.ASD1.channel_2_mode[0] = '11'
+            self.ASD_chip_inst.channel_2_mode[0] = '11'
 
         if self.checkBox_4.isChecked() == True:
-            self.TDC_inst.asd_mezz.ASD1.channel_3_mode[0] = '00'
+            self.ASD_chip_inst.channel_3_mode[0] = '00'
         else:
-            self.TDC_inst.asd_mezz.ASD1.channel_3_mode[0] = '11'
+            self.ASD_chip_inst.channel_3_mode[0] = '11'
 
         if self.checkBox_5.isChecked() == True:
-            self.TDC_inst.asd_mezz.ASD1.channel_4_mode[0] = '00'
+            self.ASD_chip_inst.channel_4_mode[0] = '00'
         else:
-            self.TDC_inst.asd_mezz.ASD1.channel_4_mode[0] = '11'
+            self.ASD_chip_inst.channel_4_mode[0] = '11'
 
         if self.checkBox_6.isChecked() == True:
-            self.TDC_inst.asd_mezz.ASD1.channel_5_mode[0] = '00'
+            self.ASD_chip_inst.channel_5_mode[0] = '00'
         else:
-            self.TDC_inst.asd_mezz.ASD1.channel_5_mode[0] = '11'
+            self.ASD_chip_inst.channel_5_mode[0] = '11'
 
         if self.checkBox_7.isChecked() == True:
-            self.TDC_inst.asd_mezz.ASD1.channel_6_mode[0] = '00'
+            self.ASD_chip_inst.channel_6_mode[0] = '00'
         else:
-            self.TDC_inst.asd_mezz.ASD1.channel_6_mode[0] = '11'
+            self.ASD_chip_inst.channel_6_mode[0] = '11'
 
         if self.checkBox_8.isChecked() == True:
-            self.TDC_inst.asd_mezz.ASD1.channel_7_mode[0] = '00'
+            self.ASD_chip_inst.channel_7_mode[0] = '00'
         else:
-            self.TDC_inst.asd_mezz.ASD1.channel_7_mode[0] = '11'
-
+            self.ASD_chip_inst.channel_7_mode[0] = '11'
 
         #chip_mode
         if self.comboBox.currentIndex() == 0:
-            self.TDC_inst.asd_mezz.ASD1.chip_mode[0] = '0'
+            self.ASD_chip_inst.chip_mode[0] = '0'
         else:
-            self.TDC_inst.asd_mezz.ASD1.chip_mode[0] = '1'
+            self.ASD_chip_inst.chip_mode[0] = '1'
 
         #hyst
         self.hyst_binary = format(self.comboBox_2.currentIndex(), '04b')
         self.hyst_binary_reversed = reversed(self.hyst_binary)
         self.hyst_binary_reversed_val = ''.join(self.hyst_binary_reversed)
-        self.TDC_inst.asd_mezz.ASD1.hyst[0] = self.hyst_binary_reversed_val
+        self.ASD_chip_inst.hyst[0] = self.hyst_binary_reversed_val
 
         #int_gate
         self.int_gate_index = self.comboBox_3.currentIndex()
         self.int_gate_binary = format(self.int_gate_index, '04b')
-        self.TDC_inst.asd_mezz.ASD1.int_gate[0] = self.int_gate_binary
+        self.ASD_chip_inst.int_gate[0] = self.int_gate_binary
 
         #Disc2 Thr - wilk thr
         self.wilk_thr_index = self.comboBox_4.currentIndex()
         self.wilk_thr_binary = format(self.wilk_thr_index, '03b')
-        self.TDC_inst.asd_mezz.ASD1.wilk_thr[0] = self.wilk_thr_binary
+        self.ASD_chip_inst.wilk_thr[0] = self.wilk_thr_binary
 
         #Rund Curr
         self.round_curr_index = self.comboBox_5.currentIndex()
         self.round_curr_binary = format(self.round_curr_index, '03b')
-        self.TDC_inst.asd_mezz.ASD1.rundown_curr[0] = self.round_curr_binary
+        self.ASD_chip_inst.rundown_curr[0] = self.round_curr_binary
 
         #deadtime
         self.dead_time_index = self.comboBox_6.currentIndex()
         self.dead_time_binary = format(self.dead_time_index, '03b')
-        self.TDC_inst.asd_mezz.ASD1.deadtime[0] = self.dead_time_binary
+        self.ASD_chip_inst.deadtime[0] = self.dead_time_binary
 
         #main_thr
         self.main_thr_val = int((255 - self.spinBox.value())/2)
         self.main_thr_binary = format(self.main_thr_val, '08b')
-        self.TDC_inst.asd_mezz.ASD1.main_thr[0] = self.main_thr_binary
+        self.ASD_chip_inst.main_thr[0] = self.main_thr_binary
 
-        print('Settings saved to ASD1')
+        print('Settings saved to ' + self.ASD_name)
 
     def save_all(self):
-        self.ASD_list = [self.TDC_inst.asd_mezz.ASD0, self.TDC_inst.asd_mezz.ASD1, self.TDC_inst.asd_mezz.ASD2]
+        self.ASD_chip_inst = [self.ASD_mezz_inst.ASD0, self.ASD_mezz_inst.ASD1, self.ASD_mezz_inst.ASD2]
 
-        for ASD in self.ASD_list:
+        for ASD in self.ASD_chip_inst:
             if self.checkBox.isChecked() == True:
                 ASD.channel_0_mode[0] = '00'
             else:
@@ -525,7 +520,6 @@ class Ui_Dialog(object):
                 ASD.channel_7_mode[0] = '00'
             else:
                 ASD.channel_7_mode[0] = '11'
-
 
             #chip_mode
             if self.comboBox.currentIndex() == 0:

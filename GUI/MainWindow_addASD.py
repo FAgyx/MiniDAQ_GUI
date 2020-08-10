@@ -22,9 +22,7 @@ from setup_2_popup import Ui_Dialog as Form_10
 from control_0_popup import Ui_Dialog as Form_11
 from control_1_popup import Ui_Dialog as Form_12
 from read_only_popup import Ui_Dialog as Form_13
-from ASD0_popup import Ui_Dialog as Form_14
-from ASD1_popup import Ui_Dialog as Form_15
-from ASD2_popup import Ui_Dialog as Form_16
+from ASD_popup import Ui_Dialog as Form_14
 
 # import UART functions
 sys.path.insert(0, "../UART_py3")
@@ -409,7 +407,8 @@ class Ui_MainWindow(object):
     #ASD0
     def open_ASD0(self):
         dialog = QtWidgets.QDialog()
-        dialog.ui = Form_14(self.TDC_inst)
+        ASD_name = 'ASD0'
+        dialog.ui = Form_14(self.TDC_inst.asd_mezz.ASD0, self.TDC_inst.asd_mezz, ASD_name)
         dialog.ui.setupUi(dialog)
         dialog.exec_()
         dialog.show()
@@ -417,7 +416,8 @@ class Ui_MainWindow(object):
     #ASD1
     def open_ASD1(self):
         dialog = QtWidgets.QDialog()
-        dialog.ui = Form_15(self.TDC_inst)
+        ASD_name = 'ASD1'
+        dialog.ui = Form_14(self.TDC_inst.asd_mezz.ASD1, self.TDC_inst.asd_mezz, ASD_name)
         dialog.ui.setupUi(dialog)
         dialog.exec_()
         dialog.show()
@@ -425,7 +425,8 @@ class Ui_MainWindow(object):
     # ASD2
     def open_ASD2(self):
         dialog = QtWidgets.QDialog()
-        dialog.ui = Form_16(self.TDC_inst)
+        ASD_name = 'ASD2'
+        dialog.ui = Form_14(self.TDC_inst.asd_mezz.ASD2, self.TDC_inst.asd_mezz, ASD_name)
         dialog.ui.setupUi(dialog)
         dialog.exec_()
         dialog.show()
