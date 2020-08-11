@@ -1,5 +1,5 @@
 from TDC_config_low_level_function import *
-from ASD_reg import *
+from ASDreg import *
 
 # test 1
 class TDCreg(object):
