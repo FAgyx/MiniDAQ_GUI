@@ -1,6 +1,29 @@
-Notes: 
+Notes:
 
-------- what to do about rising_is_leading individual channels and edge type things? 
+8/10/20 Note: 
+
+- The file ASD_popup.py now runs all the ASD popups. 
+
+- So there is just one file for the ASD popups and one for the xml files 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+8/7/20 Note: 
+
+-MainWindow_addASD.py has the current progress with adding ASD functions 
+-MainWindow_addASD_init.py runs MainWindow_addASD.py 
+
+-The files 'ASDX_popup.py' (X = 0,1,2) are the individual ASD popups
+
+-The file 'create_ASD_defualt.py' creates an xml ASD file (Just one 
+ xml file for all three ASDs)
+
+-ASD_defualt.xml has the default ASD values stored for all three ASDs 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+(what to do about rising_is_leading individual channels and edge type things?)
 
 
 7/28/20 Note: 

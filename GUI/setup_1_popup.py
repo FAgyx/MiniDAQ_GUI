@@ -132,11 +132,11 @@ class Ui_Dialog(object):
         self.horizontalLayout_6.addWidget(self.pushButton_3)
         self.pushButton_3.clicked.connect(Dialog.reject)
 
-        self.apply_button_message = ""
-        self.OK_button_message = ""
-        self.cancel_button_message = ""
-        self.message = ""
-        self.message_2 = ""
+        # self.apply_button_message = ""
+        # self.OK_button_message = ""
+        # self.cancel_button_message = ""
+        # self.message = ""
+        # self.message_2 = ""
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)

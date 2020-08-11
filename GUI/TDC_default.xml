@@ -139,8 +139,8 @@
 	</reset_option>
 	<ePll_option>
 		<phase_clk160>01000</phase_clk160>
-		<phase_clk320_0>0111</phase_clk320_0>
-		<phase_clk320_1>0011</phase_clk320_1>
+		<phase_clk320_0>0100</phase_clk320_0>
+		<phase_clk320_1>0000</phase_clk320_1>
 		<phase_clk320_2>0010</phase_clk320_2>
 		<ePllRes>0010</ePllRes>
 		<ePllIcp>0100</ePllIcp>
@@ -170,6 +170,6 @@
 		<phase_clk160_value>8</phase_clk160_value>
 	</phase_clk160>
 	<phase_clk320_1>
-		<phase_clk320_1_value>3</phase_clk320_1_value>
+		<phase_clk320_1_value>0</phase_clk320_1_value>
 	</phase_clk320_1>
 </configuration>
