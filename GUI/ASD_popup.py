@@ -44,62 +44,72 @@ class Ui_Dialog(object):
         self.label_3.setObjectName("label_3")
         self.gridLayout.addWidget(self.label_3, 0, 2, 1, 1)
 
-        self.checkBox = QtWidgets.QCheckBox(self.gridLayoutWidget)
-        self.checkBox.setText("")
-        self.checkBox.setObjectName("checkBox")
-        self.gridLayout.addWidget(self.checkBox, 2, 1, 1, 1)
-        if self.ASD_chip_inst.channel_0_mode[0] == '00':
-            self.checkBox.setChecked(True)
+        self.checkBox_list = []
+        for i in range (8):
+            checkBox = QtWidgets.QCheckBox(self.gridLayoutWidget)
+            checkBox.setText("")
+            checkBox.setObjectName("checkBox_%d"%i)
+            self.gridLayout.addWidget(checkBox, 2, i+1, 1, 1)
+            if self.ASD_chip_inst.setup[i][0] == '00':
+                checkBox.setChecked(True)
+            self.checkBox_list.append(checkBox)
+
+        # self.checkBox = QtWidgets.QCheckBox(self.gridLayoutWidget)
+        # self.checkBox.setText("")
+        # self.checkBox.setObjectName("checkBox")
+        # self.gridLayout.addWidget(self.checkBox, 2, 1, 1, 1)
+        # if self.ASD_chip_inst.channel_0_mode[0] == '00':
+        #     self.checkBox.setChecked(True)
 
 
-        self.checkBox_2 = QtWidgets.QCheckBox(self.gridLayoutWidget)
-        self.checkBox_2.setText("")
-        self.checkBox_2.setObjectName("checkBox_2")
-        self.gridLayout.addWidget(self.checkBox_2, 2, 2, 1, 1)
-        if self.ASD_chip_inst.channel_1_mode[0] == '00':
-            self.checkBox_2.setChecked(True)
+        # self.checkBox_2 = QtWidgets.QCheckBox(self.gridLayoutWidget)
+        # self.checkBox_2.setText("")
+        # self.checkBox_2.setObjectName("checkBox_2")
+        # self.gridLayout.addWidget(self.checkBox_2, 2, 2, 1, 1)
+        # if self.ASD_chip_inst.channel_1_mode[0] == '00':
+        #     self.checkBox_2.setChecked(True)
 
-        self.checkBox_3 = QtWidgets.QCheckBox(self.gridLayoutWidget)
-        self.checkBox_3.setText("")
-        self.checkBox_3.setObjectName("checkBox_3")
-        self.gridLayout.addWidget(self.checkBox_3, 2, 3, 1, 1)
-        if self.ASD_chip_inst.channel_2_mode[0] == '00':
-            self.checkBox_3.setChecked(True)
+        # self.checkBox_3 = QtWidgets.QCheckBox(self.gridLayoutWidget)
+        # self.checkBox_3.setText("")
+        # self.checkBox_3.setObjectName("checkBox_3")
+        # self.gridLayout.addWidget(self.checkBox_3, 2, 3, 1, 1)
+        # if self.ASD_chip_inst.channel_2_mode[0] == '00':
+        #     self.checkBox_3.setChecked(True)
 
-        self.checkBox_4 = QtWidgets.QCheckBox(self.gridLayoutWidget)
-        self.checkBox_4.setText("")
-        self.checkBox_4.setObjectName("checkBox_4")
-        self.gridLayout.addWidget(self.checkBox_4, 2, 4, 1, 1)
-        if self.ASD_chip_inst.channel_3_mode[0] == '00':
-            self.checkBox_4.setChecked(True)
+        # self.checkBox_4 = QtWidgets.QCheckBox(self.gridLayoutWidget)
+        # self.checkBox_4.setText("")
+        # self.checkBox_4.setObjectName("checkBox_4")
+        # self.gridLayout.addWidget(self.checkBox_4, 2, 4, 1, 1)
+        # if self.ASD_chip_inst.channel_3_mode[0] == '00':
+        #     self.checkBox_4.setChecked(True)
 
-        self.checkBox_5 = QtWidgets.QCheckBox(self.gridLayoutWidget)
-        self.checkBox_5.setText("")
-        self.checkBox_5.setObjectName("checkBox_5")
-        self.gridLayout.addWidget(self.checkBox_5, 2, 5, 1, 1)
-        if self.ASD_chip_inst.channel_4_mode[0] == '00':
-            self.checkBox_5.setChecked(True)
+        # self.checkBox_5 = QtWidgets.QCheckBox(self.gridLayoutWidget)
+        # self.checkBox_5.setText("")
+        # self.checkBox_5.setObjectName("checkBox_5")
+        # self.gridLayout.addWidget(self.checkBox_5, 2, 5, 1, 1)
+        # if self.ASD_chip_inst.channel_4_mode[0] == '00':
+        #     self.checkBox_5.setChecked(True)
 
-        self.checkBox_6 = QtWidgets.QCheckBox(self.gridLayoutWidget)
-        self.checkBox_6.setText("")
-        self.checkBox_6.setObjectName("checkBox_6")
-        self.gridLayout.addWidget(self.checkBox_6, 2, 6, 1, 1)
-        if self.ASD_chip_inst.channel_5_mode[0] == '00':
-            self.checkBox_6.setChecked(True)
+        # self.checkBox_6 = QtWidgets.QCheckBox(self.gridLayoutWidget)
+        # self.checkBox_6.setText("")
+        # self.checkBox_6.setObjectName("checkBox_6")
+        # self.gridLayout.addWidget(self.checkBox_6, 2, 6, 1, 1)
+        # if self.ASD_chip_inst.channel_5_mode[0] == '00':
+        #     self.checkBox_6.setChecked(True)
 
-        self.checkBox_7 = QtWidgets.QCheckBox(self.gridLayoutWidget)
-        self.checkBox_7.setText("")
-        self.checkBox_7.setObjectName("checkBox_7")
-        self.gridLayout.addWidget(self.checkBox_7, 2, 7, 1, 1)
-        if self.ASD_chip_inst.channel_6_mode[0] == '00':
-            self.checkBox_7.setChecked(True)
+        # self.checkBox_7 = QtWidgets.QCheckBox(self.gridLayoutWidget)
+        # self.checkBox_7.setText("")
+        # self.checkBox_7.setObjectName("checkBox_7")
+        # self.gridLayout.addWidget(self.checkBox_7, 2, 7, 1, 1)
+        # if self.ASD_chip_inst.channel_6_mode[0] == '00':
+        #     self.checkBox_7.setChecked(True)
 
-        self.checkBox_8 = QtWidgets.QCheckBox(self.gridLayoutWidget)
-        self.checkBox_8.setText("")
-        self.checkBox_8.setObjectName("checkBox_8")
-        self.gridLayout.addWidget(self.checkBox_8, 2, 8, 1, 1)
-        if self.ASD_chip_inst.channel_7_mode[0] == '00':
-            self.checkBox_8.setChecked(True)
+        # self.checkBox_8 = QtWidgets.QCheckBox(self.gridLayoutWidget)
+        # self.checkBox_8.setText("")
+        # self.checkBox_8.setObjectName("checkBox_8")
+        # self.gridLayout.addWidget(self.checkBox_8, 2, 8, 1, 1)
+        # if self.ASD_chip_inst.channel_7_mode[0] == '00':
+        #     self.checkBox_8.setChecked(True)
 
         self.label_4 = QtWidgets.QLabel(self.gridLayoutWidget)
         self.label_4.setObjectName("label_4")
@@ -297,8 +307,8 @@ class Ui_Dialog(object):
         self.horizontalLayout_2.addWidget(self.pushButton_5)
         self.pushButton_5.clicked.connect(Dialog.reject)
 
-        self.checkBox_list = [self.checkBox, self.checkBox_2, self.checkBox_3, self.checkBox_4,
-                              self.checkBox_5, self.checkBox_6, self.checkBox_7, self.checkBox_8]
+        # self.checkBox_list = [self.checkBox, self.checkBox_2, self.checkBox_3, self.checkBox_4,
+        #                       self.checkBox_5, self.checkBox_6, self.checkBox_7, self.checkBox_8]
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -398,45 +408,50 @@ class Ui_Dialog(object):
     def save_single(self):
 
         #channels
-        if self.checkBox.isChecked() == True:
-            self.ASD_chip_inst.channel_0_mode[0] = '00'
-        else:
-            self.ASD_chip_inst.channel_0_mode[0] = '11'
+        for i in range(8):
+            if self.checkBox_list[i].isChecked() == True:
+                self.ASD_chip_inst.setup[i][0] = '00'
+            else:
+                self.ASD_chip_inst.setup[i][0] = '11'
+        # if self.checkBox.isChecked() == True:
+        #     self.ASD_chip_inst.channel_0_mode[0] = '00'
+        # else:
+        #     self.ASD_chip_inst.channel_0_mode[0] = '11'
 
-        if self.checkBox_2.isChecked() == True:
-            self.ASD_chip_inst.channel_1_mode[0] = '00'
-        else:
-            self.ASD_chip_inst.channel_1_mode[0] = '11'
+        # if self.checkBox_2.isChecked() == True:
+        #     self.ASD_chip_inst.channel_1_mode[0] = '00'
+        # else:
+        #     self.ASD_chip_inst.channel_1_mode[0] = '11'
 
-        if self.checkBox_3.isChecked() == True:
-            self.ASD_chip_inst.channel_2_mode[0] = '00'
-        else:
-            self.ASD_chip_inst.channel_2_mode[0] = '11'
+        # if self.checkBox_3.isChecked() == True:
+        #     self.ASD_chip_inst.channel_2_mode[0] = '00'
+        # else:
+        #     self.ASD_chip_inst.channel_2_mode[0] = '11'
 
-        if self.checkBox_4.isChecked() == True:
-            self.ASD_chip_inst.channel_3_mode[0] = '00'
-        else:
-            self.ASD_chip_inst.channel_3_mode[0] = '11'
+        # if self.checkBox_4.isChecked() == True:
+        #     self.ASD_chip_inst.channel_3_mode[0] = '00'
+        # else:
+        #     self.ASD_chip_inst.channel_3_mode[0] = '11'
 
-        if self.checkBox_5.isChecked() == True:
-            self.ASD_chip_inst.channel_4_mode[0] = '00'
-        else:
-            self.ASD_chip_inst.channel_4_mode[0] = '11'
+        # if self.checkBox_5.isChecked() == True:
+        #     self.ASD_chip_inst.channel_4_mode[0] = '00'
+        # else:
+        #     self.ASD_chip_inst.channel_4_mode[0] = '11'
 
-        if self.checkBox_6.isChecked() == True:
-            self.ASD_chip_inst.channel_5_mode[0] = '00'
-        else:
-            self.ASD_chip_inst.channel_5_mode[0] = '11'
+        # if self.checkBox_6.isChecked() == True:
+        #     self.ASD_chip_inst.channel_5_mode[0] = '00'
+        # else:
+        #     self.ASD_chip_inst.channel_5_mode[0] = '11'
 
-        if self.checkBox_7.isChecked() == True:
-            self.ASD_chip_inst.channel_6_mode[0] = '00'
-        else:
-            self.ASD_chip_inst.channel_6_mode[0] = '11'
+        # if self.checkBox_7.isChecked() == True:
+        #     self.ASD_chip_inst.channel_6_mode[0] = '00'
+        # else:
+        #     self.ASD_chip_inst.channel_6_mode[0] = '11'
 
-        if self.checkBox_8.isChecked() == True:
-            self.ASD_chip_inst.channel_7_mode[0] = '00'
-        else:
-            self.ASD_chip_inst.channel_7_mode[0] = '11'
+        # if self.checkBox_8.isChecked() == True:
+        #     self.ASD_chip_inst.channel_7_mode[0] = '00'
+        # else:
+        #     self.ASD_chip_inst.channel_7_mode[0] = '11'
 
         #chip_mode
         if self.comboBox.currentIndex() == 0:
