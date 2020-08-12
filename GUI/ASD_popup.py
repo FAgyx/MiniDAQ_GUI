@@ -478,85 +478,10 @@ class Ui_Dialog(object):
         print('Settings saved to ' + self.ASD_name)
 
     def save_all(self):
-        self.ASD_chip_inst = [self.ASD_mezz_inst.ASD0, self.ASD_mezz_inst.ASD1, self.ASD_mezz_inst.ASD2]
-
-        for ASD in self.ASD_chip_inst:
-            if self.checkBox.isChecked() == True:
-                ASD.channel_0_mode[0] = '00'
-            else:
-                ASD.channel_0_mode[0] = '11'
-
-            if self.checkBox_2.isChecked() == True:
-                ASD.channel_1_mode[0] = '00'
-            else:
-                ASD.channel_1_mode[0] = '11'
-
-            if self.checkBox_3.isChecked() == True:
-                ASD.channel_2_mode[0] = '00'
-            else:
-                ASD.channel_2_mode[0] = '11'
-
-            if self.checkBox_4.isChecked() == True:
-                ASD.channel_3_mode[0] = '00'
-            else:
-                ASD.channel_3_mode[0] = '11'
-
-            if self.checkBox_5.isChecked() == True:
-                ASD.channel_4_mode[0] = '00'
-            else:
-                ASD.channel_4_mode[0] = '11'
-
-            if self.checkBox_6.isChecked() == True:
-                ASD.channel_5_mode[0] = '00'
-            else:
-                ASD.channel_5_mode[0] = '11'
-
-            if self.checkBox_7.isChecked() == True:
-                ASD.channel_6_mode[0] = '00'
-            else:
-                ASD.channel_6_mode[0] = '11'
-
-            if self.checkBox_8.isChecked() == True:
-                ASD.channel_7_mode[0] = '00'
-            else:
-                ASD.channel_7_mode[0] = '11'
-
-            #chip_mode
-            if self.comboBox.currentIndex() == 0:
-                ASD.chip_mode[0] = '0'
-            else:
-                ASD.chip_mode[0] = '1'
-
-            # hyst
-            self.hyst_binary = format(self.comboBox_2.currentIndex(), '04b')
-            self.hyst_binary_reversed = reversed(self.hyst_binary)
-            self.hyst_binary_reversed_val = ''.join(self.hyst_binary_reversed)
-            ASD.hyst[0] = self.hyst_binary_reversed_val
-
-            # int_gate
-            self.int_gate_index = self.comboBox_3.currentIndex()
-            self.int_gate_binary = format(self.int_gate_index, '04b')
-            ASD.int_gate[0] = self.int_gate_binary
-
-            # Disc2 Thr - wilk thr
-            self.wilk_thr_index = self.comboBox_4.currentIndex()
-            self.wilk_thr_binary = format(self.wilk_thr_index, '03b')
-            ASD.wilk_thr[0] = self.wilk_thr_binary
-
-            # Rund Curr
-            self.round_curr_index = self.comboBox_5.currentIndex()
-            self.round_curr_binary = format(self.round_curr_index, '03b')
-            ASD.rundown_curr[0] = self.round_curr_binary
-
-            # deadtime
-            self.dead_time_index = self.comboBox_6.currentIndex()
-            self.dead_time_binary = format(self.dead_time_index, '03b')
-            ASD.deadtime[0] = self.dead_time_binary
-
-            # main_thr
-            self.main_thr_val = int((255 - self.spinBox.value()) / 2)
-            self.main_thr_binary = format(self.main_thr_val, '08b')
-            ASD.main_thr[0] = self.main_thr_binary
+        self.save_single()
+        for chip_setup in self.ASD_mezz_inst.ASD_mezz_setup:
+            for i in range(len(chip_setup)):
+                chip_setup[i][0] = self.ASD_chip_inst.setup[i][0]
 
         print('Settings saved to all ASDs')
 
