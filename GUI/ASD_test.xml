@@ -1,17 +1,15 @@
 <?xml version="1.0" ?>
 <configuration>
 	<ASD0>
-		<channel_modes>
-			<channel_0_mode>11</channel_0_mode>
-			<channel_1_mode>00</channel_1_mode>
-			<channel_2_mode>00</channel_2_mode>
-			<channel_3_mode>00</channel_3_mode>
-			<channel_4_mode>00</channel_4_mode>
-			<channel_5_mode>00</channel_5_mode>
-			<channel_6_mode>00</channel_6_mode>
-			<channel_7_mode>00</channel_7_mode>
-		</channel_modes>
-		<chip_mode>1</chip_mode>
+		<channel_0_mode>00</channel_0_mode>
+		<channel_1_mode>00</channel_1_mode>
+		<channel_2_mode>00</channel_2_mode>
+		<channel_3_mode>00</channel_3_mode>
+		<channel_4_mode>00</channel_4_mode>
+		<channel_5_mode>00</channel_5_mode>
+		<channel_6_mode>00</channel_6_mode>
+		<channel_7_mode>00</channel_7_mode>
+		<chip_mode>0</chip_mode>
 		<deadtime>111</deadtime>
 		<int_gate>0100</int_gate>
 		<rundown_curr>010</rundown_curr>
@@ -20,18 +18,16 @@
 		<main_thr>01100110</main_thr>
 	</ASD0>
 	<ASD1>
-		<channel_modes>
-			<channel_0_mode>00</channel_0_mode>
-			<channel_1_mode>00</channel_1_mode>
-			<channel_2_mode>00</channel_2_mode>
-			<channel_3_mode>00</channel_3_mode>
-			<channel_4_mode>11</channel_4_mode>
-			<channel_5_mode>00</channel_5_mode>
-			<channel_6_mode>00</channel_6_mode>
-			<channel_7_mode>00</channel_7_mode>
-		</channel_modes>
+		<channel_0_mode>00</channel_0_mode>
+		<channel_1_mode>00</channel_1_mode>
+		<channel_2_mode>00</channel_2_mode>
+		<channel_3_mode>00</channel_3_mode>
+		<channel_4_mode>00</channel_4_mode>
+		<channel_5_mode>00</channel_5_mode>
+		<channel_6_mode>00</channel_6_mode>
+		<channel_7_mode>00</channel_7_mode>
 		<chip_mode>0</chip_mode>
-		<deadtime>101</deadtime>
+		<deadtime>111</deadtime>
 		<int_gate>0100</int_gate>
 		<rundown_curr>010</rundown_curr>
 		<hyst>1110</hyst>
@@ -39,17 +35,15 @@
 		<main_thr>01100110</main_thr>
 	</ASD1>
 	<ASD2>
-		<channel_modes>
-			<channel_0_mode>00</channel_0_mode>
-			<channel_1_mode>00</channel_1_mode>
-			<channel_2_mode>00</channel_2_mode>
-			<channel_3_mode>00</channel_3_mode>
-			<channel_4_mode>00</channel_4_mode>
-			<channel_5_mode>00</channel_5_mode>
-			<channel_6_mode>00</channel_6_mode>
-			<channel_7_mode>11</channel_7_mode>
-		</channel_modes>
-		<chip_mode>1</chip_mode>
+		<channel_0_mode>00</channel_0_mode>
+		<channel_1_mode>00</channel_1_mode>
+		<channel_2_mode>00</channel_2_mode>
+		<channel_3_mode>00</channel_3_mode>
+		<channel_4_mode>00</channel_4_mode>
+		<channel_5_mode>00</channel_5_mode>
+		<channel_6_mode>00</channel_6_mode>
+		<channel_7_mode>00</channel_7_mode>
+		<chip_mode>0</chip_mode>
 		<deadtime>111</deadtime>
 		<int_gate>0100</int_gate>
 		<rundown_curr>010</rundown_curr>

@@ -1,12 +1,17 @@
-Notes:
+Notes: 
 
-8/10/20 Note: 
+9/2/20 Note: 
 
-- The file ASD_popup.py now runs all the ASD popups. 
+-MainWindow_addASD_condensed.py has the current progress with condensing the files  
+-MainWindow_addASD_init_condensed.py runs MainWindow_addASD_condensed.py 
 
-- So there is just one file for the ASD popups and one for the xml files 
+- all other files with 'condensed' in their name are also condensed from the prior files 
+- also the formating of the ASD xml files are slightly different, so the code to read and 
+  write them is shorter 
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Still working on maybe changing the TDC xml files so that their reading/writing process can be shorter
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 8/7/20 Note: 
 

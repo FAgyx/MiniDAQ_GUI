@@ -1,5 +1,5 @@
 #from test_5 import Ui_MainWindow
-from MainWindow_addASD import Ui_MainWindow
+from MainWIndow_addASD_condensed import Ui_MainWindow
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 import datetime
