@@ -7,23 +7,23 @@ def generateXML(fileName):
 	#ASD0 
 	ASD0 = ET.SubElement(configuration, 'ASD0')
 
+
 	#channel modes 
-	channel_modes = ET.SubElement(ASD0, 'channel_modes')
-	channel_0_mode = ET.SubElement(channel_modes, 'channel_0_mode')
+	channel_0_mode = ET.SubElement(ASD0, 'channel_0_mode')
 	channel_0_mode.text = '00'
-	channel_1_mode = ET.SubElement(channel_modes, 'channel_1_mode')
+	channel_1_mode = ET.SubElement(ASD0, 'channel_1_mode')
 	channel_1_mode.text = '00'
-	channel_2_mode = ET.SubElement(channel_modes, 'channel_2_mode')
+	channel_2_mode = ET.SubElement(ASD0, 'channel_2_mode')
 	channel_2_mode.text = '00'
-	channel_3_mode = ET.SubElement(channel_modes, 'channel_3_mode')
+	channel_3_mode = ET.SubElement(ASD0, 'channel_3_mode')
 	channel_3_mode.text = '00'
-	channel_4_mode = ET.SubElement(channel_modes, 'channel_4_mode')
+	channel_4_mode = ET.SubElement(ASD0, 'channel_4_mode')
 	channel_4_mode.text = '00'
-	channel_5_mode = ET.SubElement(channel_modes, 'channel_5_mode')
+	channel_5_mode = ET.SubElement(ASD0, 'channel_5_mode')
 	channel_5_mode.text = '00'
-	channel_6_mode = ET.SubElement(channel_modes, 'channel_6_mode')
+	channel_6_mode = ET.SubElement(ASD0, 'channel_6_mode')
 	channel_6_mode.text = '00'
-	channel_7_mode = ET.SubElement(channel_modes, 'channel_7_mode')
+	channel_7_mode = ET.SubElement(ASD0, 'channel_7_mode')
 	channel_7_mode.text = '00'
 
 	#chip mode
@@ -58,22 +58,21 @@ def generateXML(fileName):
 	ASD1 = ET.SubElement(configuration, 'ASD1')
 
 	#channel modes 
-	channel_modes = ET.SubElement(ASD1, 'channel_modes')
-	channel_0_mode = ET.SubElement(channel_modes, 'channel_0_mode')
+	channel_0_mode = ET.SubElement(ASD1, 'channel_0_mode')
 	channel_0_mode.text = '00'
-	channel_1_mode = ET.SubElement(channel_modes, 'channel_1_mode')
+	channel_1_mode = ET.SubElement(ASD1, 'channel_1_mode')
 	channel_1_mode.text = '00'
-	channel_2_mode = ET.SubElement(channel_modes, 'channel_2_mode')
+	channel_2_mode = ET.SubElement(ASD1, 'channel_2_mode')
 	channel_2_mode.text = '00'
-	channel_3_mode = ET.SubElement(channel_modes, 'channel_3_mode')
+	channel_3_mode = ET.SubElement(ASD1, 'channel_3_mode')
 	channel_3_mode.text = '00'
-	channel_4_mode = ET.SubElement(channel_modes, 'channel_4_mode')
+	channel_4_mode = ET.SubElement(ASD1, 'channel_4_mode')
 	channel_4_mode.text = '00'
-	channel_5_mode = ET.SubElement(channel_modes, 'channel_5_mode')
+	channel_5_mode = ET.SubElement(ASD1, 'channel_5_mode')
 	channel_5_mode.text = '00'
-	channel_6_mode = ET.SubElement(channel_modes, 'channel_6_mode')
+	channel_6_mode = ET.SubElement(ASD1, 'channel_6_mode')
 	channel_6_mode.text = '00'
-	channel_7_mode = ET.SubElement(channel_modes, 'channel_7_mode')
+	channel_7_mode = ET.SubElement(ASD1, 'channel_7_mode')
 	channel_7_mode.text = '00'
 
 	#chip mode
@@ -108,22 +107,21 @@ def generateXML(fileName):
 	ASD2 = ET.SubElement(configuration, 'ASD2')
 
 	#channel modes 
-	channel_modes = ET.SubElement(ASD2, 'channel_modes')
-	channel_0_mode = ET.SubElement(channel_modes, 'channel_0_mode')
+	channel_0_mode = ET.SubElement(ASD2, 'channel_0_mode')
 	channel_0_mode.text = '00'
-	channel_1_mode = ET.SubElement(channel_modes, 'channel_1_mode')
+	channel_1_mode = ET.SubElement(ASD2, 'channel_1_mode')
 	channel_1_mode.text = '00'
-	channel_2_mode = ET.SubElement(channel_modes, 'channel_2_mode')
+	channel_2_mode = ET.SubElement(ASD2, 'channel_2_mode')
 	channel_2_mode.text = '00'
-	channel_3_mode = ET.SubElement(channel_modes, 'channel_3_mode')
+	channel_3_mode = ET.SubElement(ASD2, 'channel_3_mode')
 	channel_3_mode.text = '00'
-	channel_4_mode = ET.SubElement(channel_modes, 'channel_4_mode')
+	channel_4_mode = ET.SubElement(ASD2, 'channel_4_mode')
 	channel_4_mode.text = '00'
-	channel_5_mode = ET.SubElement(channel_modes, 'channel_5_mode')
+	channel_5_mode = ET.SubElement(ASD2, 'channel_5_mode')
 	channel_5_mode.text = '00'
-	channel_6_mode = ET.SubElement(channel_modes, 'channel_6_mode')
+	channel_6_mode = ET.SubElement(ASD2, 'channel_6_mode')
 	channel_6_mode.text = '00'
-	channel_7_mode = ET.SubElement(channel_modes, 'channel_7_mode')
+	channel_7_mode = ET.SubElement(ASD2, 'channel_7_mode')
 	channel_7_mode.text = '00'
 
 	#chip mode

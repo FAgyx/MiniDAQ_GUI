@@ -16,13 +16,13 @@ from PyQt5.QtWidgets import *
 from PyQt5 import QtCore
 
 # Importing the popup windows
-from setup_0_popup import Ui_Dialog as Form_8
-from setup_1_popup import Ui_Dialog as Form_9
-from setup_2_popup import Ui_Dialog as Form_10
-from control_0_popup import Ui_Dialog as Form_11
-from control_1_popup import Ui_Dialog as Form_12
-from read_only_popup import Ui_Dialog as Form_13
-from ASD_popup import Ui_Dialog as Form_14
+from setup_0_popup_condensed import Ui_Dialog as Form_8
+from setup_1_popup_condensed import Ui_Dialog as Form_9
+from setup_2_popup_condensed import Ui_Dialog as Form_10
+from control_0_popup_condensed import  Ui_Dialog as Form_11
+from control_1_popup_condensed import Ui_Dialog as Form_12
+from read_only_popup_condensed import Ui_Dialog as Form_13
+from ASD_popup_condensed import Ui_Dialog as Form_14
 
 # import UART functions
 sys.path.insert(0, "../UART_py3")
@@ -51,40 +51,40 @@ class Ui_MainWindow(object):
         #tab setup
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
         self.tabWidget.setGeometry(QtCore.QRect(19, 19, 820, 441))
-        self.tabWidget.setObjectName("tabWidget")
+        # self.tabWidget.setObjectName("tabWidget")
         self.tab = QtWidgets.QWidget()
-        self.tab.setObjectName("tab")
+        # self.tab.setObjectName("tab")
         self.tabWidget.addTab(self.tab, "")
         self.tab_2 = QtWidgets.QWidget()
-        self.tab_2.setObjectName("tab_2")
+        # self.tab_2.setObjectName("tab_2")
         self.tabWidget.addTab(self.tab_2, "")
         self.tab_3 = QtWidgets.QWidget()
-        self.tab_3.setObjectName("tab_3")
+        # self.tab_3.setObjectName("tab_3")
         self.tabWidget.addTab(self.tab_3, "")
 
         # menubar
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 650, 26))
-        self.menubar.setObjectName("menubar")
+        # self.menubar.setObjectName("menubar")
         self.menu = QtWidgets.QMenu(self.menubar)
         self.menu.setObjectName("TDC")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
-        self.statusbar.setObjectName("statusbar")
+        # self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
         #TDC menu options
         self.TDCSaveDefault = QtWidgets.QAction(MainWindow)
-        self.TDCSaveDefault.setObjectName("TDCSaveDefualt")
+        # self.TDCSaveDefault.setObjectName("TDCSaveDefualt")
         self.TDCSaveDefault.triggered.connect(self.save_setup_func_TDC)
         self.TDCSaveAs = QtWidgets.QAction(MainWindow)
-        self.TDCSaveAs.setObjectName("TDCSaveAs")
+        # self.TDCSaveAs.setObjectName("TDCSaveAs")
         self.TDCSaveAs.triggered.connect(self.saveFileAs_TDC)
         self.TDCLoadFrom = QtWidgets.QAction(MainWindow)
-        self.TDCLoadFrom.setObjectName("TDCLoadFrom")
+        # self.TDCLoadFrom.setObjectName("TDCLoadFrom")
         self.TDCLoadFrom.triggered.connect(self.loadFileFrom_TDC)
         self.TDCLoadDefault = QtWidgets.QAction(MainWindow)
-        self.TDCLoadDefault.setObjectName("TDCLoadDefault")
+        # self.TDCLoadDefault.setObjectName("TDCLoadDefault")
         self.TDCLoadDefault.triggered.connect(self.loadFileDefault_TDC)
         self.menu.addAction(self.TDCLoadDefault)
         self.menu.addAction(self.TDCLoadFrom)
@@ -92,16 +92,16 @@ class Ui_MainWindow(object):
         self.menu.addAction(self.TDCSaveAs)
         #ASD menu options
         self.ASDSaveDefault = QtWidgets.QAction(MainWindow)
-        self.ASDSaveDefault.setObjectName("ASDSaveDefualt")
+        # self.ASDSaveDefault.setObjectName("ASDSaveDefualt")
         self.ASDSaveDefault.triggered.connect(self.save_setup_func_ASD)
         self.ASDSaveAs = QtWidgets.QAction(MainWindow)
-        self.ASDSaveAs.setObjectName("ASDSaveAs")
+        # self.ASDSaveAs.setObjectName("ASDSaveAs")
         self.ASDSaveAs.triggered.connect(self.saveFileAs_ASD)
         self.ASDLoadFrom = QtWidgets.QAction(MainWindow)
-        self.ASDLoadFrom.setObjectName("ASDLoadFrom")
+        # self.ASDLoadFrom.setObjectName("ASDLoadFrom")
         self.ASDLoadFrom.triggered.connect(self.loadFileFrom_ASD)
         self.ASDLoadDefault = QtWidgets.QAction(MainWindow)
-        self.ASDLoadDefault.setObjectName("ASDLoadDefault")
+        # self.ASDLoadDefault.setObjectName("ASDLoadDefault")
         self.ASDLoadDefault.triggered.connect(self.loadFileDefault_ASD)
         self.menu.addAction(self.ASDLoadDefault)
         self.menu.addAction(self.ASDLoadFrom)
@@ -113,7 +113,7 @@ class Ui_MainWindow(object):
         #general functions layout
         self.gridLayoutWidget = QtWidgets.QWidget(self.tab_2)
         self.gridLayoutWidget.setGeometry(QtCore.QRect(20, 50, 261, 261))
-        self.gridLayoutWidget.setObjectName("gridLayoutWidget")
+        # self.gridLayoutWidget.setObjectName("gridLayoutWidget")
         self.gridLayout = QtWidgets.QGridLayout(self.gridLayoutWidget)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.label = QtWidgets.QLabel(self.gridLayoutWidget)
@@ -258,10 +258,6 @@ class Ui_MainWindow(object):
         self.verticalLayoutWidget_3.setGeometry(QtCore.QRect(610, 190, 161, 111))
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_3)
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
-        #ASD label
-        # self.label_9 = QtWidgets.QLabel(self.verticalLayoutWidget_3)
-        # self.label_9.setObjectName("label_9")
-        # self.verticalLayout_3.addWidget(self.label_9)
         #ASD0 button
         self.pushButton_10 = QtWidgets.QPushButton(self.verticalLayoutWidget_3)
         self.pushButton_10.setObjectName("pushButton_10")
@@ -519,6 +515,7 @@ class Ui_MainWindow(object):
             tree = ET.parse('TDC_default.xml')
             root = tree.getroot()
             print(str(Path.cwd()) + '\TDC_default.xml loaded')
+
         #mode set
         self.TDC_inst.enable_new_ttc[0] = root[0][0].text
         self.TDC_inst.enable_master_reset_code[0] = root[0][1].text
@@ -571,49 +568,20 @@ class Ui_MainWindow(object):
         self.TDC_inst.width_select[0] = root[0][21].text
 
         #internal_counter
-        self.TDC_inst.combine_time_out_config[0] = root[1][0].text
-        self.TDC_inst.fake_hit_time_interval[0] = root[1][1].text
-        self.TDC_inst.syn_packet_number[0] = root[1][2].text
-        self.TDC_inst.roll_over[0] = root[1][3].text
-        self.TDC_inst.coarse_count_offset[0] = root[1][4].text
-        self.TDC_inst.bunch_offset[0] = root[1][5].text
-        self.TDC_inst.event_offset[0] = root[1][6].text
-        self.TDC_inst.match_window[0] = root[1][7].text
+        for i in range(8):
+            self.TDC_inst.setup_1[i][0] = root[1][i].text
 
         #fine_time_lut
-        self.TDC_inst.fine_sel[0] = root[2][0].text
-        self.TDC_inst.lut0[0] = root[2][1].text
-        self.TDC_inst.lut1[0] = root[2][2].text
-        self.TDC_inst.lut2[0] = root[2][3].text
-        self.TDC_inst.lut3[0] = root[2][4].text
-        self.TDC_inst.lut4[0] = root[2][5].text
-        self.TDC_inst.lut5[0] = root[2][6].text
-        self.TDC_inst.lut6[0] = root[2][7].text
-        self.TDC_inst.lut7[0] = root[2][8].text
-        self.TDC_inst.lut8[0] = root[2][9].text
-        self.TDC_inst.lut9[0] = root[2][10].text
-        self.TDC_inst.luta[0] = root[2][11].text
-        self.TDC_inst.lutb[0] = root[2][12].text
-        self.TDC_inst.lutc[0] = root[2][13].text
-        self.TDC_inst.lutd[0] = root[2][14].text
-        self.TDC_inst.lute[0] = root[2][15].text
-        self.TDC_inst.lutf[0] = root[2][16].text
+        for i in range(17):
+            self.TDC_inst.chnl_decode[i][0] = root[2][i].text
 
         #reset_option
-        self.TDC_inst.rst_ePLL[0] = root[3][0].text
-        self.TDC_inst.reset_jtag_in[0] = root[3][1].text
-        self.TDC_inst.event_reset_jtag_in[0] = root[3][2].text
-        self.TDC_inst.chnl_fifo_overflow_clear[0] = root[3][3].text
-        self.TDC_inst.debug_port_select[0] = root[3][4].text
+        for i in range(5):
+            self.TDC_inst.reset_control[i][0] = root[3][i].text
 
         #ePll_option
-        self.TDC_inst.phase_clk160[0] = root[4][0].text
-        self.TDC_inst.phase_clk320_0[0] = root[4][1].text
-        self.TDC_inst.phase_clk320_1[0] = root[4][2].text
-        self.TDC_inst.phase_clk320_2[0] = root[4][3].text
-        self.TDC_inst.ePllRes[0] = root[4][4].text
-        self.TDC_inst.ePllIcp[0] = root[4][5].text
-        self.TDC_inst.ePllCap[0] = root[4][6].text
+        for i in range(7):
+            self.TDC_inst.ePLL_control[i][0] = root[4][i].text
 
         #data_rate
         if root[6][0].text == '1':
@@ -727,50 +695,21 @@ class Ui_MainWindow(object):
         for i in range (24):
             root[0][24][i].text = self.channel_enable_f_list[i]
 
-        # internal_counter
-        root[1][0].text = self.TDC_inst.combine_time_out_config[0]
-        root[1][1].text = self.TDC_inst.fake_hit_time_interval[0]
-        root[1][2].text = self.TDC_inst.syn_packet_number[0]
-        root[1][3].text = self.TDC_inst.roll_over[0]
-        root[1][4].text = self.TDC_inst.coarse_count_offset[0]
-        root[1][5].text = self.TDC_inst.bunch_offset[0]
-        root[1][6].text = self.TDC_inst.event_offset[0]
-        root[1][7].text = self.TDC_inst.match_window[0]
+        #internal counter
+        for i in range(8):
+            root[1][i].text = self.TDC_inst.setup_1[i][0]
 
         # fine_time_lut
-        root[2][0].text = self.TDC_inst.fine_sel[0]
-        root[2][1].text = self.TDC_inst.lut0[0]
-        root[2][2].text = self.TDC_inst.lut1[0]
-        root[2][3].text = self.TDC_inst.lut2[0]
-        root[2][4].text = self.TDC_inst.lut3[0]
-        root[2][5].text = self.TDC_inst.lut4[0]
-        root[2][6].text = self.TDC_inst.lut5[0]
-        root[2][7].text = self.TDC_inst.lut6[0]
-        root[2][8].text = self.TDC_inst.lut7[0]
-        root[2][9].text = self.TDC_inst.lut8[0]
-        root[2][10].text = self.TDC_inst.lut9[0]
-        root[2][11].text = self.TDC_inst.luta[0]
-        root[2][12].text = self.TDC_inst.lutb[0]
-        root[2][13].text = self.TDC_inst.lutc[0]
-        root[2][14].text = self.TDC_inst.lutd[0]
-        root[2][15].text = self.TDC_inst.lute[0]
-        root[2][16].text = self.TDC_inst.lutf[0]
+        for i in range(17):
+            root[2][i].text = self.TDC_inst.chnl_decode[i][0]
 
-        # reset_option
-        root[3][0].text = self.TDC_inst.rst_ePLL[0]
-        root[3][1].text = self.TDC_inst.reset_jtag_in[0]
-        root[3][2].text = self.TDC_inst.event_reset_jtag_in[0]
-        root[3][3].text = self.TDC_inst.chnl_fifo_overflow_clear[0]
-        root[3][4].text = self.TDC_inst.debug_port_select[0]
+        #reset option
+        for i in range(5):
+            root[3][i].text = self.TDC_inst.reset_control[i][0]
 
-        # ePll_option
-        root[4][0].text = self.TDC_inst.phase_clk160[0]
-        root[4][1].text = self.TDC_inst.phase_clk320_0[0]
-        root[4][2].text = self.TDC_inst.phase_clk320_1[0]
-        root[4][3].text = self.TDC_inst.phase_clk320_2[0]
-        root[4][4].text = self.TDC_inst.ePllRes[0]
-        root[4][5].text = self.TDC_inst.ePllIcp[0]
-        root[4][6].text = self.TDC_inst.ePllCap[0]
+        #ePll option
+        for i in range(7):
+            root[4][i].text = self.TDC_inst.ePLL_control[i][0]
 
         # data_rate
         if self.comboBox.currentIndex() == 0:
@@ -874,21 +813,8 @@ class Ui_MainWindow(object):
         self.ASD_list = [self.TDC_inst.asd_mezz.ASD0, self.TDC_inst.asd_mezz.ASD1, self.TDC_inst.asd_mezz.ASD2]
         self.index = 0
         for ASD in self.ASD_list:
-            ASD.channel_0_mode[0] = root[self.index][0][0].text
-            ASD.channel_1_mode[0] = root[self.index][0][1].text
-            ASD.channel_2_mode[0] = root[self.index][0][2].text
-            ASD.channel_3_mode[0] = root[self.index][0][3].text
-            ASD.channel_4_mode[0] = root[self.index][0][4].text
-            ASD.channel_5_mode[0] = root[self.index][0][5].text
-            ASD.channel_6_mode[0] = root[self.index][0][6].text
-            ASD.channel_7_mode[0] = root[self.index][0][7].text
-            ASD.chip_mode[0] = root[self.index][1].text
-            ASD.deadtime[0] = root[self.index][2].text
-            ASD.int_gate[0] = root[self.index][3].text
-            ASD.rundown_curr[0] = root[self.index][4].text
-            ASD.hyst[0] = root[self.index][5].text
-            ASD.wilk_thr[0] = root[self.index][6].text
-            ASD.main_thr[0] = root[self.index][7].text
+            for i in range(15):
+                ASD.setup[i][0] = root[self.index][i].text
             self.index += 1
 
     #ASD save as
@@ -917,21 +843,8 @@ class Ui_MainWindow(object):
         self.ASD_list = [self.TDC_inst.asd_mezz.ASD0, self.TDC_inst.asd_mezz.ASD1, self.TDC_inst.asd_mezz.ASD2]
         self.ASD_index = 0
         for ASD in self.ASD_list:
-            root[self.ASD_index][0][0].text = ASD.channel_0_mode[0]
-            root[self.ASD_index][0][1].text = ASD.channel_1_mode[0]
-            root[self.ASD_index][0][2].text = ASD.channel_2_mode[0]
-            root[self.ASD_index][0][3].text = ASD.channel_3_mode[0]
-            root[self.ASD_index][0][4].text = ASD.channel_4_mode[0]
-            root[self.ASD_index][0][5].text = ASD.channel_5_mode[0]
-            root[self.ASD_index][0][6].text = ASD.channel_6_mode[0]
-            root[self.ASD_index][0][7].text = ASD.channel_7_mode[0]
-            root[self.ASD_index][1].text = ASD.chip_mode[0]
-            root[self.ASD_index][2].text = ASD.deadtime[0]
-            root[self.ASD_index][3].text = ASD.int_gate[0]
-            root[self.ASD_index][4].text = ASD.rundown_curr[0]
-            root[self.ASD_index][5].text = ASD.hyst[0]
-            root[self.ASD_index][6].text = ASD.wilk_thr[0]
-            root[self.ASD_index][7].text = ASD.main_thr[0]
+            for i in range(15):
+                root[self.ASD_index][i].text = ASD.setup[i][0]
             self.ASD_index += 1
 
         tree.write('ASD_auto_saved.xml')

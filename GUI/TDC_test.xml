@@ -24,8 +24,8 @@
 		<TDC_ID>1111010101010101010</TDC_ID>
 		<width_select>000</width_select>
 		<rising_is_leading>
-			<channel_0>1</channel_0>
-			<channel_1>1</channel_1>
+			<channel_0>0</channel_0>
+			<channel_1>0</channel_1>
 			<channel_2>1</channel_2>
 			<channel_3>1</channel_3>
 			<channel_4>1</channel_4>
@@ -57,7 +57,7 @@
 			<channel_4>1</channel_4>
 			<channel_5>1</channel_5>
 			<channel_6>1</channel_6>
-			<channel_7>1</channel_7>
+			<channel_7>0</channel_7>
 			<channel_8>1</channel_8>
 			<channel_9>1</channel_9>
 			<channel_10>1</channel_10>
@@ -92,7 +92,7 @@
 			<channel_13>1</channel_13>
 			<channel_14>1</channel_14>
 			<channel_15>1</channel_15>
-			<channel_16>1</channel_16>
+			<channel_16>0</channel_16>
 			<channel_17>1</channel_17>
 			<channel_18>1</channel_18>
 			<channel_19>1</channel_19>
@@ -113,30 +113,30 @@
 		<match_window>000000011111</match_window>
 	</internal_counter>
 	<fine_time_lut>
-		<fine_sel>0011</fine_sel>
-		<lut0>00</lut0>
-		<lut1>01</lut1>
-		<lut2>10</lut2>
-		<lut3>01</lut3>
+		<fine_sel>0001</fine_sel>
+		<lut0>11</lut0>
+		<lut1>11</lut1>
+		<lut2>11</lut2>
+		<lut3>11</lut3>
 		<lut4>11</lut4>
-		<lut5>00</lut5>
-		<lut6>10</lut6>
-		<lut7>10</lut7>
-		<lut8>00</lut8>
-		<lut9>00</lut9>
-		<luta>00</luta>
-		<lutb>01</lutb>
+		<lut5>11</lut5>
+		<lut6>11</lut6>
+		<lut7>11</lut7>
+		<lut8>11</lut8>
+		<lut9>11</lut9>
+		<luta>11</luta>
+		<lutb>11</lutb>
 		<lutc>11</lutc>
-		<lutd>00</lutd>
+		<lutd>11</lutd>
 		<lute>11</lute>
-		<lutf>00</lutf>
+		<lutf>11</lutf>
 	</fine_time_lut>
 	<reset_option>
-		<rst_ePLL>0</rst_ePLL>
-		<reset_jtag_in>0</reset_jtag_in>
+		<rst_ePLL>1</rst_ePLL>
+		<reset_jtag_in>1</reset_jtag_in>
 		<event_reset_jtag_in>0</event_reset_jtag_in>
-		<chnl_fifo_overflow_clear>0</chnl_fifo_overflow_clear>
-		<debug_port_select>0000</debug_port_select>
+		<chnl_fifo_overflow_clear>1</chnl_fifo_overflow_clear>
+		<debug_port_select>1100</debug_port_select>
 	</reset_option>
 	<ePll_option>
 		<phase_clk160>01000</phase_clk160>

@@ -7,7 +7,6 @@
 # WARNING! All changes made in this file will be lost!
 
 ################ setup1 popup script ####################
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
@@ -23,14 +22,11 @@ class Ui_Dialog(object):
         #Main grid layout
         self.gridLayoutWidget = QtWidgets.QWidget(Dialog)
         self.gridLayoutWidget.setGeometry(QtCore.QRect(19, 19, 351, 331))
-        self.gridLayoutWidget.setObjectName("gridLayoutWidget")
         self.gridLayout = QtWidgets.QGridLayout(self.gridLayoutWidget)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
-        self.gridLayout.setObjectName("gridLayout")
 
         #combine_time_out_config
         self.lineEdit = QtWidgets.QLineEdit(self.gridLayoutWidget)
-        self.lineEdit.setObjectName("lineEdit")
         self.gridLayout.addWidget(self.lineEdit, 0, 0, 1, 1)
         self.lineEdit.setText(format(int(self.TDC_inst.combine_time_out_config[0],2),'03X'))
         self.label = QtWidgets.QLabel(self.gridLayoutWidget)
@@ -39,7 +35,6 @@ class Ui_Dialog(object):
 
         #fake_hit_time_interval
         self.lineEdit_2 = QtWidgets.QLineEdit(self.gridLayoutWidget)
-        self.lineEdit_2.setObjectName("lineEdit_2")
         self.gridLayout.addWidget(self.lineEdit_2, 1, 0, 1, 1)
         self.lineEdit_2.setText(format(int(self.TDC_inst.fake_hit_time_interval[0], 2), '03X'))
         self.label_2 = QtWidgets.QLabel(self.gridLayoutWidget)
@@ -48,57 +43,46 @@ class Ui_Dialog(object):
 
         #syn_packet_number
         self.lineEdit_3 = QtWidgets.QLineEdit(self.gridLayoutWidget)
-        self.lineEdit_3.setObjectName("lineEdit_3")
         self.gridLayout.addWidget(self.lineEdit_3, 2, 0, 1, 1)
         self.lineEdit_3.setText(format(int(self.TDC_inst.syn_packet_number[0], 2), '03X'))
-        #self.lineEdit_3.setText(self.TDC_inst.syn_packet_number[0])
         self.label_3 = QtWidgets.QLabel(self.gridLayoutWidget)
         self.label_3.setObjectName("label_3")
         self.gridLayout.addWidget(self.label_3, 2, 1, 1, 1)
 
         #roll_over
         self.lineEdit_4 = QtWidgets.QLineEdit(self.gridLayoutWidget)
-        self.lineEdit_4.setObjectName("lineEdit_4")
         self.gridLayout.addWidget(self.lineEdit_4, 3, 0, 1, 1)
         self.lineEdit_4.setText(format(int(self.TDC_inst.roll_over[0], 2), '03X'))
-        #self.lineEdit_4.setText(self.TDC_inst.roll_over[0])
         self.label_4 = QtWidgets.QLabel(self.gridLayoutWidget)
         self.label_4.setObjectName("label_4")
         self.gridLayout.addWidget(self.label_4, 3, 1, 1, 1)
 
         #coarse_count_offset
         self.lineEdit_5 = QtWidgets.QLineEdit(self.gridLayoutWidget)
-        self.lineEdit_5.setObjectName("lineEdit_5")
         self.gridLayout.addWidget(self.lineEdit_5, 4, 0, 1, 1)
         self.lineEdit_5.setText(format(int(self.TDC_inst.coarse_count_offset[0], 2), '03X'))
-        #self.lineEdit_5.setText(self.TDC_inst.coarse_count_offset[0])
         self.label_5 = QtWidgets.QLabel(self.gridLayoutWidget)
         self.label_5.setObjectName("label_5")
         self.gridLayout.addWidget(self.label_5, 4, 1, 1, 1)
 
         #bunch_offset
         self.lineEdit_6 = QtWidgets.QLineEdit(self.gridLayoutWidget)
-        self.lineEdit_6.setObjectName("lineEdit_6")
         self.gridLayout.addWidget(self.lineEdit_6, 5, 0, 1, 1)
         self.lineEdit_6.setText(format(int(self.TDC_inst.bunch_offset[0], 2), '03X'))
-        #self.lineEdit_6.setText(self.TDC_inst.bunch_offset[0])
         self.label_6 = QtWidgets.QLabel(self.gridLayoutWidget)
         self.label_6.setObjectName("label_6")
         self.gridLayout.addWidget(self.label_6, 5, 1, 1, 1)
 
         #event_offset
         self.lineEdit_7 = QtWidgets.QLineEdit(self.gridLayoutWidget)
-        self.lineEdit_7.setObjectName("lineEdit_7")
         self.gridLayout.addWidget(self.lineEdit_7, 6, 0, 1, 1)
         self.lineEdit_7.setText(format(int(self.TDC_inst.event_offset[0], 2), '03X'))
-        #self.lineEdit_7.setText(self.TDC_inst.event_offset[0])
         self.label_7 = QtWidgets.QLabel(self.gridLayoutWidget)
         self.label_7.setObjectName("label_7")
         self.gridLayout.addWidget(self.label_7, 6, 1, 1, 1)
 
         #match_window
         self.lineEdit_8 = QtWidgets.QLineEdit(self.gridLayoutWidget)
-        self.lineEdit_8.setObjectName("lineEdit_8")
         self.gridLayout.addWidget(self.lineEdit_8, 7, 0, 1, 1)
         self.lineEdit_8.setText(format(int(self.TDC_inst.match_window[0], 2), '03X'))
         self.label_8 = QtWidgets.QLabel(self.gridLayoutWidget)
@@ -123,7 +107,7 @@ class Ui_Dialog(object):
         self.pushButton_2 = QtWidgets.QPushButton(self.horizontalLayoutWidget_6)
         self.pushButton_2.setObjectName("pushButton_2")
         self.horizontalLayout_6.addWidget(self.pushButton_2)
-        self.pushButton_2.clicked.connect(self.apply_button)
+        self.pushButton_2.clicked.connect(self.OK_button)
         self.pushButton_2.clicked.connect(Dialog.reject)
 
         #Cancel button
@@ -131,12 +115,6 @@ class Ui_Dialog(object):
         self.pushButton_3.setObjectName("pushButton_3")
         self.horizontalLayout_6.addWidget(self.pushButton_3)
         self.pushButton_3.clicked.connect(Dialog.reject)
-
-        # self.apply_button_message = ""
-        # self.OK_button_message = ""
-        # self.cancel_button_message = ""
-        # self.message = ""
-        # self.message_2 = ""
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -156,11 +134,17 @@ class Ui_Dialog(object):
         self.pushButton_2.setText(_translate("Dialog", "OK"))
         self.pushButton_3.setText(_translate("Dialog", "Cancel"))
 
+    #apply button
     def apply_button(self):
+        self.save()
+
+    #Ok button
+    def OK_button(self):
+        self.save()
+
+    def save(self):
         self.lineEdit_binary = format(int(self.lineEdit.text(), 16), '010b')
-        self.message = self.lineEdit_binary
         self.lineEdit_2_binary = format(int(self.lineEdit_2.text(), 16), '012b')
-        self.message_2 = self.lineEdit_2_binary
         self.lineEdit_3_binary = format(int(self.lineEdit_3.text(), 16), '012b')
         self.lineEdit_4_binary = format(int(self.lineEdit_4.text(), 16), '012b')
         self.lineEdit_5_binary = format(int(self.lineEdit_5.text(), 16), '012b')
@@ -180,11 +164,11 @@ class Ui_Dialog(object):
         #call update_setup_1 function
         self.TDC_inst.update_setup_1()
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
-    ui.setupUi(Dialog)
-    Dialog.show()
-    sys.exit(app.exec_())
+# if __name__ == "__main__":
+#     import sys
+#     app = QtWidgets.QApplication(sys.argv)
+#     Dialog = QtWidgets.QDialog()
+#     ui = Ui_Dialog()
+#     ui.setupUi(Dialog)
+#     Dialog.show()
+#     sys.exit(app.exec_())

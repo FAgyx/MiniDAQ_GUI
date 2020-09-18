@@ -102,49 +102,49 @@
 		</channel_enable_f>
 	</mode_set>
 	<internal_counter>
-		<combine_time_out_config>0000101000</combine_time_out_config>
+		<combine_time_out_config>0000101001</combine_time_out_config>
 		<fake_hit_time_interval>000100000000</fake_hit_time_interval>
 		<syn_packet_number>111111111111</syn_packet_number>
 		<roll_over>111111111111</roll_over>
 		<coarse_count_offset>000000000000</coarse_count_offset>
 		<bunch_offset>111110011100</bunch_offset>
-		<event_offset>000000000000</event_offset>
+		<event_offset>000000000001</event_offset>
 		<match_window>000000011111</match_window>
 	</internal_counter>
 	<fine_time_lut>
 		<fine_sel>0011</fine_sel>
-		<lut0>00</lut0>
+		<lut0>11</lut0>
 		<lut1>01</lut1>
 		<lut2>10</lut2>
 		<lut3>01</lut3>
 		<lut4>11</lut4>
-		<lut5>00</lut5>
+		<lut5>11</lut5>
 		<lut6>10</lut6>
 		<lut7>10</lut7>
-		<lut8>00</lut8>
-		<lut9>00</lut9>
-		<luta>00</luta>
+		<lut8>11</lut8>
+		<lut9>11</lut9>
+		<luta>11</luta>
 		<lutb>01</lutb>
 		<lutc>11</lutc>
-		<lutd>00</lutd>
+		<lutd>11</lutd>
 		<lute>11</lute>
-		<lutf>00</lutf>
+		<lutf>11</lutf>
 	</fine_time_lut>
 	<reset_option>
 		<rst_ePLL>0</rst_ePLL>
-		<reset_jtag_in>0</reset_jtag_in>
-		<event_reset_jtag_in>0</event_reset_jtag_in>
-		<chnl_fifo_overflow_clear>0</chnl_fifo_overflow_clear>
-		<debug_port_select>0000</debug_port_select>
+		<reset_jtag_in>1</reset_jtag_in>
+		<event_reset_jtag_in>1</event_reset_jtag_in>
+		<chnl_fifo_overflow_clear>1</chnl_fifo_overflow_clear>
+		<debug_port_select>0001</debug_port_select>
 	</reset_option>
 	<ePll_option>
-		<phase_clk160>01000</phase_clk160>
-		<phase_clk320_0>0111</phase_clk320_0>
-		<phase_clk320_1>0011</phase_clk320_1>
-		<phase_clk320_2>0010</phase_clk320_2>
-		<ePllRes>0010</ePllRes>
-		<ePllIcp>0100</ePllIcp>
-		<ePllCap>10</ePllCap>
+		<phase_clk160>01001</phase_clk160>
+		<phase_clk320_0>0101</phase_clk320_0>
+		<phase_clk320_1>0001</phase_clk320_1>
+		<phase_clk320_2>0011</phase_clk320_2>
+		<ePllRes>0011</ePllRes>
+		<ePllIcp>0101</ePllIcp>
+		<ePllCap>11</ePllCap>
 	</ePll_option>
 	<TDC_status />
 	<data_rate>
@@ -167,9 +167,9 @@
 		<leading_type>0</leading_type>
 	</edge_type>
 	<phase_clk160>
-		<phase_clk160_value>8</phase_clk160_value>
+		<phase_clk160_value>9</phase_clk160_value>
 	</phase_clk160>
 	<phase_clk320_1>
-		<phase_clk320_1_value>3</phase_clk320_1_value>
+		<phase_clk320_1_value>1</phase_clk320_1_value>
 	</phase_clk320_1>
 </configuration>
