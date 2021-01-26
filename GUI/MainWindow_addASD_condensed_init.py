@@ -7,12 +7,28 @@ import serial
 sys.path.insert(0, "../UART_py3")
 from TDCreg import *
 from serial_config_tdc import *
+import logging
+from PyQt5.QtCore import *
+
+
 
 class StartQT5(QtWidgets.QMainWindow):
     def __init__(self, ser, TDC_inst, parent=None):
         QtWidgets.QWidget.__init__(self, parent)
         self.ui = Ui_MainWindow(ser, TDC_inst)
+        self.logfile = open('log.txt','a')
         self.ui.setupUi(self)
+
+
+    def normalOutputWritten(self,text):
+        self.ui.textBrowser.moveCursor(QtGui.QTextCursor.End)
+        # if text == '\n' :
+        #     self.ui.textBrowser.insertPlainText(text)
+        # else:
+        #     self.ui.textBrowser.insertPlainText(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ">>")
+        #     self.ui.textBrowser.insertPlainText(text)
+        self.ui.textBrowser.insertPlainText(text)
+        self.logfile.write(text)
 
 class OutLog:
     def __init__(self, edit, out=None, color=None):
@@ -23,7 +39,7 @@ class OutLog:
         color = alternate color (i.e. color stderr a different color)
         """
         self.edit = edit
-        self.out = None
+        self.out = out
         self.color = color
 
     def write(self, m):
@@ -47,10 +63,24 @@ class OutLog:
     def flush(self):
         pass
 #
+
+class EmittingStream(QObject):
+    textWritten = pyqtSignal(str)
+
+    def write(self, text):
+        if text == '\n' :
+            text = text
+        else:
+            text = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ">>" + text
+        self.textWritten.emit(str(text))
+
+    def flush(self):
+        pass
+
 #
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    ser = serial.Serial(port='COM5', baudrate = 115200, bytesize = serial.EIGHTBITS,
+    ser = serial.Serial(port='COM3', baudrate = 115200, bytesize = serial.EIGHTBITS,
                         parity =serial.PARITY_EVEN, stopbits = serial.STOPBITS_ONE, timeout=0.1)
 
 
@@ -58,5 +88,9 @@ if __name__ == "__main__":
 
     myapp = StartQT5(ser, TDC_inst)
     myapp.show()
-    sys.stdout = OutLog(myapp.ui.textBrowser, sys.stdout)
+
+    # sys.stderr = OutLog(myapp.ui.textBrowser, sys.stderr)
+    # sys.stdout = OutLog(myapp.ui.textBrowser, sys.stdout)
+    sys.stdout = EmittingStream(textWritten=myapp.normalOutputWritten)
+    # logging.basicConfig(format="%(message)s",level=logging.INFO,stream=sys.stdout)
     sys.exit(app.exec_())

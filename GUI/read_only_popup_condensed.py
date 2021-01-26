@@ -6,7 +6,8 @@
 #
 # WARNING! All changes made in this file will be lost!
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from StyleSheet import *
+from crc8_D81 import *
 class Ui_Dialog(object):
 
     def __init__(self, TDC_inst):
@@ -15,42 +16,52 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(325, 339)
+        
         self.gridLayoutWidget = QtWidgets.QWidget(Dialog)
-        self.gridLayoutWidget.setGeometry(QtCore.QRect(19, 19, 281, 221))
+        self.gridLayoutWidget.setGeometry(QtCore.QRect(20, 20, 200, 200))
         self.gridLayout = QtWidgets.QGridLayout(self.gridLayoutWidget)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
 
         # instruction error
-        self.lineEdit = QtWidgets.QLineEdit(self.gridLayoutWidget)
+        self.lineEdit = QtWidgets.QLabel(self.gridLayoutWidget)
         self.gridLayout.addWidget(self.lineEdit, 1, 2, 1, 1)
-        self.lineEdit.setText(self.TDC_inst.instruction_error[0])
+        self.lineEdit.setStyleSheet(LedGreen if self.TDC_inst.instruction_error[0]=='0' else LedRed)
         self.label_3 = QtWidgets.QLabel(self.gridLayoutWidget)
         self.label_3.setObjectName("label_3")
         self.gridLayout.addWidget(self.label_3, 1, 1, 1, 1)
 
         #CRC
-        self.lineEdit_2 = QtWidgets.QLineEdit(self.gridLayoutWidget)
+        self.lineEdit_2 = QtWidgets.QLabel(self.gridLayoutWidget)
         self.gridLayout.addWidget(self.lineEdit_2, 2, 2, 1, 1)
-        self.lineEdit_2.setText(self.TDC_inst.CRC[0])
+        self.lineEdit_2.setText(format(int(self.TDC_inst.CRC[0], 2), '08X'))
         self.label_4 = QtWidgets.QLabel(self.gridLayoutWidget)
         self.label_4.setObjectName("label_4")
         self.gridLayout.addWidget(self.label_4, 2, 1, 1, 1)
 
+        #CRC_cal
+        self.label_8 = QtWidgets.QLabel(self.gridLayoutWidget)
+        self.gridLayout.addWidget(self.label_8, 3, 2, 1, 1)
+        self.label_8.setText(crc_cal(self.TDC_inst))
+        # self.label_8.setText('FFFFFFFF')
+        self.label_7 = QtWidgets.QLabel(self.gridLayoutWidget)
+        self.label_7.setObjectName("label_7")
+        self.gridLayout.addWidget(self.label_7, 3, 1, 1, 1)
+
         #ePll lock
-        self.lineEdit_3 = QtWidgets.QLineEdit(self.gridLayoutWidget)
-        self.gridLayout.addWidget(self.lineEdit_3, 5, 2, 1, 1)
-        self.lineEdit_3.setText(self.TDC_inst.ePll_lock[0])
+        self.lineEdit_3 = QtWidgets.QLabel(self.gridLayoutWidget)
+        self.gridLayout.addWidget(self.lineEdit_3, 6, 2, 1, 1)
+        self.lineEdit_3.setStyleSheet(LedGreen if self.TDC_inst.ePll_lock[0]=='1' else LedRed)
         self.label_5 = QtWidgets.QLabel(self.gridLayoutWidget)
         self.label_5.setObjectName("label_5")
-        self.gridLayout.addWidget(self.label_5, 5, 1, 1, 1)
+        self.gridLayout.addWidget(self.label_5, 6, 1, 1, 1)
 
         #chnl fifo overflow
-        self.lineEdit_4 = QtWidgets.QLineEdit(self.gridLayoutWidget)
-        self.gridLayout.addWidget(self.lineEdit_4, 6, 2, 1, 1)
-        self.lineEdit_4.setText(self.TDC_inst.chnl_fifo_overflow[0])
+        self.lineEdit_4 = QtWidgets.QLabel(self.gridLayoutWidget)
+        self.gridLayout.addWidget(self.lineEdit_4, 7, 2, 1, 1)
+        self.lineEdit_4.setText(format(int(self.TDC_inst.chnl_fifo_overflow[0], 2), '06X'))
         self.label_6 = QtWidgets.QLabel(self.gridLayoutWidget)
         self.label_6.setObjectName("label_6")
-        self.gridLayout.addWidget(self.label_6, 6, 1, 1, 1)
+        self.gridLayout.addWidget(self.label_6, 7, 1, 1, 1)
 
         #read status labels
         self.label = QtWidgets.QLabel(self.gridLayoutWidget)
@@ -58,10 +69,10 @@ class Ui_Dialog(object):
         self.gridLayout.addWidget(self.label, 0, 1, 1, 1)
         self.label_2 = QtWidgets.QLabel(self.gridLayoutWidget)
         self.label_2.setObjectName("label_2")
-        self.gridLayout.addWidget(self.label_2, 4, 1, 1, 1)
+        self.gridLayout.addWidget(self.label_2, 5, 1, 1, 1)
 
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout.addItem(spacerItem, 3, 1, 1, 1)
+        self.gridLayout.addItem(spacerItem, 4, 1, 1, 1)
 
         # bottom button stuff
         self.horizontalLayoutWidget_6 = QtWidgets.QWidget(Dialog)
@@ -97,9 +108,10 @@ class Ui_Dialog(object):
         self.label.setText(_translate("Dialog", "read status 0"))
         self.label_2.setText(_translate("Dialog", "read status 1"))
         self.label_3.setText(_translate("Dialog", "instruction_error: "))
-        self.label_4.setText(_translate("Dialog", "CRC: "))
+        self.label_4.setText(_translate("Dialog", "CRC_JTAG: "))
         self.label_5.setText(_translate("Dialog", "ePll_lock: "))
         self.label_6.setText(_translate("Dialog", "chnl_fifo_overflow: "))
+        self.label_7.setText(_translate("Dialog", "CRC_cal: "))
         self.pushButton.setText(_translate("Dialog", "Apply"))
         self.pushButton_2.setText(_translate("Dialog", "OK"))
         self.pushButton_3.setText(_translate("Dialog", "Cancel"))
@@ -107,10 +119,19 @@ class Ui_Dialog(object):
     def apply_button(self):
         self.TDC_inst.read_status_0()
         self.TDC_inst.read_status_1()
+        self.show_value()
 
     def OK_button(self):
         self.TDC_inst.read_status_0()
         self.TDC_inst.read_status_1()
+        self.show_value()
+
+    def show_value(self):
+        self.label_8.setText(crc_cal(self.TDC_inst))
+        self.lineEdit.setStyleSheet(LedGreen if self.TDC_inst.instruction_error[0]=='0' else LedRed)
+        self.lineEdit_2.setText(format(int(self.TDC_inst.CRC[0], 2), '08X'))
+        self.lineEdit_3.setStyleSheet(LedGreen if self.TDC_inst.ePll_lock[0]=='1' else LedRed)
+        self.lineEdit_4.setText(format(int(self.TDC_inst.chnl_fifo_overflow[0], 2), '06X'))
 
 # if __name__ == "__main__":
 #     import sys

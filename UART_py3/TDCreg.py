@@ -142,13 +142,13 @@ class TDCreg(object):
         self.control = [self.control_0 , self.control_1]
 
     def init_status_0(self):
-        self.instruction_error = ['']
-        self.CRC = ['']
+        self.instruction_error = ['0']
+        self.CRC = ['00000000000000000000000000000000']
         self.status_0 = [self.instruction_error,self.CRC]
 
     def init_status_1(self):
-        self.ePll_lock = ['']
-        self.chnl_fifo_overflow = ['']
+        self.ePll_lock = ['0']
+        self.chnl_fifo_overflow = ['000000000000000000000000']
         self.status_1 = [self.ePll_lock,self.chnl_fifo_overflow]
 
     def reset_status(self):
@@ -178,14 +178,19 @@ class TDCreg(object):
         update_bit_length(115,self.ser)
         start_action(self.ser)
         print("setup0 updated to TDC: 0x"+format(int(self.setup_0_bin_str,2),'029X'))
-        readback = ''
-        for byte in get_update_reg(3,self.ser)[4:19]:
-            readback+=format(ord(byte),'b').zfill(8)
+        readback = get_update_reg(3,self.ser)[4:19]
+        readback_bin=str_to_bin(readback,'')
         if len(readback)>0:
-            readback = readback[0:115]
-            self.setup_0_indictor[0] = '1' if readback == self.setup_0[0] else '0'
+            readback_bin = readback_bin[0:115]
+            self.setup_0_indictor[0] = '1' if readback_bin == self.setup_0_bin_str[-115:] else '0'
         else:
             print("Warning: setup0 readback blank! Please check UART connection.")
+
+        
+        # for byte in readback:
+        #     readback_bin=format(ord(byte),'b').zfill(8)
+
+        
 
     def update_setup_1(self):
         self.setup_1_bin_str = ''.join(self.setup_1_align)
@@ -201,12 +206,11 @@ class TDCreg(object):
         update_bit_length(94,self.ser)
         start_action(self.ser)
         print("setup1 updated to TDC: 0x"+format(int(self.setup_1_bin_str,2),'024X'))
-        readback = ''
-        for byte in get_update_reg(3,self.ser)[4:16]:
-            readback+=format(ord(byte),'b').zfill(8)
+        readback = get_update_reg(3,self.ser)[4:16]
+        readback_bin=str_to_bin(readback,'')
         if len(readback)>0:
-            readback = readback[0:94]
-            self.setup_1_indictor[0] = '1' if readback == self.setup_1[0] else '0'
+            readback_bin = readback_bin[0:94]
+            self.setup_1_indictor[0] = '1' if readback_bin == self.setup_1_bin_str[-94:] else '0'
         else:
             print("Warning: setup1 readback blank! Please check UART connection.")
 
@@ -224,12 +228,11 @@ class TDCreg(object):
         update_bit_length(36,self.ser)
         start_action(self.ser)
         print("setup2 updated to TDC: 0x"+format(int(self.setup_2_bin_str,2),'09X'))
-        readback = ''
-        for byte in get_update_reg(3,self.ser)[4:9]:
-            readback+=format(ord(byte),'b').zfill(8)
+        readback = get_update_reg(3,self.ser)[4:9]
+        readback_bin=str_to_bin(readback,'')
         if len(readback)>0:
-            readback = readback[0:36]
-            self.setup_2_indictor[0] = '1' if readback == self.setup_2[0] else '0'
+            readback_bin = readback_bin[0:36]
+            self.setup_2_indictor[0] = '1' if readback_bin == self.setup_2_bin_str[-36:] else '0'
         else:
             print("Warning: setup2 readback blank! Please check UART connection.")
 
@@ -247,12 +250,11 @@ class TDCreg(object):
         update_bit_length(8,self.ser)
         start_action(self.ser)
         print("control_0 updated to TDC: 0x"+format(int(self.control_0_bin_str,2),'02X'))
-        readback = ''
-        for byte in get_update_reg(3,self.ser)[4:5]:
-            readback+=format(ord(byte),'b').zfill(8)
+        readback = get_update_reg(3,self.ser)[4:5]
+        readback_bin=str_to_bin(readback,'')
         if len(readback)>0:
-            readback = readback[0:8]
-            self.control_0_indictor[0] = '1' if readback == self.control_0[0] else '0'
+            readback_bin = readback_bin[0:8]
+            self.control_0_indictor[0] = '1' if readback_bin == self.control_0_bin_str[-8:] else '0'
         else:
             print("Warning: control0 readback blank! Please check UART connection.")
 
@@ -270,12 +272,11 @@ class TDCreg(object):
         update_bit_length(47,self.ser)
         start_action(self.ser)
         print("control_1 updated to TDC: 0x"+format(int(self.control_1_bin_str,2),'012X'))
-        readback = ''
-        for byte in get_update_reg(3,self.ser)[4:10]:
-            readback+=format(ord(byte),'b').zfill(8)
+        readback = get_update_reg(3,self.ser)[4:10]
+        readback_bin=str_to_bin(readback,'')
         if len(readback)>0:
-            readback = readback[0:47]
-            self.control_1_indictor[0] = '1' if readback == self.control_1[0] else '0'
+            readback_bin = readback_bin[0:47]
+            self.control_1_indictor[0] = '1' if readback_bin == self.control_1_bin_str[-47:] else '0'
         else:
             print("Warning: control1 readback blank! Please check UART connection.")
 
@@ -288,14 +289,13 @@ class TDCreg(object):
         update_JTAG_inst('\x17',self.ser)
         update_bit_length(33,self.ser)
         start_action(self.ser)
-        readback = ''
-        for byte in get_update_reg(3,self.ser)[4:9]:
-            readback+=format(ord(byte),'b').zfill(8)
+        readback = get_update_reg(3,self.ser)[4:9]
+        readback_bin=str_to_bin(readback,'')
         if len(readback)>0:
-            readback = readback[0:33]
-            self.instruction_error[0] = readback[0]
-            self.CRC[0] = readback[1:33]
-            print("status_0 read back: 0x"+format(int(readback,2),'09X'))
+            readback_bin = readback_bin[0:33]
+            self.instruction_error[0] = readback_bin[0]
+            self.CRC[0] = readback_bin[1:33]
+            print("status_0 read back: 0x"+format(int(readback_bin,2),'09X'))
         else:
             print("Warning: status0 readback blank! Please check UART connection.")
 
@@ -308,14 +308,13 @@ class TDCreg(object):
         update_JTAG_inst('\x18',self.ser)
         update_bit_length(25,self.ser)
         start_action(self.ser)
-        readback = ''
-        for byte in get_update_reg(3,self.ser)[4:8]:
-            readback+=format(ord(byte),'b').zfill(8)
+        readback = get_update_reg(3,self.ser)[4:8]
+        readback_bin=str_to_bin(readback,'')
         if len(readback)>0:
-            readback = readback[0:25]
-            self.ePll_lock[0] = readback[0]
-            self.chnl_fifo_overflow[0] = readback[1:25]
-            print("status_1 read back: 0x"+format(int(readback,2),'07X'))
+            readback_bin = readback_bin[0:25]
+            self.ePll_lock[0] = readback_bin[0]
+            self.chnl_fifo_overflow[0] = readback_bin[1:25]
+            print("status_1 read back: 0x"+format(int(readback_bin,2),'07X'))
         else:
             print("Warning: status1 readback blank! Please check UART connection.")
 

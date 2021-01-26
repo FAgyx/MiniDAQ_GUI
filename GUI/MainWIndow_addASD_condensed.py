@@ -30,6 +30,8 @@ sys.path.insert(0, "../UART_py3")
 from serial_config_tdc import *
 from TDCreg import *
 from TDC_config_low_level_function import *
+from hit_tab import *
+from rad_tab import *
 
 import time
 timestr = time.strftime("%Y-%m-%d-%H%M%S")
@@ -55,12 +57,19 @@ class Ui_MainWindow(object):
         self.tab = QtWidgets.QWidget()
         # self.tab.setObjectName("tab")
         self.tabWidget.addTab(self.tab, "")
+        self.hit_tab_ins = hit_tab(self.tab,self.ser)
+
+
         self.tab_2 = QtWidgets.QWidget()
         # self.tab_2.setObjectName("tab_2")
         self.tabWidget.addTab(self.tab_2, "")
         self.tab_3 = QtWidgets.QWidget()
         # self.tab_3.setObjectName("tab_3")
         self.tabWidget.addTab(self.tab_3, "")
+
+        self.tab_rad = QtWidgets.QWidget()
+        self.tabWidget.addTab(self.tab_rad, "rad test")
+        self.rad_tab_ins = rad_tab(self.tab_rad,self.TDC_inst)
 
         # menubar
         MainWindow.setCentralWidget(self.centralwidget)
@@ -112,6 +121,15 @@ class Ui_MainWindow(object):
 
         #general functions layout
         self.gridLayoutWidget = QtWidgets.QWidget(self.tab_2)
+
+
+
+
+
+
+
+
+
         self.gridLayoutWidget.setGeometry(QtCore.QRect(20, 50, 261, 261))
         # self.gridLayoutWidget.setObjectName("gridLayoutWidget")
         self.gridLayout = QtWidgets.QGridLayout(self.gridLayoutWidget)

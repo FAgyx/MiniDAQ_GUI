@@ -381,7 +381,7 @@ def update_hit_width(serial_port, width):
 
 
 def update_inv_hit(serial_port, inv):
-    if inv == '0':
+    if inv == 1:
         content_str = '\x00' + '\x1f\x2f\x32\x42\x50\x60\x70\x81\x0f'
         serial_port.write(content_str.encode('latin_1'))
         serial_port.flush()
@@ -407,9 +407,9 @@ def update_hit_delay(serial_port,delay):
 
 
 def update_hit_mask_hit(serial_port,hit_mask):
-    byte_content_0 = ord(hit_mask[0])
-    byte_content_1 = ord(hit_mask[1])
-    byte_content_2 = ord(hit_mask[2])
+    byte_content_0 = int(hit_mask[0:8],2)
+    byte_content_1 = int(hit_mask[8:16],2)
+    byte_content_2 = int(hit_mask[16:24],2)
     content_str = '\x00' + '\x1f\x2f\x32\x44\x50'
     content_str = content_str + chr(6*16+byte_content_0//16)
     content_str = content_str + chr(7 * 16 + byte_content_0 % 16)

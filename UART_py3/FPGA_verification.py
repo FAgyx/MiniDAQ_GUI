@@ -6,7 +6,7 @@ from TDCreg import *
 # ser = serial.Serial( port='/dev/ttyUSB0', baudrate = 115200, bytesize = serial.EIGHTBITS,parity =serial.PARITY_EVEN, stopbits = serial.STOPBITS_ONE, timeout=0.1)
 
 # if used in windows, uncomment the initialization below and choose the right device
-ser = serial.Serial(port='COM4', baudrate = 115200, bytesize = serial.EIGHTBITS,parity =serial.PARITY_EVEN, stopbits = serial.STOPBITS_ONE, timeout=0.1)
+ser = serial.Serial(port='COM3', baudrate = 115200, bytesize = serial.EIGHTBITS,parity =serial.PARITY_EVEN, stopbits = serial.STOPBITS_ONE, timeout=0.1)
 
 TDC0 = TDCreg(ser)
 TDC0.DAQ_init()
