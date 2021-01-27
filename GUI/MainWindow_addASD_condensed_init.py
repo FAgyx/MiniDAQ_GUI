@@ -22,11 +22,6 @@ class StartQT5(QtWidgets.QMainWindow):
 
     def normalOutputWritten(self,text):
         self.ui.textBrowser.moveCursor(QtGui.QTextCursor.End)
-        # if text == '\n' :
-        #     self.ui.textBrowser.insertPlainText(text)
-        # else:
-        #     self.ui.textBrowser.insertPlainText(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ">>")
-        #     self.ui.textBrowser.insertPlainText(text)
         self.ui.textBrowser.insertPlainText(text)
         self.logfile.write(text)
 

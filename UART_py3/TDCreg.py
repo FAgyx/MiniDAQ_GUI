@@ -185,6 +185,7 @@ class TDCreg(object):
             self.setup_0_indictor[0] = '1' if readback_bin == self.setup_0_bin_str[-115:] else '0'
         else:
             print("Warning: setup0 readback blank! Please check UART connection.")
+        return readback_bin
 
         
         # for byte in readback:
@@ -213,6 +214,7 @@ class TDCreg(object):
             self.setup_1_indictor[0] = '1' if readback_bin == self.setup_1_bin_str[-94:] else '0'
         else:
             print("Warning: setup1 readback blank! Please check UART connection.")
+        return readback_bin
 
     def update_setup_2(self):
         self.setup_2_bin_str = ''.join(self.setup_2_align)
@@ -235,6 +237,7 @@ class TDCreg(object):
             self.setup_2_indictor[0] = '1' if readback_bin == self.setup_2_bin_str[-36:] else '0'
         else:
             print("Warning: setup2 readback blank! Please check UART connection.")
+        return readback_bin
 
     def update_control_0(self):
         self.control_0_bin_str = ''.join(self.control_0_align)
@@ -257,6 +260,7 @@ class TDCreg(object):
             self.control_0_indictor[0] = '1' if readback_bin == self.control_0_bin_str[-8:] else '0'
         else:
             print("Warning: control0 readback blank! Please check UART connection.")
+        return readback_bin
 
     def update_control_1(self):
         self.control_1_bin_str = ''.join(self.control_1_align)
@@ -279,6 +283,7 @@ class TDCreg(object):
             self.control_1_indictor[0] = '1' if readback_bin == self.control_1_bin_str[-47:] else '0'
         else:
             print("Warning: control1 readback blank! Please check UART connection.")
+        return readback_bin
 
     def read_status_0(self):
         update_reg(0,'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00',self.ser)

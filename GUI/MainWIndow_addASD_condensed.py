@@ -500,7 +500,9 @@ class Ui_MainWindow(object):
 
     #TRST button
     def TRST(self):
-        self.TDC_inst.reset_all_reg()
+        # self.TDC_inst.reset_all_reg()
+        trst_0(self.ser)
+        trst_1(self.ser)
 
     #master reset
     def master_reset(self):
